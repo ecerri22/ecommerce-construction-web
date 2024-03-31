@@ -171,15 +171,21 @@
                     </div>
                 </div>
                 <div class="graphs">
-                    <div>
-                        <canvas id="myChart"></canvas>
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <script src="graphs.js"></script>
+                    <div class = "graph-1">
+                        <h2 class = "graph-title">Yearly Performance</h2>
+                        <div class = "line-graph">
+                            <canvas id="myChart"></canvas>
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <script src="graphs.js"></script>
+                        </div>
                     </div>
-                    <div>
-                        <canvas id="myPieChart"></canvas>
-                        <script src="piechart.js"></script>
-                        <script> piechart(); </script>
+                    <div class = "graph-2">
+                    <h2 class = "graph-title">Costs</h2>
+                        <div  class = "piechart">
+                            <canvas id="myPieChart"></canvas>
+                            <script src="piechart.js"></script>
+                            <script> piechart(); </script>
+                        </div>
                     </div>
                 </div>
             </div>
