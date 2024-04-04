@@ -14,15 +14,14 @@
     background-color: white;
     height:250px;
     width:300px;
-    border-radius: 20px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #caa;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
-    box-shadow: 2px 3px 5px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     margin-bottom: 40px;
 }
