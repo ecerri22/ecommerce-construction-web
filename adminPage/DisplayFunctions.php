@@ -108,6 +108,10 @@
                         //-1 is passed as a parameter since we don't need to display the difference in this case
                         $array = array(new Statistic("Pending Orders",98,100,"icons/box.png"),new Statistic("Canceled Orders",32,20,"icons/cancel.png"),
                         new Statistic("Page Visits",2156,2000,"icons/visits.png"));
+                        //this is a good way to dynamically generate the statistics, we can easily add more statistics to the page.
+                        //for example , try to see the difference after the commented line below is uncommented
+                        //and when its commented.
+                        //$array[3] = new Statistic("Statistic Name",1000,-1,"icons/bar-chart.png");
                         foreach($array as $statistic)
                         {
                             display_statistic($statistic,2);
