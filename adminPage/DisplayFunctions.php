@@ -91,18 +91,19 @@
             Ex: lorem5 => Lorem ipsum dolor sit amet. -->
             <div class="statistics-box"></div>
             <!-- by using php to dynamically generate the statistics, we can easily customize the display of the statistics -->
-                <div class="statistics-content">
                     <?php
                         //this array should be instantiated with values from the database, for now this will suffice
                         $array = array(new Statistic("Total Users",500,500,"icons/user.png"),new Statistic("Total Orders",500,200,"icons/order.png"),
                         new Statistic("Total Products Sold",300,100,"icons/checkout.png"),new Statistic("Quarter Earnings",676,800,"icons/bar-chart.png"));
+                        if(isset($array))
+                            echo '<div class="statistics-content">';
                         foreach($array as $statistic)
                         {
                             display_statistic($statistic,1);
                         }
+                        if(isset($array))
+                            echo '</div>';
                     ?>
-                </div>
-                <div class = "statistics-content-2">
                     <?php
                         //this array should *also* be instantiated with values from the database, for now this will suffice
                         //-1 is passed as a parameter since we don't need to display the difference in this case
@@ -112,31 +113,32 @@
                         //for example , try to see the difference after the commented line below is uncommented
                         //and when its commented.
                         //$array[3] = new Statistic("Statistic Name",1000,-1,"icons/bar-chart.png");
+                        if(isset($array))
+                            echo '<div class = "statistics-content-2">';
                         foreach($array as $statistic)
                         {
                             display_statistic($statistic,2);
                         }
+                        if(isset($array))
+                            echo '</div>';
                     ?>
-                </div>
                 <!-- the graphs are a little bit more complex to generate dynamically, so i will do this part later-->
-                <div class="graphs">
-                    <div class = "graph-1">
-                        <h2 class = "graph-title">Yearly Performance</h2>
-                        <div class = "line-graph">
-                            <canvas id="myChart"></canvas>
-                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                            <script src="graphs.js"></script>
-                        </div>
-                    </div>
-                    <div class = "graph-2">
-                    <h2 class = "graph-title">Costs</h2>
-                        <div  class = "piechart">
-                            <canvas id="myPieChart"></canvas>
-                            <script src="piechart.js"></script>
-                            <script> piechart(); </script>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    //again , all these values should be retrieved from the database
+                    $graphs = array(new graph("Yearly Performance",[[65, 59, 80, 81, 56, 55, 40],[28, 48, 40, 19, 86, 27, 90],[93, 34, 67, 12, 56, 78, 23]],[["Jan","Feb","Mar","Apr","May","Jun","Jul"],["Users","Sales","Orders"]],"line")
+                    ,new graph("Costs",[5000,3000,2000,1500],["Marketing","Operations","Supplies","Utilites"],"pie"));
+                    if(isset($graphs))
+                        echo '<div class="graphs">';
+                        echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
+                        echo ' <script src="graphs.js"></script>';
+                    $i=0;
+                    foreach($graphs as $graph)
+                    {
+                        $graph->display_graph($i++);
+                    }
+                    if(isset($graphs))
+                        echo '</div>';
+                ?>
             </div>
     </div>
 

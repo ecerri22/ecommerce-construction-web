@@ -1,47 +1,85 @@
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'graphdata.php', true);
-xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        var data = JSON.parse(xhr.responseText);
-        // Separate the datasets from the fetched data
-        var data1 = data[0];
-        var data2 = data[1];
-        var data3 = data[2];
-        // Create and update the chart with the fetched data
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Sales',
-                    data: data1, // Use the first dataset
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                },
-                {
-                    label: 'Orders',
-                    data: data2, // Use the second dataset
-                    borderColor: 'rgb(255, 99, 132)',
-                    tension: 0.1
-                },
-                {
-                    label: 'Users',
-                    data: data3, // Use the third dataset
-                    borderColor: 'rgb(0, 255, 0)',
-                    tension: 0.1
-                }
-            ]
-            },
-            options: {
-                animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuart'
-                }
-            }
+function linechart(){}
+            linechart.cnt = 0;//to keep track of how many line graphs there are so that i can 
+            //access them through javascript, i will be using closures to stimulate
+            //static variables in javascript (remember what static variables are in c++)
+
+            linechart.createchart = function(data,x_axis,labels_){
+            // Create and update the chart with the fetched data
+            var ctx = document.getElementsByClassName('myLineChart')[linechart.cnt].getContext('2d');
+
+             var datasets = [];
+
+    // Loop through each dataset in the data array
+    for (var i = 0; i < data.length; i++) {
+        datasets.push({
+            label: labels_[i] || 'Dataset ' + (i + 1), // Use label from labels_ array or generate a default one
+            data: data[i],
+            borderColor: getRandomColor(), // Generate a random color for each dataset (optional)
+            tension: 0.1
         });
-    } else {
-        console.error('Failed to load data from data.php');
     }
+
+    var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: x_axis,
+            datasets: datasets
+        },
+        options: {
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            }
+        }
+    });
+    // Increment the counter
+    linechart.cnt++;
 };
-xhr.send();
+
+// Function to generate a random color
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function piechart(){}
+    piechart.cnt = 0;//to keep track of how many line graphs there are so that i can 
+    //access them through javascript, i will be using closures to stimulate
+    //static variables in javascript (remember what static variables are in c++)
+        piechart.createchart = function(data,name){
+                // Extract labels and data from the fetched data
+                var labels = Object.keys(data);
+                var values = Object.values(data);
+
+                // Create pie chart with the fetched data
+                var ctx = document.getElementsByClassName('myPieChart')[piechart.cnt].getContext('2d');
+                var myPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: name,
+                            data: values,
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)'
+                                // Add more colors as needed
+                            ]
+                        }]
+                    },
+                    options: {
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutQuart'
+                        }
+                    }
+                });
+        xhr.send();
+        piechart.cnt++;//increment the counter
+    }
