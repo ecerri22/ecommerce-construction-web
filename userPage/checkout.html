@@ -67,11 +67,73 @@
         </div>
     </header>
 
-    <div class="content">
-        <!-- YOU SHOULD WORK HERE AND CONTINUE BUILDING YOUR PAGE -->
+    <div class="checkout-content">
+        <h2>Checkout</h2>
+        <div class="checkout-container">
+            <div class="shipping-details">
+                <h4>SHIPPING DETAILS</h4>
+                <hr />
+                <div class="address">
+                    <p class="p-address">Daniel Hacker</p>
+                    <p class="p-address">dhacker@gmail.com</p>
+                    <p class="p-address">111 20 Stockholm Sweden</p>
+                </div>
+                <h4>PAYMENT DETAILS</h4>
+                <hr/>
+                <h6>NAME ON CARD</h6>
+                <p class="card-details"> <input type="text" name="name_on_card" placeholder="Enter name on card"/></p>
+                <h6>CARD NUMBER</h6>
+                <p class="card-details"> <input type="text" name="card_number" placeholder="XXXX-XXXX-XXXX-XXXX"/></p>
+                <div class="card-date">
+                    <h6>VALID THROUGH</h6>
+                    <p class="card-details"> <input type="month" name="card_validity"></p>
+                    <h6>CVC CODE</h6>
+                    <p class="card-details"><input type="text" name="card_cvc" placeholder="XXX"/></p>
+                </div>
+                <button id="purchase-btn">PURCHASE</button>
+                
+            </div>
+            <div class="your-order">
+                <div class="orders">
+                    <h4>YOUR ORDER</h4>
+                    <hr/>
+                    <div class="checkout-products">
+                        <div class="checkout-one-product">
+                            <img class="product-checkout-img"src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"/>
+                            <div class="checkout-products-details">
+                                <p class=" product-checkout-name">Basic Tee</p>
+                                <p class="product-checkout-price">$35</p>
+                                <p class="product-checkout-quantity">1</p>
+                            </div>
+                        </div>
+                
+                        <hr/>
+                        <div class="checkout-one-product">
+                            <img class="product-checkout-img"src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"/>
+                            <div class="checkout-products-details">
+                                <p class=" product-checkout-name">Basic Tee</p>
+                                <p class="product-checkout-price">$35</p>
+                                <p class="product-checkout-quantity">1</p>
+                            </div>
+                        </div>
+                        
+                        <hr/>
+                    </div>
+                    
+                </div>
+                
+                <div class="checkout">
+                    <h5>Subtotal</h5>
+                    <p>$35</p>
+                    <h5>Shipping</h5>
+                    <p>$5</p>
+                    <h5>Total</h5>
+                    <p>$40</p>
+                </div>
+    
+            </div>
+        </div>
         
-        <!-- If you need lorem text just type: lorem(number of words) and press the "enter"/"tab" key.
-        Ex: lorem5 => Lorem ipsum dolor sit amet. -->
         
     </div>
 
