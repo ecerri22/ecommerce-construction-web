@@ -80,6 +80,5 @@ function piechart(){}
                         }
                     }
                 });
-        xhr.send();
         piechart.cnt++;//increment the counter
     }

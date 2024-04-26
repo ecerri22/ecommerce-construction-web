@@ -18,6 +18,7 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            <script src="javascript/functions.js"></script>
         </head>
         <?php
     }
@@ -85,6 +86,7 @@
     {
         ?>
             <div class="admin-dashboard">
+                <button onclick="undoRemoveStatistic()" class = "undo-btn">Undo Delete</button>
             <!-- YOU SHOULD WORK HERE AND CONTINUE BUILDING YOUR PAGE -->
             
             <!-- If you need lorem text just type: lorem(number of words) and press the "enter"/"tab" key.
@@ -92,34 +94,37 @@
             <div class="statistics-box"></div>
             <!-- by using php to dynamically generate the statistics, we can easily customize the display of the statistics -->
                     <?php
-                        //this array should be instantiated with values from the database, for now this will suffice
-                        $array = array(new Statistic("Total Users",500,500,"icons/user.png"),new Statistic("Total Orders",500,200,"icons/order.png"),
-                        new Statistic("Total Products Sold",300,100,"icons/checkout.png"),new Statistic("Quarter Earnings",676,800,"icons/bar-chart.png"));
-                        if(isset($array))
+                        Statistic::get_statistics(1);
+                        if(isset(Statistic::$statistic_array1))
                             echo '<div class="statistics-content">';
-                        foreach($array as $statistic)
+                        foreach(Statistic::$statistic_array1 as $statistic)
                         {
-                            display_statistic($statistic,1);
+                            $statistic->display_statistic();
                         }
-                        if(isset($array))
+                        if(isset(Statistic::$statistic_array1))
                             echo '</div>';
                     ?>
                     <?php
-                        //this array should *also* be instantiated with values from the database, for now this will suffice
-                        //-1 is passed as a parameter since we don't need to display the difference in this case
-                        $array = array(new Statistic("Pending Orders",98,100,"icons/box.png"),new Statistic("Canceled Orders",32,20,"icons/cancel.png"),
-                        new Statistic("Page Visits",2156,2000,"icons/visits.png"));
+                        Statistic::get_statistics(2);
                         //this is a good way to dynamically generate the statistics, we can easily add more statistics to the page.
                         //for example , try to see the difference after the commented line below is uncommented
                         //and when its commented.
-                        //$array[3] = new Statistic("Statistic Name",1000,-1,"icons/bar-chart.png");
-                        if(isset($array))
+                        Statistic::$statistic_array2[count(Statistic::$statistic_array2)] = new Statistic(8,"Statistic Name",1000,-1,"icons/bar-chart.png","https://www.google.com",2);
+                        //the "https://www.google.com" is just a placeholder, if we are going to make it so when the statistic is clicked 
+                        //it sends you to another file instead of just modfying the current file we can change this to the file path.
+                        if(isset(Statistic::$statistic_array2))
                             echo '<div class = "statistics-content-2">';
-                        foreach($array as $statistic)
+                        foreach(Statistic::$statistic_array2 as $statistic)
                         {
-                            display_statistic($statistic,2);
+                            $statistic->display_statistic();
                         }
-                        if(isset($array))
+                        ?>
+                        
+                        <button class="green-button" id="statistic_2_maker">
+                            <i class="fas fa-plus" style="color: white; "></i>
+                        </button>
+                        <?php
+                        if(isset(Statistic::$statistic_array2))
                             echo '</div>';
                     ?>
                 <!-- the graphs are a little bit more complex to generate dynamically, so i will do this part later-->
@@ -130,11 +135,10 @@
                     if(isset($graphs))
                         echo '<div class="graphs">';
                         echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
-                        echo ' <script src="graphs.js"></script>';
-                    $i=0;
+                        echo ' <script src="javascript/graphs.js"></script>';
                     foreach($graphs as $graph)
                     {
-                        $graph->display_graph($i++);
+                        $graph->display_graph();
                     }
                     if(isset($graphs))
                         echo '</div>';
@@ -145,13 +149,5 @@
         <?php
     }
 
-    function display_statistic($statistic,$type)
-    {
-        if($type==1)
-            $statistic->display_statistic_one();
-        else
-            $statistic->display_statistic_two();
-
-    }
 
 ?>
