@@ -13,7 +13,7 @@ function removeStatisticAndAnimate(event,deleteButton,statisticID) {
 
     removedstack.push(statisticDiv);
     statisticDiv.addEventListener('animationend', function() {
-        
+        statisticDiv.style.position= 'absolute';
     });
     
 
@@ -22,8 +22,12 @@ function removeStatisticAndAnimate(event,deleteButton,statisticID) {
 function undoRemoveStatistic() {
     if(removedstack.length == 0) return;
     var statisticDiv = removedstack.pop();
+    statisticDiv.style.position = 'relative';
     statisticDiv.classList.remove('fadeOut');
     statisticDiv.classList.add('fadeIn');
+    statisticDiv.addEventListener('animationend', function() {
+        statisticDiv.style.position = 'relative';
+    });
     statisticDiv.style.opacity = 1;
 }
 function removeGraphAndAnimate(graphDiv) {

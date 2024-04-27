@@ -130,8 +130,8 @@
                 <!-- the graphs are a little bit more complex to generate dynamically, so i will do this part later-->
                 <?php
                     //again , all these values should be retrieved from the database
-                    $graphs = array(new graph("Yearly Performance",[[65, 59, 80, 81, 56, 55, 40],[28, 48, 40, 19, 86, 27, 90],[93, 34, 67, 12, 56, 78, 23]],[["Jan","Feb","Mar","Apr","May","Jun","Jul"],["Users","Sales","Orders"]],"line")
-                    ,new graph("Costs",[5000,3000,2000,1500],["Marketing","Operations","Supplies","Utilites"],"pie"));
+                    $graphs = array(new graph(1,"Yearly Performance",[[65, 59, 80, 81, 56, 55, 40],[28, 48, 40, 19, 86, 27, 90],[93, 34, 67, 12, 56, 78, 23]],[["Jan","Feb","Mar","Apr","May","Jun","Jul"],["Users","Sales","Orders"]],"line")
+                    ,new graph(2,"Costs",[5000,3000,2000,1500],["Marketing","Operations","Supplies","Utilites"],"pie"));
                     if(isset($graphs))
                         echo '<div class="graphs">';
                         echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';

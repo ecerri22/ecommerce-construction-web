@@ -125,17 +125,17 @@
 }
 .graphs {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: row;
     margin-top: 20px;
-    margin-left: -100px;
+    margin-left: 10px;
 }
 .line-graph{
     width: 700px;
     height: 350px;
 }
 .graph-line{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,23 +147,25 @@
     transition: box-shadow 0.3s ease;
     border: 1px solid #ccc;
     border-radius: 10px;
+    margin-right: 100px;
 }
 .graph-line:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 .graph-pie{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: white;
-    margin-left: -100px;
     width: 450px;
     height: 450px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     border: 1px solid #ccc;
     border-radius: 10px;
+    margin-right: 100px;
 }
 .graph-pie:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -211,8 +213,8 @@
 }
 a {
     text-decoration: none;
-  }
-  a:link, a:visited {
+}
+a:link, a:visited {
     color: purple;
 }
 
@@ -224,7 +226,7 @@ a {
     to {
         opacity: 0;
         max-width: 0;
-        margin-right: 0;
+        margin: 0;
         padding: 0;
     }
 }
@@ -243,7 +245,7 @@ a {
 }
 
 .fadeOut {
-    animation: fadeOutAnimation 0.5s ease forwards;
+    animation: fadeOutAnimation 0.3s ease forwards;
 }
 .fadeIn {
     animation: fadeInAnimation 1s ease forwards;

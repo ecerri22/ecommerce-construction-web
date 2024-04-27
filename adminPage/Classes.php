@@ -53,7 +53,7 @@
             
         }
 
-        public function display_diff()//displays growth compared to another time period,parameters will be retreived from database later.
+        private function display_diff()//displays growth compared to another time period,parameters will be retreived from database later.
         {
             $diff = (($this->statistic_value-$this->statistic_prev_value)/$this->statistic_value)*100;
             $diff = number_format($diff,2);
@@ -116,12 +116,14 @@
     }
 
     class graph{
+        private $statistic_id;
         private $graph_name;
         private $graph_data;
         private $graph_labels;
         private $graph_type;
 
-        public function __construct($graph_name, $graph_data, $graph_labels, $graph_type){
+        public function __construct($statistic_id,$graph_name, $graph_data, $graph_labels, $graph_type){
+            $this->statistic_id = $statistic_id;
             $this->graph_name = $graph_name;
             $this->graph_data = $graph_data;
             $this->graph_labels = $graph_labels;
@@ -131,6 +133,7 @@
         function display_graph(){
             if($this->graph_type == "line"){
                 echo '<div class = "graph-line">';
+                echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>';
                     echo '<h2 class = "graph-title">'.$this->graph_name.'</h2>';
                     echo '<div class = "line-graph">';
                         echo '<canvas class="myLineChart"></canvas>';//the Line-graph class is just there so i can access it with javascript. i must target the canvas element
@@ -144,6 +147,7 @@
                     $data[$this->graph_labels[$i]] = $this->graph_data[$i];
                 }
                 echo '<div class = "graph-pie">';
+                echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>';
                 echo '<h2 class = "graph-title">'.$this->graph_name.'</h2>';
                 echo '<div  class = "piechart">';
                 echo '<canvas class="myPieChart"></canvas>';
