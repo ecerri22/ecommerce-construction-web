@@ -12,14 +12,48 @@ function makesticky(prod){
         sticky.classList.add("stickydiv");
     }
 }
-function callPHPFunction(text) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Products/search.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            alert(xhr.responseText); // Output the result returned by the PHP function
+function Search() {
+    var search = $('#searcher').val();
+    $.ajax({
+        url: 'search.php', // The PHP script that generates the new element
+        type: 'POST',
+        data: {
+             dat : search
+            },
+        success: function(response) {
+            $('#products').replaceWith(response);
         }
-    };
-    xhr.send("data=" + text); // Send the data to the PHP script
+    });
+}
+function toggleButtonColorOnPress(button){
+    if (button.style.backgroundColor == "green"){
+        button.style.backgroundColor = "#061538";
+        $.ajax({
+            url: 'removeFromCategories.php', // The PHP script that generates the new element
+            type: 'POST',
+            data: {
+                 category : button.innerHTML
+                },
+
+        });
+    } else {
+        button.style.backgroundColor = "green";
+        $.ajax({
+            url: 'addToCategories.php', // The PHP script that generates the new element
+            type: 'POST',
+            data: {
+                 category : button.innerHTML
+                },
+        });
+        
+    }
+    Search();
+   
+}
+function clearSearch(){
+    for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
+        document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#061538";
+    }
+    $('#searcher').val("");
+    Search();
 }

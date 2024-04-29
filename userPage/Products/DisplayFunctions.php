@@ -1,6 +1,7 @@
 <?php
 
     include_once('Classes.php');
+    session_start();
     function display_head()
     {
         ?>
@@ -13,6 +14,7 @@
     
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="products.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../javascript/functions.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,12 +31,12 @@
                 </a>
 
                 <!-- center search bar-->
-                <form action="#" class="search-bar">
-                    <input type="text" class="input-search" placeholder="Search...">
-                    <button class="btn-search header-btn" onclick="callPHPFunction();">
+                <div class="search-bar">
+                    <input type="text" name="product" id="searcher" class="input-search" placeholder="Search...">
+                    <button class="btn-search header-btn" onclick="Search()">
                         <i class="fas fa-search"></i>
                     </button>
-                </form>
+                </div>
 
                 <!-- right side -->
                 <div class="header-user-btns">
@@ -84,50 +86,63 @@
         <div class="sidebar">
             <div class="sidebar-container">
                 <div class="sidebar-header">
-                    <h3>Categories</h3>
+                    <h3>Searching Options</h3>
                 </div>
+                <button class="clear-btn" onclick="clearSearch()">Clear</button>
                 <div class="sidebar-content">
+                    <h3 style="margin-bottom: 30px">Categories</h3>
                     <div class="sidebar-list">
-                            <a href="#" class="sidebar-link">Hand tools</a>
-                            <a href="#" class="sidebar-link">Power Tools</a>
-                            <a href="#" class="sidebar-link">Materials</a>
-                            <a href="#" class="sidebar-link">Hardware</a>
-                            <a href="#" class="sidebar-link">Construction Machinery</a>
-                            <a href="#" class="sidebar-link">Saftey And Personal Protection</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Hand-tools</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Power-tools</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Materials</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Hardware</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Construction Machinery</a>
+                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Saftey And Personal Protection</a>
+                    </div>
+                    <div class="price-fliter">
+                        <h3 style = "margin-top: 20px; margin-bottom : 20px;">Filter By Price</h3>
+                        
                     </div>
                 </div>
             </div>
         </div>
         <?php
     }
+        //this just makes some products which will later be taken from the database.
+        new Product("Cotton Tee", 1, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "White","T-shirt");
+        new Product("Tool Set", 2, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Red","Hand-tools");
+        new Product("Power Drill", 3, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Blue","Power-tools");
+        new Product("Wood Planks", 4, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Green","Materials");
+        new Product("Screws Pack", 5, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Yellow","Hardware");
+        new Product("Excavator", 6, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Purple","Construction Machinery");
+        new Product("Safety Helmet", 7, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Orange","Safty And Personal Protection");
+        new Product("Wrench Set", 8, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Pink","Hand-tools");
+        new Product("Circular Saw", 9, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Brown","Power-tools");
+        new Product("Cement Bag", 10, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Gray","Materials");
+        new Product("Nails Pack", 11, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hardware");
+        new Product("Bulldozer", 12, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "White","Construction Machinery");
+        new Product("Safety Goggles", 13, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Red","Protects your eyes");
+        new Product("Hammer", 14, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Blue","Hand tool for nailing");
+        new Product("Angle Grinder", 15, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Green","For cutting and grinding");
+        new Product("Steel Rods", 16, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Yellow","Strong construction material");
+        new Product("Bolts Pack", 17, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Purple","Secure your structures");
+        new Product("Crane", 18, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Orange","Lifts heavy objects");
+        new Product("Safety Gloves", 19, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Pink","Protects your hands");
+        //end of making products
+        $_SESSION['productslist'] = Product::getProductsArray();
+        $_SESSION['updatedproductslist'] = Product::getProductsArray();
+        $_SESSION['categories'] = array();
+        
     function display_products()
     {
-        echo '<div class="products-container">';
+        echo '<div id="products" class="products-container">';
         echo '<div class="products">';
-        $products = array(new Product("Basic Tee", 1, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","T-shirt"),
-        new Product("Basic Tee", 2, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hand-tools"),
-        new Product("Basic Tee", 3, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Power-tools"),
-        new Product("Basic Tee", 4, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Materials"),
-        new Product("Basic Tee", 5, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hardware"),
-        new Product("Basic Tee", 6, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Construction Machinery"),
-        new Product("Basic Tee", 7, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Safty And Personal Protection"),
-        new Product("Basic Tee", 8, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hand-tools"),
-        new Product("Basic Tee", 9, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Power-tools"),
-        new Product("Basic Tee", 10, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Materials"),
-        new Product("Basic Tee", 11, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hardware"),
-        new Product("Basic Tee", 12, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Construction Machinery"),
-        new Product("Basic Tee", 13, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Safty And Personal Protection"),
-        new Product("Basic Tee", 14, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hand-tools"),
-        new Product("Basic Tee", 15, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Power-tools"),
-        new Product("Basic Tee", 16, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Materials"),
-        new Product("Basic Tee", 17, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hardware"),
-        new Product("Basic Tee", 18, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Construction Machinery"),
-        new Product("Basic Tee", 19, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Safty And Personal Protection"),);
-        foreach(Product::$products as $product)
+        foreach($_SESSION['updatedproductslist'] as $product)
         {
             $product->display();
         }
         echo '</div>';
         echo '</div></div>';
     }
+    
 ?>

@@ -7,7 +7,7 @@ class Product{
     private $link;
     private $category;
     private $minidescription;
-    static $products = array();
+    private static $products = array();
 
 
     public function __construct($name, $price, $image, $link, $minidescription, $category)
@@ -28,7 +28,7 @@ class Product{
         echo  '   </div>';
         echo  '   <div class="product-description-container">';
         echo  '      <div class="description-box">';
-        echo  '         <h3 style = "display : inline-block;margin-right: 50px">';
+        echo  '         <h3 style = "display : inline-block;">';
         echo  '            <a href="/#" class = "product-name">'.$this->name.'</a>';
         echo  '      </h3>';
         echo  ' <button class="compare-btn" onclick ="makesticky(this)">Hold</button>';
@@ -41,6 +41,42 @@ class Product{
         echo  '     </div>';
         echo  ' </div>';
     }
+
+    public static function getProductsArray()
+    {
+        return Product::$products;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function getMinidescription()
+    {
+        return $this->minidescription;
+    }
+
 }
+
 
 ?>
