@@ -1,11 +1,15 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $category = $_POST['category'];
-        if(count($_SESSION['categories'])==0 || in_array($category, $_SESSION['categories']) == false)
-            $_SESSION['categories'][] = $category;
+        include_once('DisplayFunctions.php'); // Include the display functions
+        if(isset($_POST['dddat'])){
+        $category = $_POST['dddat'];
+        }
+    
+        $_SESSION['categories'][] = $category;
+
     }
     else{
-        header("Location: Products.php");
+       echo '<script>console.log("outta here!" );</script>';
     }
 
 ?>

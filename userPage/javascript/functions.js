@@ -32,7 +32,7 @@ function toggleButtonColorOnPress(button){
             url: 'removeFromCategories.php', // The PHP script that generates the new element
             type: 'POST',
             data: {
-                 category : button.innerHTML
+                 ccccategory:button.innerHTML
                 },
 
         });
@@ -42,8 +42,11 @@ function toggleButtonColorOnPress(button){
             url: 'addToCategories.php', // The PHP script that generates the new element
             type: 'POST',
             data: {
-                 category : button.innerHTML
+                 dddat:button.innerHTML
                 },
+            success: function(response) {
+               
+            }
         });
         
     }

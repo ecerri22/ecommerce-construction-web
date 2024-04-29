@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $products = $_SESSION['productslist']; // Get the products array
     $categories = $_SESSION['categories']; 
+    echo "<script>console.log('Debug Objects: " . json_encode($categories) . "' );</script>";
     $nrofcategories = count($categories); // Get the number of categories
 
     if(isset($_SESSION['minprice']) && isset($_SESSION['maxprice'])){
