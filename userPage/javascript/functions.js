@@ -14,11 +14,18 @@ function makesticky(prod){
 }
 function Search() {
     var search = $('#searcher').val();
+    var Categories = [];
+    for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
+        if (document.getElementsByClassName("sidebar-link")[i].style.backgroundColor == "green"){
+            Categories.push(document.getElementsByClassName("sidebar-link")[i].innerHTML);
+        }
+    }
     $.ajax({
         url: 'search.php', // The PHP script that generates the new element
         type: 'POST',
         data: {
-             dat : search
+             dat : search,
+             categories : Categories
             },
         success: function(response) {
             $('#products').replaceWith(response);
@@ -28,27 +35,8 @@ function Search() {
 function toggleButtonColorOnPress(button){
     if (button.style.backgroundColor == "green"){
         button.style.backgroundColor = "#061538";
-        $.ajax({
-            url: 'removeFromCategories.php', // The PHP script that generates the new element
-            type: 'POST',
-            data: {
-                 ccccategory:button.innerHTML
-                },
-
-        });
     } else {
-        button.style.backgroundColor = "green";
-        $.ajax({
-            url: 'addToCategories.php', // The PHP script that generates the new element
-            type: 'POST',
-            data: {
-                 dddat:button.innerHTML
-                },
-            success: function(response) {
-               
-            }
-        });
-        
+        button.style.backgroundColor = "green";   
     }
     Search();
    

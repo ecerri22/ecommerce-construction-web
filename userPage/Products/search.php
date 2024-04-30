@@ -13,8 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
     $products = $_SESSION['productslist']; // Get the products array
-    $categories = $_SESSION['categories']; 
-    echo "<script>console.log('Debug Objects: " . json_encode($categories) . "' );</script>";
+    if(isset($_POST['categories']))
+    {
+        $categories = $_POST['categories']; 
+    }
+    else{
+        $categories = array();
+    }
     $nrofcategories = count($categories); // Get the number of categories
 
     if(isset($_SESSION['minprice']) && isset($_SESSION['maxprice'])){
@@ -63,10 +68,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
     // Sort the matches
+    if(isset($matches)){
     usort($matches, function($a, $b) {
         return $a['distance'] - $b['distance'];
     });
-
+    }
+    else{
+        $matches = array();
+    }
     // Extract the sorted products
     $_SESSION['updatedproductslist'] = array_map(function($match) {
         return $match['product'];
