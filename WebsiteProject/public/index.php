@@ -1,6 +1,5 @@
 <?php
 
-use Controllers\UserController;
 use Core\Router;
 
 session_start();
@@ -22,7 +21,3 @@ $url = parse_url($_SERVER["REQUEST_URI"])['path'];
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($url, $method);
-
-//create instances here and call functions
-$userController = new UserController();
-$userController->signUp();
