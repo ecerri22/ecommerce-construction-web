@@ -5,16 +5,24 @@ namespace Controllers;
 use Core\Controller;
 use Models\User;
 
-class UserController extends Controller{
+
+class UserController extends Controller
+{
     private $user;
 
-    public function __construct() {
-        parent::__construct(); 
+    public function __construct()
+    {
+        parent::__construct();
         $this->user = new User();
-        $this->view('user/daniela_signup.view.php');
     }
 
-    public function signUp() {
+    public function renderSignup()
+    {
+        view('user/daniela_signup.view.php');
+    }
+
+    public function signUp()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstName = $_POST['fname'] ?? '';
             $lastName = $_POST['lname'] ?? '';
@@ -24,14 +32,15 @@ class UserController extends Controller{
             if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
                 echo "Please fill in all fields.";
                 return;
-            }
+            } else {
+                $result = $this->user->register($firstName, $lastName, $password, $email);
 
-            // if ($this->user->register('', $firstName, $lastName, $password, $email)) {
-            //     echo "Sign up successful!";
-            // } else {
-            //     echo "Error occurred while signing up. Please try again later.";
-            // }
+                if ($result) {
+                    echo "User registered successfully.";
+                } else {
+                    echo "Failed to register user.";
+                }
+            }
         }
     }
 }
-
