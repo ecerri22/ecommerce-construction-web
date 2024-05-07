@@ -1,6 +1,10 @@
 <?php
 
-//add routes here.
-//1. action = form action
-//2. controller
-$router->post('/signup', 'UserController.php');
+use Controllers\UserController;
+
+$uc = new UserController();
+
+$router->get('/signup', $uc, 'renderSignup');
+$router->post('/signup', $uc, 'signUp');
+
+
