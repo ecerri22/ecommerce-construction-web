@@ -8,41 +8,43 @@ class Router
 {
     protected $routes = [];
 
-    public function add($method, $url, $controller)
+    public function add($method, $url, $controller, $function)
     {
         $this->routes[] = [
             'url' => $url,
             'controller' => $controller,
             'method' => $method,
-            'middleware'=> NULL
+            'middleware'=> NULL,
+
+            'function' => $function
         ];
 
         return $this;
     }
 
-    public function get($url, $controller)
+    public function get($url, $controller, $function)
     {
-        return $this->add('GET', $url, $controller);
+        return $this->add('GET', $url, $controller, $function);
     }
 
-    public function post($url, $controller)
+    public function post($url, $controller, $function)
     {
-        return $this->add('POST', $url, $controller);
+        return $this->add('POST', $url, $controller, $function);
     }
 
-    public function delete($url, $controller)
+    public function delete($url, $controller, $function)
     {
-        return $this->add('DELETE', $url, $controller);
+        return $this->add('DELETE', $url, $controller, $function);
     }
 
-    public function patch($url, $controller)
+    public function patch($url, $controller, $function)
     {
-        return $this->add('PATCH', $url, $controller);
+        return $this->add('PATCH', $url, $controller, $function);
     }
 
-    public function put($url, $controller)
+    public function put($url, $controller, $function)
     {
-        return $this->add('PUT', $url, $controller);
+        return $this->add('PUT', $url, $controller, $function);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,10 +52,9 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['url'] === $url && $route['method'] === strtoupper($method)) {
-                if($route['middleware']){
-                    // Middleware::check($route['middleware']);
-                }
-                return require base_path('app/controllers/' . $route['controller']);
+                $controller = new $route['controller']();
+                $function = $route['function'];
+                return $controller->$function();
             }
         }
         $this->abort();
