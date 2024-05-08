@@ -1,7 +1,10 @@
 <?php
 
 
-    include_once('../Models/product2.php');
+    
+
+
+    use Models\product2;
     session_start();
 
     class ProductsPage{

@@ -1,5 +1,6 @@
 <?php
-    require_once '../Core/dbconnect_dashboard.php';
+
+    use Core\Database;
     class Statistic{
         private $statistic_id;
         private $statistic_name;
@@ -66,9 +67,9 @@
             }
         }
         public static function get_statistics($type){
-            global $conn;
+            global $connection;
             $sql = "SELECT * FROM statistics WHERE statistics.type = $type";
-            $stmt = $conn->prepare($sql);
+            $stmt = $connection->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll();
             $i=0;

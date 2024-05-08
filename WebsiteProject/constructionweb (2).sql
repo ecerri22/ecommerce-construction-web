@@ -542,3 +542,56 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/* THIS IS THE DASHBOARD PAGE DATABASE FOR NOW */
+
+CREATE TABLE `statistics` (
+  `name` varchar(255) NOT NULL,
+  `value` double NOT NULL,
+  `prev_value` double NOT NULL,
+  `icon` text NOT NULL,
+  `Type` int(11) NOT NULL,
+  `destination` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `statistics`
+--
+
+INSERT INTO `statistics` (`name`, `value`, `prev_value`, `icon`, `Type`, `destination`, `id`) VALUES
+('Canceled Orders', 32, 20, 'icons/cancel.png', 2, 'https://www.microsoft.com/', 1),
+('Page Visits', 2156, 2000, 'icons/visits.png', 2, 'https://www.facebook.com/', 2),
+('Pending Orders', 98, 100, 'icons/box.png', 2, 'https://www.netflix.com/', 3),
+('Quarter Earnings', 676, 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
+('Total Orders', 500, 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
+('Total Products Sold', 300, 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
+('Total Users', 500, 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `statistics`
+--
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `statistics`
+--
+ALTER TABLE `statistics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/* END OF THE DASHBOARD PAGE DATABASE FOR NOW */

@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../Models/statistics.php');
+    use Models\statistics;
 
     class adminDashboard{
 

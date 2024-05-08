@@ -6,6 +6,8 @@ use Controllers\HomePageController;
 use Controllers\OrdersAdminController;
 use Controllers\ProductsAdminController;
 use Controllers\UsersAdminController;
+use Controllers\AdminDashboardController;
+use Controllers\ProductsUserController;
 
 // HOME PAGE //
 $homepagecont = new HomePageController();
@@ -33,3 +35,11 @@ $router->get('/allOrdersAdmin', $orAdC, 'renderOrdersAdminController');
 // ADMIN - ALL USERS //
 $usAdC = new UsersAdminController();
 $router->get('/allUsersAdmin', $usAdC, 'renderUsersAdminController');
+
+// ADMIN - DASHBOARD //
+$adminDashboard = new AdminDashboardController();
+$router->get('/adminDashboard', $adminDashboard, 'renderAdminDashboard');
+
+// USER - PRODUCTS //
+$userProducts = new ProductsUserController();
+$router->get('/allProductsUser', $userProducts, 'renderProductsUserController');
