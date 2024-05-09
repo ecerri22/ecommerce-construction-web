@@ -392,17 +392,10 @@ input[type=number]::-webkit-outer-spin-button {
   color: #bfbfbf;
 }
 
-/*//////////////////////////////////////////*/
+/*//////////////// CHECKOUT PAGE //////////////////////////*/
 .checkout-content{
-  padding: 1rem 4rem 2rem 4rem;
-  
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;   
+  padding:1rem 4rem;
 }
-
 
 .checkout-container{
   display: flex;
@@ -410,9 +403,6 @@ input[type=number]::-webkit-outer-spin-button {
   gap:10rem;
 }
 
-.checkout-content h2{
-  display: inline-block;
-}
 
 .orders{
   overflow-y: scroll;
@@ -427,23 +417,22 @@ input[type=number]::-webkit-outer-spin-button {
   display:flex;
   flex-direction: column;
 }
-
 .checkout-one-product{
   margin-bottom: 1rem;
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 5rem;
 }
 
 .checkout-products-details{
   font-weight: bold;
-  margin-right: 30%;
-  margin-top: 10%;
+  margin-left: 5rem;
+  margin-top: 3rem;
   
 }
 .shipping-details{
-  margin-top: 2rem;
+  margin-top: 1rem;
   flex:50%;
 }
 
@@ -474,36 +463,24 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 0.6rem;
 }
 
-.address p{
-  width:50%;
-}
-.p-address{
-  border: none;
-}
-
-.address{
-  margin-top: 3rem;
-  margin-bottom: 6rem;
-}
-
 .shipping-details h4{
-  margin-top: 10px;
+  
   margin-bottom: 1rem;
 }
 
 .shipping-details h6{
-  margin-top: 1rem;
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
   font-size:small;
 }
 
 .shipping-details input{
-  width: 50%;
+  width: 70%;
   height: 2rem;
 }
 
 #purchase-btn{
-  margin-top: 5rem;
+  margin-top: 7rem;
   width: 75%;
   justify-content: center;
   margin-left: 10%;
@@ -519,19 +496,6 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #ed7513;
   cursor: pointer;
 }
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-  gap: 20px; 
-}
-
-.product-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  text-align: center;
-}
-
 
 /* FOOTER  */
 
