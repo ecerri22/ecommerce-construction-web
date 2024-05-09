@@ -43,4 +43,16 @@ class UserController extends Controller
             }
         }
     }
+
+    public function renderWishlist(){
+        view('user/rosela_wishlist.view.php');
+    }
+
+    public function renderShoppingCart(){
+        view('user/rosela_shoppingCart.view.php');
+    }
+
+    public function renderCheckout(){
+        view('user/rosela_checkout.view.php');
+    }
 }
