@@ -9,6 +9,7 @@
 body {
     margin: 0;
     font-family: "IBM Plex Sans", sans-serif;
+    background: #f9fafc;
 }
 
 /*      SIDEBAR     */
@@ -212,6 +213,11 @@ body {
     No text or content should be outside of the width from the logo to the end of the shopping cart button!
     
 */
+
+.page-title {
+    color:#061538;
+    font-size: 2.5rem;
+}
 
 /* Product Table Styling */
 .product-table {

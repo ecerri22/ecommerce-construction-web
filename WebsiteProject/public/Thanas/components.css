@@ -1,252 +1,476 @@
+/* GENERAL */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/*      SIDEBAR     */
+body {
+  display: flex;
+  flex-direction: row;    
+  background: #f9fafc;
+}
+
+.logo {
+  text-decoration: none;
+  color: #061538;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.sidebar {
+  background: rgb(255 255 255);
+  border-right: 1px solid #71767f1e;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14%;
+}
+
+/*     TABS STYLING    */
+.tabs-list-sidebar {
+  list-style: none;
+  padding: 1rem 0;
+}
+
+.tab-sidebar {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.tab-sidebar:hover * { 
+  color: #081f54; 
+}
+
+.tab-sidebar:hover .tab-link-sidebar::before, 
+.tab-sidebar:focus .tab-link-sidebar::before,
+.tab-sidebar:active .tab-link-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  width: 0.2rem; 
+  height: 100%; 
+  background-color: #081f54; 
+}
+
+.tab-link-sidebar {
+  display: flex;
+  align-items: center; 
+  text-decoration: none;
+  color: #71767f;
+  padding-left: .2rem; 
+
+}
+
+.tab-txt-sidebar {
+  padding-left: 1.2rem;
+  line-height: 1.4; 
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.fas {
+  font-size: 1.4rem;
+  color: #71767f;
+  width: 1.4rem; 
+  text-align: center; 
+}
+
+/*  LOGOUT BUTTON   */
+.logout-sidebar {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  align-items: center; 
+  justify-content: center;
+  gap: .6rem;
+  background: #061538;
+  border: none;
+  margin-top: auto; 
+}
+
+.logout-text-sidebar {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #eee;
+}
+
+.logout-icon {
+  color: #eee;
+}
+
+.logout-sidebar:hover {
+  background: #081f54;
+  cursor: pointer;
+}
+
+/*  NAVBAR     */
+.admin-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 86%;
+  background: rgb(255 255 255);
+  border-bottom: 1px solid #71767f1e;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1.4rem;
+  z-index: 9999;
+}
+
+.admin-name {
+  display: flex;
+  flex-direction: col;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  background: #061538;
+  color: #eee;
+  border: none;
+  font-size: 1.2rem;
+  gap: 1rem;
+}
+
+.admin-name:hover {
+  cursor: pointer;
+}
+
+.user-pfp {
+  height: 1.4rem;
+  width: 1.4rem;
+  background: #eee;
+}
+
+.fa-bell {
+  font-size: 1.2rem;
+  padding: 0 .6rem;
+  color: #061538;
+}
+
+.notif-btn {
+  border: none;
+  background: none;
+}
+
+.notif-btn:hover {
+  cursor: pointer;
+}
+
+/* CONTENT*/
+.content {
+  flex: auto;
+  padding-top: 3rem;
+}
+
+.admin-dashboard {
+  background: #f9fafc;
+  overflow-y: auto;
+  padding: 4rem; 
+  padding-left: 18%;
+  z-index: 00000;
+  display: flex;
+  flex-direction: column;
+}
+
+/*************************************************************/
+
+.dashboard-contents-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 2rem;
+}
+
 /* Undo Button */
 .undo-btn {
-    background-color: #cc059a; /* Red */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fd7e14;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.4rem;
+  /* border-radius: 4px; */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 10px 10px 2rem 10px;
+  margin-bottom: 2rem;
 }
 
 .undo-btn:hover {
-    background-color: #910085; /* Darker Red */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color:  #df6c0e; 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .undo-btn:focus {
-    outline: none;
+  outline: none;
 }
 
-/* Optional: Adjust margin to your layout */
-.undo-btn {
-    margin: 0 auto; /* Centers the button horizontally */
-    margin-top: 20px; /* Adds some space above the button */
-}
 .statistics-box {
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 20px;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 20px;
 }
 
 .statistics-content {
-    display: flex;
-    flex-wrap: wrap;
-    transition: justify-content 5s ease;
+  display: flex;
+  flex-wrap: wrap;
+  transition: justify-content 5s ease;
+  gap: 0;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .statistic{
-    position: relative;
-    margin: 10px;
-    background-color: white;
-    height:250px;
-    width:300px;
-    border: 1px solid #caa;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    margin-right: 50px;
+  position: relative;
+  margin: 10px;
+  background-color: #fff;
+  height: 18rem;
+  width: 16rem;
+  border: 1px solid  #081f5421;
+  /* border-radius: 10px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease; 
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  /* margin-right: 50px; */
 }
 .statistic:hover{
-    background-color: rgba(220,220,220,0.3);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(220,220,220,0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.statistic:active
-{
-    background-color: rgb(100,220,100);
-}
+
+
 .statistic-icon {
-    height: 50px;
-    margin-bottom: 10px;
+  height: 50px;
+  margin-bottom: 10px;
 }
 .statistic-icon-2 {
-    height: 50px;
-    display: inline-block;
+  height: 50px;
+  display: inline-block;
 }
+
 .statistics-content-2{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-left: 50px;
-    row-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  row-gap: 20px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
+
 .statistic-2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 250px;
-    margin-right: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  /* border-radius: 10px; */
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 16rem;
+  margin: 10px;
 }
 
 .statistic-2:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .statistic-icon-2 {
-    height: 50px;
-    width: 50px;
-    margin-right: 20px;
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
 }
 
 .statistic-2-info {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .statistic-2-info div {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .statistic-2-info p {
-    margin: 0;
-    font-weight: bold;
-    color: #333;
+  margin: 0;
+  font-weight: bold;
+  color: #333;
 }
+
 .piechart{
-    width: 350px;
+  width: 32rem;
+  height: 17rem;
 }
+
 .graphs {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-top: 20px;
-    margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
+
 .line-graph{
-    width: 700px;
-    height: 350px;
+  width: 32rem;
+  height: 20rem;
 }
+
 .graph-line{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    width: 800px;
-    height: 450px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-right: 100px;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 46%;
+  height: 22rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  border: 1px solid #ccc;
+  /* border-radius: 10px; */
+  /* margin-right: 100px; */
+  margin: 10px;
 }
+
 .graph-line:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .graph-pie{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    width: 450px;
-    height: 450px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-right: 100px;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 46%;
+  height: 22rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  border: 1px solid #ccc;
+  margin: 10px;
 }
+
 .graph-pie:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .delete-btn {
-    position: absolute;
-    top:5px;
-    right:5px;
-    background-color: transparent;
-    color: gray;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  color: gray;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .delete-btn:hover {
-    background-color: #c82333;
-    color: white;
+  background-color: #c82333;
+  color: white;
 }
 
 .delete-btn:focus {
-    outline: none;
+  outline: none;
 }
+
 .green-button {
-    background-color: limegreen;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    height: 60px;
-    width: 60px;
-    margin-top: 35px;
-    margin-left: -200px;
+  background-color: #fd7e14;
+  color: white;
+  padding: 0.5rem 1.21rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 4rem;
+  width: 4rem;
+  z-index: 9999;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .green-button:hover {
-    background-color: forestgreen;
-}
-.green-button:focus {
-    outline: none;
-}
-a {
-    text-decoration: none;
-}
-a:link, a:visited {
-    color: purple;
+  background-color: #df6c0e;
 }
 
+.green-button:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.plus-icon {
+  font-size: 2rem;
+  color: #71767f;
+  /* width: 1.4rem;  */
+  /* text-align: center;  */
+}
+
+
 @keyframes fadeOutAnimation {
-    from {
-        opacity: 1;
-        max-width: 100%;
-    }
-    to {
-        opacity: 0;
-        max-width: 0;
-        margin: 0;
-        padding: 0;
-    }
+  from {
+      opacity: 1;
+      max-width: 100%;
+  }
+  to {
+      opacity: 0;
+      max-width: 0;
+      margin: 0;
+      padding: 0;
+  }
 }
 @keyframes fadeInAnimation {
-    from {
-        opacity: 0;
-        max-width: 0;
-        margin-right: 0;
-        padding: 0;
-    }
-    to {
-        opacity: 1;
-        max-width: 100%;
-    }
-    
+  from {
+      opacity: 0;
+      max-width: 0;
+      margin-right: 0;
+      padding: 0;
+  }
+  to {
+      opacity: 1;
+      max-width: 100%;
+  }
+  
 }
 
 .fadeOut {
-    animation: fadeOutAnimation 0.3s ease forwards;
+  animation: fadeOutAnimation 0.3s ease forwards;
 }
 .fadeIn {
-    animation: fadeInAnimation 1s ease forwards;
+  animation: fadeInAnimation 1s ease forwards;
 }

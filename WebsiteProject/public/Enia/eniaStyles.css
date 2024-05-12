@@ -185,7 +185,7 @@ header {
     justify-content: center;
     align-items: center;
     gap: 1.2rem;
-    background-image: url("/public/image/UntitledDesign.jpg");
+    background-image: url("/image/UntitledDesign.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -466,7 +466,7 @@ header {
 }
 
 .card__picture--1 {
-    background-image: url("/public/image/project-1.jpg");
+    background-image: url("/image/project-1.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -474,7 +474,7 @@ header {
 }
 
 .card__picture--2 {
-    background-image: url("/public/image/project-2.jpg");
+    background-image: url("/image/project-2.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -482,7 +482,7 @@ header {
 }
 
 .card__picture--3 {
-    background-image: url("/public/image/project-3.jpg");
+    background-image: url("/image/project-3.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
