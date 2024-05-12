@@ -18,64 +18,6 @@ class HelpAdviceView {
         <?php
     }
 
-    private function renderHeader() {
-        ?>
-         <header class="">
-                <div class="header-container">
-                    <div class="upper-bar">
-                        <!-- logo -->
-                        <a href="#" class="logo">
-                            <h3>LOGO</h3>
-                        </a>
-
-                        <!-- center search bar-->
-                        <form action="#" class="search-bar">
-                            <input type="text" class="input-search" placeholder="Search...">
-                            <button class="btn-search header-btn">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
-
-                        <!-- right side -->
-                        <div class="header-user-btns">
-                            <!-- user icon -->
-                            <button class="user-profile-btn header-btn ">
-                                <i class="fas fa-user"></i>
-                            </button>
-
-                            <!-- wishlist icon -->
-                            <button class="user-wishlist-btn header-btn">
-                                <i class="fas fa-heart"></i> 
-                            </button>
-
-                            <!-- shopping bag icon  -->
-                            <button class="user-shopping-bag-btn header-btn">
-                                <i class="fas fa-shopping-cart"></i> 
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="lower-bar">
-                        <ul class="tabs-list">
-                            <li>
-                                <a href="#" class="tab-link tab-link-active">Home</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tab-link">Products</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tab-link">About Us</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tab-link">Help & Advice</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </header>
-        <?php
-    }
-
     private function renderContent() {
         ?>
          <div class="content">

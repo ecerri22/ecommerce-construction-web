@@ -19,6 +19,11 @@ class AdminController extends Controller{
         view('admin/enia_createProduct.view.php');
     }
 
+    public function renderEditProductPage()
+    {
+        view('admin/enia_editProduct.view.php');
+    }
+
     public function renderOrdersAdminController()
     {
         view('admin/atea_allOrders.view.php');

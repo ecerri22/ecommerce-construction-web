@@ -50,10 +50,13 @@ $router->get('/productDetails', $pc, 'renderProductDetails');
 
 /********************************/
 //********ADMIN********* //
-$ac = new AdminController()
-;
+$ac = new AdminController();
+
 // ADMIN - CREATE PRODUCT //
 $router->get('/createProduct', $ac, 'renderAddProductPage');
+
+// ADMIN - EDIT PRODUCT //
+$router->get('/editProduct', $ac, 'renderEditProductPage');
 
 // ADMIN - DASHBOARD //
 $router->get('/dashboard', $ac, 'renderDashboardAdminPage');

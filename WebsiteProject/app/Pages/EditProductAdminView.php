@@ -2,7 +2,7 @@
 
 namespace Pages;
 
-class AddProductAdminView {
+class EditProductAdminView {
     private $title;
 
     public function __construct($title) {
@@ -89,8 +89,8 @@ class AddProductAdminView {
             <?php $this->renderNavbar() ?>
 
             <div class="admin-dashboard">
-                <h1 class="page-title">Create Product</h1>
-                <form action="/createProduct" class="create-prod-form">
+                <h1 class="page-title">Edit Product</h1>
+                <form action="/editProduct" class="create-prod-form">
                     <label for="prod-name" class="label-name">Product Name:</label>
                     <input type="text" class="prod prod-name" name="prod-name">
 
@@ -157,7 +157,7 @@ class AddProductAdminView {
                         <input type="text" class="prod prod-bought-at" name="prod-bought-at">
                     </div>
 
-                    <input type="submit" value="Create product" class="prod-submit"> 
+                    <input type="submit" value="Save changes" class="prod-submit"> 
 
                 </form>
             </div>

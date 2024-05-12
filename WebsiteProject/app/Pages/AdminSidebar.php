@@ -13,33 +13,27 @@ class AdminSidebar {
                 </a>
                 <ul class="tabs-list-sidebar">
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/dashboard" class="tab-link-sidebar">
                             <i class="fas fa-th-large"></i>
                             <p class="tab-txt-sidebar">Dashboard</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="products.html" class="tab-link-sidebar active">
+                        <a href="/allProductsAdmin" class="tab-link-sidebar active">
                             <i class="fas fa-box-open"></i> 
                             <p class="tab-txt-sidebar">Products</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/allOrdersAdmin" class="tab-link-sidebar">
                             <i class="fas fa-file-alt"></i>
                             <p class="tab-txt-sidebar">Orders</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/allUsersAdmin" class="tab-link-sidebar">
                             <i class="fas fa-user"></i>
                             <p class="tab-txt-sidebar">Users</p>
-                        </a>
-                    </li>
-                    <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
-                            <i class="fas fa-comment"></i>
-                            <p class="tab-txt-sidebar">Reviews</p>
                         </a>
                     </li>
                 </ul>

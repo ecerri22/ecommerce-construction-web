@@ -69,35 +69,41 @@ class ProductDetailsView {
                         <!-- right side -->
                         <div class="header-user-btns">
                             <!-- user icon -->
-                            <button class="user-profile-btn header-btn ">
-                                <i class="fas fa-user"></i>
-                            </button>
+                            <a href="/myAccount">
+                                <button class="user-profile-btn header-btn">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                            </a>
 
                             <!-- wishlist icon -->
-                            <button class="user-wishlist-btn header-btn">
-                                <i class="fas fa-heart"></i> 
-                            </button>
+                            <a href="/wishlist">
+                                <button class="user-wishlist-btn header-btn">
+                                    <i class="fas fa-heart"></i> 
+                                </button>
+                            </a>
 
                             <!-- shopping bag icon  -->
-                            <button class="user-shopping-bag-btn header-btn">
-                                <i class="fas fa-shopping-cart"></i> 
-                            </button>
+                            <a href="/shoppingCart">
+                                <button class="user-shopping-bag-btn header-btn">
+                                    <i class="fas fa-shopping-cart"></i> 
+                                </button>
+                            </a>
                         </div>
 
                     </div>
                     <div class="lower-bar">
                         <ul class="tabs-list">
                             <li>
-                                <a href="#" class="tab-link tab-link-active">Home</a>
+                                <a href="/" class="tab-link tab-link-active">Home</a>
                             </li>
                             <li>
-                                <a href="#" class="tab-link">Products</a>
+                                <a href="/allProducts" class="tab-link">Products</a>
                             </li>
                             <li>
-                                <a href="#" class="tab-link">About Us</a>
+                                <a href="/aboutUs" class="tab-link">About Us</a>
                             </li>
                             <li>
-                                <a href="#" class="tab-link">Help & Advice</a>
+                                <a href="/helpAdvice" class="tab-link">Help & Advice</a>
                             </li>
                         </ul>
                     </div>

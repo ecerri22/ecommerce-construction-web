@@ -97,11 +97,5 @@ class User {
     
         return $save ? true : false;
     }
-    
-    public function getAllUsers() {
-        $sql = "SELECT * FROM users";
-        $result = $this->db->query($sql)->findOrFail();
 
-        return $result;
-    }
 }

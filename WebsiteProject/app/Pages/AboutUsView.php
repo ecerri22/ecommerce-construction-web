@@ -36,21 +36,21 @@ class AboutUsView {
                             <h3>Meet Our Team</h3>
                             <div class="team-members">
                                 <div class="team-member">
-                                    <img src="/public/image/customer-4.jpg" alt="Person 1" class="team-photo">
+                                    <img src="/image/customer-4.jpg" alt="Person 1" class="team-photo">
                                     <div class="member-info">
                                         <h4>John Doe </h4>
                                         <p>CEO & Founder</p>
                                     </div>
                                 </div>
                                 <div class="team-member">
-                                    <img src="/public/image/customer-1.jpg" alt="Person 2" class="team-photo">
+                                    <img src="/image/customer-1.jpg" alt="Person 2" class="team-photo">
                                     <div class="member-info">
                                         <h4>Jane Doe</h4>
                                         <p>Chief Engineer</p>
                                     </div>
                                 </div>
                                 <div class="team-member">
-                                    <img src="/public/image/person-9.jpg" alt="Person 3" class="team-photo">
+                                    <img src="/image/person-9.jpg" alt="Person 3" class="team-photo">
                                     <div class="member-info">
                                         <h4>James Smith</h4>
                                         <p>Project Manager</p>
