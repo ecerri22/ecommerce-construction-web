@@ -2,6 +2,6 @@
 
 use Pages\SignUpView;
 
-$signUpView = new SignUpView("signup");
+$signUpView = new SignUpView("Sign up");
 $signUpView->render();
 
