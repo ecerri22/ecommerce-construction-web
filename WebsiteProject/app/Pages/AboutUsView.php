@@ -1,8 +1,7 @@
 <?php
-
 namespace Pages;
 
-class SignUpView {
+class AboutUsView {
     private $title;
 
     public function __construct($title) {
@@ -30,7 +29,7 @@ class SignUpView {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title><?= $this->title; ?></title>
             
-            <link rel="stylesheet" href="Daniela/danielaStyles.css" />
+            <link rel="stylesheet" href="Denis/denisStyles.css" />
 
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,29 +99,61 @@ class SignUpView {
 
     private function renderContent() {
         ?>
-        <div class="content">
-                <h1 class="titleH1"> Create your Account</h1>
-                <form class="formSignUp" method="post" action="/signup">
-                    <div class="first-last-name">
-                        <div class="input-field">
-                            <label for="fname" class="labels">first name</label>
-                            <input type="text" name="fname" class="input-form" placeholder="Enter your first name" />
+            <div class="content">
+                <section class="about-us">
+                    <div class="about-container">
+                    
+                        <h2 class="header">About Our Company</h2>
+                        <p>Construction Web has been a pioneer in the construction industry since 1998, specializing in both residential and commercial projects. Our commitment to innovation and excellence has established us as a leader in the field, delivering projects that not only meet but exceed our clients' expectations.</p>
+                        
+                        <div class="history">
+                            <h3>Our History </h3>
+                            <p>Founded by a group of ambitious engineers, Construction Web started as a small firm focused on small to medium-sized construction projects. Over the years, we have expanded our expertise to include large-scale commercial developments, gaining recognition for our sustainable practices and cutting-edge architectural designs.</p>
                         </div>
-                        <div class="input-field">
-                            <label for="lname"class="labels">last name</label>
-                            <input type="text" name="lname" class="input-form" placeholder="Enter your last name"/>
+
+                        <div class="team">
+                            <h3>Meet Our Team</h3>
+                            <div class="team-members">
+                                <div class="team-member">
+                                    <img src="/public/image/customer-4.jpg" alt="Person 1" class="team-photo">
+                                    <div class="member-info">
+                                        <h4>John Doe </h4>
+                                        <p>CEO & Founder</p>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="/public/image/customer-1.jpg" alt="Person 2" class="team-photo">
+                                    <div class="member-info">
+                                        <h4>Jane Doe</h4>
+                                        <p>Chief Engineer</p>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <img src="/public/image/person-9.jpg" alt="Person 3" class="team-photo">
+                                    <div class="member-info">
+                                        <h4>James Smith</h4>
+                                        <p>Project Manager</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="mission">
+                            <h3>Our Mission</h3>
+                            <p>To lead the construction industry by creating unparalleled value for our clients through innovation, foresight, and reliability, ensuring that our projects are completed on time, on budget, and to the highest standards of quality.</p>
+                        </div>
+
+                        <div class="value">
+                            <h3>Our Valued Clients</h3>
+                            <p>Our team has always embraced our clients and partners as part of Our Team. Every project is performed with open communication. The Partnering methodology is implemented and a mutual respect with our clients provides the groundwork for our success</p>
+                        </div>
+
+                        <div class="why-us">
+                            <h3>Why us?</h3>
+                            <p>Choose our construction company for unparalleled expertise, meticulous attention to detail, and a commitment to exceeding expectations. With a proven track record of delivering exceptional results, we ensure your project is completed on time, within budget, and to the highest standards.</p>
+                        </div> 
                     </div>
-                    <div class="input-field">
-                        <label for="email"class="labels">email</label>
-                        <input type="text" name="email"class="input-form" placeholder="Enter your email">
-                    </div>
-                    <div class="input-field">
-                        <label for="pass"class="labels">password</label>
-                        <input type="password" name="pass" class="input-form" placeholder="Enter the password">
-                    </div>
-                    <input class="create-account-btn" type="submit" name="create-account" value="Sign up"/>
-                </form>     
+                </section>
             </div>
         <?php
     }
@@ -159,4 +190,3 @@ class SignUpView {
         <?php
     }    
 }
-

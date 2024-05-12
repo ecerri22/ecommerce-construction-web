@@ -1,8 +1,7 @@
 <?php
-
 namespace Pages;
 
-class SignUpView {
+class LoginView {
     private $title;
 
     public function __construct($title) {
@@ -100,30 +99,32 @@ class SignUpView {
 
     private function renderContent() {
         ?>
-        <div class="content">
-                <h1 class="titleH1"> Create your Account</h1>
-                <form class="formSignUp" method="post" action="/signup">
-                    <div class="first-last-name">
-                        <div class="input-field">
-                            <label for="fname" class="labels">first name</label>
-                            <input type="text" name="fname" class="input-form" placeholder="Enter your first name" />
-                        </div>
-                        <div class="input-field">
-                            <label for="lname"class="labels">last name</label>
-                            <input type="text" name="lname" class="input-form" placeholder="Enter your last name"/>
-                        </div>
-                    </div>
-                    <div class="input-field">
-                        <label for="email"class="labels">email</label>
-                        <input type="text" name="email"class="input-form" placeholder="Enter your email">
-                    </div>
-                    <div class="input-field">
-                        <label for="pass"class="labels">password</label>
-                        <input type="password" name="pass" class="input-form" placeholder="Enter the password">
-                    </div>
-                    <input class="create-account-btn" type="submit" name="create-account" value="Sign up"/>
-                </form>     
+            <div class="content">
+        <h1 class="titleH1">Customer Login </h1>
+
+        <div class="login-container">
+            <form class="login-form">
+                <p class="heading">Registered Customers </p>
+
+                <div class="input-field">
+                    <label for="email" class="labels">email address</label>
+                    <input type="text" name="email"/>
+                </div>
+
+                <div class="input-field">
+                    <label for="pass"class="labels">password</label>
+                    <input type="password" name="pass"/>
+                </div>
+
+                <button type="submit" class="button">Login </button>
+            </form>
+            <div class="signup-part">
+                <p class="heading">New Customers</p>
+                <p class="info-signup">Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>
+                <a href="signupForm.html" class="button create-acc-btn-login">Create An Account</a>
             </div>
+        </div>
+    </div>
         <?php
     }
            
@@ -159,4 +160,3 @@ class SignUpView {
         <?php
     }    
 }
-
