@@ -49,13 +49,19 @@ body {
   position: relative;
 }
 
-.tab-sidebar:hover * { 
+.tab-sidebar:hover *,
+.tab-sidebar:active * { 
   color: #081f54; 
+}
+
+.tab-link-sidebar.active .fas,
+.tab-link-sidebar.active .tab-txt-sidebar {
+  color: #081f54;
 }
 
 .tab-sidebar:hover .tab-link-sidebar::before, 
 .tab-sidebar:focus .tab-link-sidebar::before,
-.tab-sidebar:active .tab-link-sidebar::before {
+.tab-link-sidebar.active::before {
   content: '';
   position: absolute;
   top: 0;
@@ -71,7 +77,6 @@ body {
   text-decoration: none;
   color: #71767f;
   padding-left: .2rem; 
-
 }
 
 .tab-txt-sidebar {
