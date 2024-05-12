@@ -1,7 +1,6 @@
 <?php
 
 namespace Models;
-
 use Core\App;
 
 class User {
