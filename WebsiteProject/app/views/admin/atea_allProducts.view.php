@@ -2,5 +2,5 @@
 
 use Pages\ProductsAdminView;
 
-$productsAdminView = new ProductsAdminView("Products Admin View");
+$productsAdminView = new ProductsAdminView("Products Admin");
 $productsAdminView->render();
