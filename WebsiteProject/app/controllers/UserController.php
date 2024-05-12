@@ -21,6 +21,38 @@ class UserController extends Controller
         view('user/daniela_signup.view.php');
     }
 
+    public function renderLogin()
+    {
+        view('user/daniela_login.view.php');
+    }
+
+    public function renderHelpAdvice()
+    {
+        view('user/daniela_helpadvice.view.php');
+    }
+
+    public function renderWishlist(){
+        view('user/rosela_wishlist.view.php');
+    }
+
+    public function renderShoppingCart(){
+        view('user/rosela_shoppingCart.view.php');
+    }
+
+    public function renderCheckout(){
+        view('user/rosela_checkout.view.php');
+    }
+
+    public function renderMyAccount()
+    {
+        view('user/irvi_myAccount.view.php');
+    }
+
+    public function renderMyOrders()
+    {
+        view('user/irvi_myorders.view.php');
+    }
+
     public function signUp()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,15 +76,4 @@ class UserController extends Controller
         }
     }
 
-    public function renderWishlist(){
-        view('user/rosela_wishlist.view.php');
-    }
-
-    public function renderShoppingCart(){
-        view('user/rosela_shoppingCart.view.php');
-    }
-
-    public function renderCheckout(){
-        view('user/rosela_checkout.view.php');
-    }
 }
