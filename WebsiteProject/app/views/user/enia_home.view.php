@@ -2,6 +2,6 @@
 
 use Pages\HomePageView;
 
-$homePageView = new HomePageView("Home");
+$homePageView = new HomePageView("Home", 'Enia/eniaStyles.css');
 $homePageView->render();
 

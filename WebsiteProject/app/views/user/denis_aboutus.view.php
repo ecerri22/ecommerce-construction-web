@@ -2,6 +2,6 @@
 
 use Pages\AboutUsView;
 
-$aboutUsView = new AboutUsView("About Us");
+$aboutUsView = new AboutUsView("About Us", 'Denis/denisStyles.css');
 $aboutUsView->render();
 
