@@ -2,41 +2,41 @@
 
 namespace Pages;
 use Models\Product;
+use Models\search;
 
 
 class AllProductsView {
-    public function __construct() {
-        //this just makes some products which will later be taken from the database.
-        new Product("Cotton Tee", 1.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","T-shirt");
-        new Product("Tool Set", 2.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand-tools");
-        new Product("Power Drill", 3.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Power-tools");
-        new Product("Wood Planks", 4.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Materials");
-        new Product("Screws Pack", 5.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hardware");
-        new Product("Excavator", 6.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Construction Machinery");
-        new Product("Safety Helmet", 7.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Safty And Personal Protection");
-        new Product("Wrench Set", 8.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand-tools");
-        new Product("Circular Saw", 9.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Power-tools");
-        new Product("Cement Bag", 10.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Materials");
-        new Product("Nails Pack", 11.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hardware");
-        new Product("Bulldozer", 12.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Construction Machinery");
-        new Product("Safety Goggles", 13.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Protects your eyes");
-        new Product("Hammer", 14.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand tool for nailing");
-        new Product("Angle Grinder", 15.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","For cutting and grinding");
-        new Product("Steel Rods", 16.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Strong construction material");
-        new Product("Bolts Pack", 17.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Secure your structures");
-        new Product("Crane", 18.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Lifts heavy objects");
-        new Product("Safety Gloves", 19.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Protects your hands");
-        new Product("Cotton Tee", 20.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","T-shirt");
+    public $arr = array();
 
-        $_SESSION['productslist'] = Product::getProductsArray();
-        $_SESSION['updatedproductslist'] = Product::getProductsArray();
+    public function __construct($arr)
+    {
+        $this->arr = $arr;
     }
 
-    public function render(){
+    public function render()
+    {
+        $this->arr = array(new Product("Cotton Tee", 1, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "White","T-shirt"),
+        new Product("Tool Set", 2, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Red","Hand-tools"),
+        new Product("Power Drill", 3, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Blue","Power-tools"),
+        new Product("Wood Planks", 4, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Green","Materials"),
+        new Product("Screws Pack", 5, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Yellow","Hardware"),
+        new Product("Excavator", 6, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Purple","Construction Machinery"),
+        new Product("Safety Helmet", 7, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Orange","Safty And Personal Protection"),
+        new Product("Wrench Set", 8, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Pink","Hand-tools"),
+        new Product("Circular Saw", 9, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Brown","Power-tools"),
+        new Product("Cement Bag", 10, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Gray","Materials"),
+        new Product("Nails Pack", 11, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Black","Hardware"),
+        new Product("Bulldozer", 12, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "White","Construction Machinery"),
+        new Product("Safety Goggles", 13, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Red","Protects your eyes"),
+        new Product("Hammer", 14, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Blue","Hand tool for nailing"),
+        new Product("Angle Grinder", 15, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Green","For cutting and grinding"),
+        new Product("Steel Rods", 16, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Yellow","Strong construction material"),
+        new Product("Bolts Pack", 17, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Purple","Secure your structures"),
+        new Product("Crane", 18, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Orange","Lifts heavy objects"),
+        new Product("Safety Gloves", 19, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "Pink","Protects your hands"));
         $this->display_head();
         $this->display_sidebar();
-        $this->display_products();
-        $this->display_footer();
+        $this->display_products($this->arr);
     }
 
     function display_head(){
@@ -71,7 +71,9 @@ class AllProductsView {
                     <!-- center search bar-->
                     <div class="search-bar">
                         <input type="text" name="product" id="searcher" class="input-search" placeholder="Search...">
-                        <button class="btn-search header-btn" onclick="Search()">
+                        <?php
+                         echo '<button class="btn-search header-btn" onclick="Search('.json_encode($this->arr).')">';
+                        ?>
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -167,10 +169,10 @@ class AllProductsView {
         <?php
     }
         
-    function display_products() {
+    public function display_products($products) {
         echo '<div id="products" class="products-container">';
         echo '<div class="products">';
-        foreach($_SESSION['updatedproductslist'] as $product)
+        foreach($products as $product)
         {
             $product->display();
         }

@@ -2,5 +2,5 @@
 
 use Pages\AllProductsView;
 
-$products = new AllProductsView('All Products', 'Thanas/thanasStyles.css');
+$products = new AllProductsView(array());
 $products->render();

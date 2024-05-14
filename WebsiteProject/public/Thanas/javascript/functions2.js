@@ -14,7 +14,8 @@ function makesticky(prod){
     }
 }
 
-function Search() {
+function Search(page) {
+    console.log("Search function called");
     var search = $('#searcher').val();
     var Categories = [];
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
@@ -23,11 +24,12 @@ function Search() {
         }
     }
     $.ajax({
-        url: 'search.php', // The PHP script that generates the new element
+        url: '/../WebsiteProject/app/Models/search.php', // The PHP script that generates the new element
         type: 'POST',
         data: {
              dat : search,
-             categories : Categories
+             page : JSON.stringify(page),
+             categories : Categories,
             },
         success: function(response) {
             $('#products').replaceWith(response);
