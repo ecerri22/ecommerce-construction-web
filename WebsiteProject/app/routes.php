@@ -22,6 +22,7 @@ $router->post('/signup', $uc, 'signUp');
 
 // LOGIN PAGE //
 $router->get('/login', $uc, 'renderLogin');
+$router->post('/login', $uc, 'logIn');
 
 // HELP-ADVICE PAGE //
 $router->get('/helpAdvice', $uc, 'renderHelpAdvice');

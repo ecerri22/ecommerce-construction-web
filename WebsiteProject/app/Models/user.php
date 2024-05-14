@@ -4,6 +4,8 @@ namespace Models;
 use Core\App;
 
 class User {
+    protected $user = [];
+
     private $user_id;
     private $firstName;
     private $lastName;
@@ -88,14 +90,17 @@ class User {
         $this->setEmail($email);
     
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $this->setPassword($hashedPassword);
     
         $createdAt = date('Y-m-d H:i:s');
         
         $sql = "INSERT INTO users (first_name, last_name, password, email, role, created_at) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPassword()}', '{$this->getEmail()}', '{$this->getRole()}', '{$createdAt}')";
-        $save = $this->db->query($sql);
+        $save = $this->db->query($sql);        
     
         return $save ? true : false;
     }
 
+    
+    
 }

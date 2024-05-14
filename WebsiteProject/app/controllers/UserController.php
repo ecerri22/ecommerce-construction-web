@@ -2,18 +2,21 @@
 
 namespace Controllers;
 
+use Core\Authenticator;
 use Core\Controller;
+use Core\Session;
 use Models\User;
-
 
 class UserController extends Controller
 {
     private $user;
+    private $auth;
 
     public function __construct()
     {
         parent::__construct();
         $this->user = new User();
+        $this->auth = new Authenticator();
     }
 
     public function renderSignup()
@@ -23,7 +26,9 @@ class UserController extends Controller
 
     public function renderLogin()
     {
-        view('user/daniela_login.view.php');
+        return view('user/daniela_login.view.php', [
+            'errors' => $this->auth->errors()
+        ]);
     }
 
     public function renderHelpAdvice()
@@ -74,6 +79,28 @@ class UserController extends Controller
                 }
             }
         }
+    }
+
+    public function logIn()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['pass'];
+                   
+            if (!$this->auth->validate($email, $password)) {
+                $this->renderLogin();
+                
+            } else {
+                if ($this->auth->attempt($email, $password)) {
+                    redirect('/allProducts'); 
+                } else {
+                    Session::flash('errors', 'Invalid email or password.');
+                    // return redirect('/login');
+                    $this->renderLogin();
+
+                }
+            }
+        }        
     }
 
 }

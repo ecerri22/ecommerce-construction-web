@@ -78,27 +78,42 @@ class AllProductsView {
 
                     <!-- right side -->
                     <div class="header-user-btns">
-                            <!-- user icon -->
-                            <a href="/myAccount">
-                                <button class="user-profile-btn header-btn">
-                                    <i class="fas fa-user"></i>
+                        <?php if ($_SESSION['user'] ?? false) : ?>
+                        <!-- User is logged in -->
+                        <a href="/myAccount">
+                            <button class="user-profile-btn header-btn">
+                                <i class="fas fa-user"></i>
+                            </button>
+                        </a>
+
+                        <a href="/wishlist">
+                            <button class="user-wishlist-btn header-btn">
+                                <i class="fas fa-heart"></i> 
+                            </button>
+                        </a>
+
+                        <a href="/shoppingCart">
+                            <button class="user-shopping-bag-btn header-btn">
+                                <i class="fas fa-shopping-cart"></i> 
+                            </button>
+                        </a>
+                        <?php else : ?>
+                        <!-- User is logged out -->
+                        <div class="login-signup-btns">
+                            <a href=/login>
+                                <button class="login-btn hero-btn">
+                                    Login
                                 </button>
                             </a>
 
-                            <!-- wishlist icon -->
-                            <a href="/wishlist">
-                                <button class="user-wishlist-btn header-btn">
-                                    <i class="fas fa-heart"></i> 
-                                </button>
-                            </a>
-
-                            <!-- shopping bag icon  -->
-                            <a href="/shoppingCart">
-                                <button class="user-shopping-bag-btn header-btn">
-                                    <i class="fas fa-shopping-cart"></i> 
+                            <a href=/signUp>
+                                <button class="signup-btn hero-btn">
+                                    Signup
                                 </button>
                             </a>
                         </div>
+                        <?php endif; ?>
+                    </div>
 
                 </div>
                 <div class="lower-bar">

@@ -1,38 +1,63 @@
 <?php
 
 namespace Core;
+use Core\App;
+use Core\Validator;
 
 class Authenticator
 {
   protected $user = [];
+  protected $errors = [];
+
+  public function validate($email, $password)
+  {
+    if (!Validator::email($email)) {
+      $this->errors['email'] = 'Please provide a valid email';
+    }
+
+    if (!Validator::string($password, 5, 50)) {
+      $this->errors['password'] = 'Please provide a valid password';
+    }
+
+    return empty($this->errors);
+  }
 
   public function attempt($email, $password)
   {
-    $this->user = App::resolve(Database::class)->query('select * from users where email = :email', ['email' => $email])->find();
+    $this->user = App::container()->resolve('Core\Database')->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->find();
 
     if ($this->user) {
       if (password_verify($password, $this->user['password'])) {
-        $this->login([
-          'email' => $email
-        ]);
-
+        $this->login(['email' => $email]);
         return true;
+      } else {
+        return false;
       }
     }
-    return false;
   }
 
   public function login($user)
   {
     $_SESSION['user'] = [
       'email' => $user['email'],
-      'id' => $this->user['id'],
+      'user_id' => $this->user['user_id'],
       'role' => $this->user['role'],
-      'name' => $this->user['name'],
-      'image_name' => $this->user['image_name']
+      'first_name' => $this->user['first_name'],
     ];
 
     session_regenerate_id(true);
+  }
+
+  public function errors()
+  {
+    return $this->errors;
+  }
+
+  
+  public function error($key, $message)
+  {
+    //sets error
+    $this->errors[$key] = $message;
   }
 
   public function logout()
@@ -44,4 +69,6 @@ class Authenticator
   {
     return $_SESSION['user']['id'];
   }
+
+
 }
