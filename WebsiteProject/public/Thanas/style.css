@@ -1,3 +1,12 @@
+.hero-btn{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+}
 
 .wishlist-title{
   display: inline-block;
@@ -199,6 +208,8 @@ input[type=number]::-webkit-outer-spin-button {
   color: #bfbfbf;
 }
 
+
+
 /*//////////////////////////////////////////*/
 .checkout-content{
   padding:1rem 4rem;
@@ -322,4 +333,45 @@ input[type=number]::-webkit-outer-spin-button {
 #purchase-btn:hover{
   background-color: #ed7513;
   cursor: pointer;
+}
+
+
+.login-btn {
+  border: 2px #eee solid;
+  color: #eee;
+  background-color: #061538;
+  height: 100%;
+}
+
+.login-btn:hover {
+  background-color: #081b44;
+  transition: 400ms;
+}
+
+.signup-btn {
+  background: #eee;
+  color: #061538;
+  height: 100%;
+}
+
+.signup-btn:hover {
+  background:  #eeeeeee1;
+  transition: 400ms;
+}
+
+.login-signup-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+  
+}
+
+.hero-btn{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
 }
