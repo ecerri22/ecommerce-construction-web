@@ -1,6 +1,6 @@
 <?php
 
 use Pages\AllProductsView;
-use Models\Product;
-$products = new AllProductsView(Product::getAllproducts());
-$products->render();
+
+$products = new AllProductsView('All Products', 'Thanas/thanasStyles.css');
+$products->render($allProducts);

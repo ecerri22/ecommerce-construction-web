@@ -75,10 +75,15 @@ class AddProductAdminView {
 
 
 
-                <button class="logout-sidebar">
-                    <i class="fas fa-sign-out-alt logout-icon"></i>
-                    <p class="logout-text-sidebar">LOG OUT</p>
-                </button>
+                <?php if ($_SESSION['user'] ?? false) : ?>
+                        <form action="/login" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="logout-sidebar">
+                                <i class="fas fa-sign-out-alt logout-icon"></i>
+                                <p class="logout-text-sidebar">LOG OUT</p>
+                            </button>
+                        </form>
+                <?php endif; ?>
             </div>
         <?php
     }
@@ -101,7 +106,7 @@ class AddProductAdminView {
                     <div class="div-prod-img">
                         <label for="prod-img" class="label-other">
                             <span>+ Add Product Image</span>
-                            <input type="file" id="prod-img" class="prod-img" name="prod-img" accept="image/*">
+                            <input type="file" id="prod-img" class="prod-img" name="image_name" accept="image/*">
                         </label>
                     </div>
 
@@ -129,16 +134,16 @@ class AddProductAdminView {
                     <div class="div-prod-category">
                         <label for="prod-category" class="label-other">Category:</label>
                         <select id="prod-category" class="prod prod-category" name="prod-category">
-                            <option value="category1">Electrical</option>
-                            <option value="category2">Windows</option>
-                            <option value="category3">Steel Profiles</option>
-                            <option value="category4">Wood Materials</option>
-                            <option value="category5">Hydraulics</option>
-                            <option value="category6">Professional Work Tools</option>
-                            <option value="category7">Building Materials</option>
-                            <option value="category8">Roof Covers</option>
-                            <option value="category9">Isolation</option>
-                            <option value="category10">Packaging Materials</option>
+                            <option value="1">Electrical</option>
+                            <option value="2">Windows</option>
+                            <option value="3">Steel Profiles</option>
+                            <option value="4">Wood Materials</option>
+                            <option value="5">Hydraulics</option>
+                            <option value="6">Professional Work Tools</option>
+                            <option value="7">Building Materials</option>
+                            <option value="8">Roof Covers</option>
+                            <option value="9">Isolation</option>
+                            <option value="10">Packaging Materials</option>
                         </select>
                     </div>
 
@@ -175,7 +180,7 @@ class AddProductAdminView {
             <button class="admin-name">
                 <!-- <img src=""/> -->
                 <div class="user-pfp"></div>
-                <p>Admin</p>
+                <p><?= $_SESSION['user']['first_name'] ?></p>
             </button>
         </nav>
         <?php

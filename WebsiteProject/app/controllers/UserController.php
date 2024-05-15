@@ -81,26 +81,55 @@ class UserController extends Controller
         }
     }
 
+    // public function logIn()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         $email = $_POST['email'];
+    //         $password = $_POST['pass'];
+                   
+    //         if (!$this->auth->validate($email, $password)) {
+    //             $this->renderLogin();
+    //         } else {
+    //             if ($this->auth->attempt($email, $password)) {
+    //                 redirect('/allProducts'); 
+    //             } else {
+    //                 Session::flash('errors', 'Invalid email or password.');
+    //                 // return redirect('/login');
+    //                 $this->renderLogin();
+
+    //             }
+    //         }
+    //     }        
+    // }
+
+
     public function logIn()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['pass'];
-                   
+                
             if (!$this->auth->validate($email, $password)) {
                 $this->renderLogin();
-                
             } else {
                 if ($this->auth->attempt($email, $password)) {
-                    redirect('/allProducts'); 
+                    if ($_SESSION['user']['role'] === 1) {
+                        redirect('/dashboard');
+                    } else {
+                        redirect('/allProducts');
+                    }
                 } else {
                     Session::flash('errors', 'Invalid email or password.');
-                    // return redirect('/login');
                     $this->renderLogin();
-
                 }
             }
         }        
     }
+
+    public function logOut(){
+        $this->auth->logout();
+        redirect('/');
+    }
+
 
 }
