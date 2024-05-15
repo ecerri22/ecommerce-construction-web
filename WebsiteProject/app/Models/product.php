@@ -1,41 +1,29 @@
 <?php
 
 namespace Models;
-
 use Core\App;
 
 class Product{
-    private $name;
-    private $price;
-    private $image;
-    private $link;
-    private $category;
-    private $minidescription;
-    private static $products = array();
-    private $db;
+    public $id;
+    public $name;
+    public $price;
+    public $image;
+    public $link;
+    public $category;
+    public $minidescription;
+    public static $products = array();
 
-
-    // public function __construct($name, $price, $image, $link, $minidescription, $category)
-    // {
-    //     $this->name = $name;
-    //     $this->price = $price;
-    //     $this->image = $image;
-    //     $this->link = $link;
-    //     $this->minidescription = $minidescription;
-    //     $this->category = $category;
-    //     array_push(Product::$products, $this);
-    // }
-
-    public function __construct()
+    public function __construct($id,$name, $price, $image, $link, $minidescription, $category)
     {
-        $this->db = App::container()->resolve('Core\Database');
+        $this->id = $id;
+        $this->name = $name;
+        $this->price = $price;
+        $this->image = $image;
+        $this->link = $link;
+        $this->minidescription = $minidescription;
+        $this->category = $category;
+        array_push(Product::$products, $this);
     }
-
-    public function getAllProducts(){
-        return App::container()->resolve('Core\Database')->query('SELECT * FROM
-        products')->get();
-    }
-
     public function display()
     {
         echo '<div class="product-card">';
@@ -60,7 +48,6 @@ class Product{
     {
         return Product::$products;
     }
-
     public function getName()
     {
         return $this->name;
@@ -91,7 +78,21 @@ class Product{
         return $this->minidescription;
     }
 
-    
+    public static function getAllproducts()
+    {
+        $result = App::container()->resolve('Core\Database')->query('SELECT * FROM products
+        JOIN categories ON categories.category_id = products.category_id')->get(); 
+
+        // Iterate through the result and return an array of product objects
+        $products = array();
+        foreach ($result as $row) {
+            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"#", $row['description'], $row['category_name']);
+            $products[] = $product;
+        }
+        return $products;
+         
+    }
+
 }
 
 

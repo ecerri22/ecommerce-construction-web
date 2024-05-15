@@ -11,13 +11,12 @@ class ProductController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->product = new Product();
     }
 
     public function renderAllProductsPage()
     {
         view('user/thanas_allProducts.view.php', [
-            'allProducts' => $this->product->getAllProducts()
+            'allProducts' => Product::getAllproducts()
         ]);
     }
  

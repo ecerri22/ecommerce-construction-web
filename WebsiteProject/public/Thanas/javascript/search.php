@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $descriptionDistance = levenshtein($data, $product['minidescription']);
         
          // If the name is a better match, add to matches
-        if ($nameDistance <= $descriptionDistance || str_contains($product['name'], $data)) {
+        if ($nameDistance <= $descriptionDistance/25 || str_contains($product['name'], $data)) {
             if(str_contains($product['name'], $data))
             {
                 $nameDistance = 0;
             }
-            if($nameDistance <= 3)
+            if($nameDistance <= 4)
             {
                 if((in_array($product["category"], $categories) || $nrofcategories == 0) && $product['price'] >= $minprice && $product['price'] <= $maxprice)
                 {
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 $descriptionDistance = 0;
             }
-            if($descriptionDistance <= 3)
+            if($descriptionDistance <= 100)
             {
                 if((in_array($product["category"], $categories) || $nrofcategories == 0) && $product['price'] >= $minprice && $product['price']<= $maxprice)
                 {
