@@ -15,6 +15,7 @@ function makesticky(prod){
 }
 
 function Search(page) {
+    console.log(page);
     console.log("Search function called");
     var search = $('#searcher').val();
     var Categories = [];
@@ -24,33 +25,33 @@ function Search(page) {
         }
     }
     $.ajax({
-        url: '/../WebsiteProject/app/Models/search.php', // The PHP script that generates the new element
+        url: '/Thanas/javascript/search.php',
         type: 'POST',
         data: {
              dat : search,
-             page : JSON.stringify(page),
+             page : JSON.stringify(page), // Use the serialized productsArray
              categories : Categories,
-            },
+        },
         success: function(response) {
             $('#products').replaceWith(response);
         }
     });
 }
 
-function toggleButtonColorOnPress(button){
+function toggleButtonColorOnPress(button, page){
     if (button.style.backgroundColor == "green"){
         button.style.backgroundColor = "#0615388c";
     } else {
         button.style.backgroundColor = "green";   
     }
-    Search();
+    Search(page);
    
 }
 
-function clearSearch(){
+function clearSearch(page){
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
         document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
     }
     $('#searcher').val("");
-    Search();
+    Search(page);
 }

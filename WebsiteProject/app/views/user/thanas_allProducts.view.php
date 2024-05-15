@@ -1,6 +1,6 @@
 <?php
 
 use Pages\AllProductsView;
-
-$products = new AllProductsView(array());
+use Models\Product;
+$products = new AllProductsView(Product::getAllproducts());
 $products->render();

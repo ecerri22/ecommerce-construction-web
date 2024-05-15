@@ -1,6 +1,8 @@
 <?php
 
-    use Models\statistics;
+    namespace Pages;
+    use Models\statistic;
+    use Models\graph;
 
     class adminDashboard{
 

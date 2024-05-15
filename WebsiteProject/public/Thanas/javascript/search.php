@@ -1,6 +1,11 @@
 <?php
-    use Models\Product;
+
+      namespace Pages;
+
+use Models\Product;
 use Pages\AllProductsView;
+      include_once "C:\\xampp\\htdocs\\ecommerce-construction-web\\WebsiteProject\\app\Models\\product.php";
+      include_once "C:\\xampp\\htdocs\\ecommerce-construction-web\\WebsiteProject\\app\\Pages\\AllProductsView.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
@@ -8,13 +13,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = trim($data); // Remove any whitespace from the beginning and end of the data
     $data = htmlspecialchars($data);
     $page = new AllProductsView(json_decode($_POST['page'],true)); // Get the page sent from JavaScript
-
     if($data == "Reset" || $data == "Mumbo Jumbo") // If the data is empty, display all products
     {
-        $page->display_products($page);
+        $products = array();
+        foreach($page->arr as $product)
+        {
+            $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['category'], $product['minidescription']);
+        }
+        $page->display_products($products);
         return;
     }
-    $products = $_SESSION['productslist']; // Get the products array
     if(isset($_POST['categories']))
     {
         $categories = $_POST['categories']; 
@@ -23,29 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $categories = array();
     }
     $nrofcategories = count($categories); // Get the number of categories
-
-    if(isset($_SESSION['minprice']) && isset($_SESSION['maxprice'])){
-        $minprice = $_SESSION['minprice']; // Get the minimum price
-        $maxprice = $_SESSION['maxprice']; // Get the maximum price
-    }
-    else{
-        $minprice = 0;
-        $maxprice = 1000000;
-    }
+    $minprice = 0;
+    $maxprice = 1000000;
     // Loop through products to find matches
-    foreach ($products as $product) {
-        $nameDistance = levenshtein($data, $product->getName());
-        $descriptionDistance = levenshtein($data, $product->getMinidescription());
+    foreach ($page->arr as $product) {
+        $nameDistance = levenshtein($data, $product['name']);
+        $descriptionDistance = levenshtein($data, $product['minidescription']);
         
          // If the name is a better match, add to matches
-        if ($nameDistance <= $descriptionDistance || str_contains($product->getName(), $data)) {
-            if(str_contains($product->getName(), $data))
+        if ($nameDistance <= $descriptionDistance || str_contains($product['name'], $data)) {
+            if(str_contains($product['name'], $data))
             {
                 $nameDistance = 0;
             }
             if($nameDistance <= 3)
             {
-                if((in_array($product->getCategory(), $categories) || $nrofcategories == 0) && $product->getPrice() >= $minprice && $product->getPrice() <= $maxprice)
+                if((in_array($product["category"], $categories) || $nrofcategories == 0) && $product['price'] >= $minprice && $product['price'] <= $maxprice)
                 {
                     $matches[] = ['product' => $product, 'distance' => $nameDistance];
                 }
@@ -55,13 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // If the description is a better match, add to matches
         else {
-            if(str_contains($product->getMinidescription(), $data))
+            if(str_contains($product['minidescription'], $data))
             {
                 $descriptionDistance = 0;
             }
             if($descriptionDistance <= 3)
             {
-                if((in_array($product->getCategory(), $categories) || $nrofcategories == 0) && $product->getPrice() >= $minprice && $product->getPrice() <= $maxprice)
+                if((in_array($product["category"], $categories) || $nrofcategories == 0) && $product['price'] >= $minprice && $product['price']<= $maxprice)
                 {
                     $matches[] = ['product' => $product, 'distance' => $descriptionDistance];
                 }
@@ -80,10 +81,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Extract the sorted products
     
-    $page->display_products(array_map(function($match) {
+    $products = array();
+    foreach(array_map(function($match) {
         return $match['product'];
-    }, $matches)); // Display the products
+    }, $matches) as $product) {
+        $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['minidescription'], $product['category']);
+    }
 
+    $page->display_products($products); // Display the products
 }
 else{
     header("Location: http://localhost/ecommerce-construction-web/userPage/Products/Products.php"); // Redirect to the products page
