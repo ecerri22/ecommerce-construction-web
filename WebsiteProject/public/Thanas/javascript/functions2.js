@@ -31,6 +31,7 @@ function Search(page) {
              dat : search,
              page : JSON.stringify(page), // Use the serialized productsArray
              categories : Categories,
+             maxprice : document.getElementById("mySlider").value,
         },
         success: function(response) {
             $('#products').replaceWith(response);
@@ -53,5 +54,7 @@ function clearSearch(page){
         document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
     }
     $('#searcher').val("");
+    document.getElementById("mySlider").value = 50;
+    document.getElementById("sliderValue").innerHTML = "50";
     Search(page);
 }

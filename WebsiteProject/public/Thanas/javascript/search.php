@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $nrofcategories = count($categories); // Get the number of categories
     $minprice = 0;
-    $maxprice = 1000000;
+    $maxprice = $_POST['maxprice'] * 10; // Get the maximum price
     // Loop through products to find matches
     foreach ($page->arr as $product) {
         $nameDistance = levenshtein($data, $product['name']);
