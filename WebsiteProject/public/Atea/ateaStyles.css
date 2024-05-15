@@ -36,8 +36,8 @@ body {
     top: 0;
     left: 0;
     width: 14%;
+    justify-content: space-between;
 }
-
 
 /*     TABS STYLING    */
 .tabs-list-sidebar {

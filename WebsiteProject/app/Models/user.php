@@ -83,24 +83,27 @@ class User {
         return $this;
     }
 
-    public function register( $firstName, $lastName, $password, $email){
-        $this->setRole(0);
+    public function register($firstName, $lastName, $password, $email) {
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
         $this->setEmail($email);
-    
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        // Check if the email contains "admin" after the '@' sign
+        $emailParts = explode('@', $email);
+        if (isset($emailParts[1]) && strpos($emailParts[1], 'admin') !== false) {
+            $this->setRole(1);
+        } else {
+            $this->setRole(0);
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->setPassword($hashedPassword);
-    
+
         $createdAt = date('Y-m-d H:i:s');
         
         $sql = "INSERT INTO users (first_name, last_name, password, email, role, created_at) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPassword()}', '{$this->getEmail()}', '{$this->getRole()}', '{$createdAt}')";
         $save = $this->db->query($sql);        
-    
+        
         return $save ? true : false;
     }
-
-    
-    
 }

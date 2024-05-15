@@ -90,6 +90,14 @@ class MyAccountView {
                                     <i class="fas fa-shopping-cart"></i> 
                                 </button>
                             </a>
+
+                                <form action="/login" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button class="logout-btn hero-btn">
+                                        Log out
+                                    </button>
+                                </form>
+                            
                             <?php else : ?>
                             <!-- User is logged out -->
                             <div class="login-signup-btns">
@@ -162,7 +170,9 @@ class MyAccountView {
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">My Orders</div>
                             <div class="card-body text-center">
-                                <button class="btn btn-primary" type="button">View order history</button>
+                                <a href="/myOrders">
+                                    <button class="btn btn-primary" type="button">View order history</button>
+                                </a>
                             </div>
 
                         </div>

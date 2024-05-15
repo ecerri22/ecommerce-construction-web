@@ -24,9 +24,6 @@ class WishlistView{
             <div class="wishlist-products-container">
                 <h2 class="wishlist-title">Wishlist products</h2>
                 <div class="wishlist-products">
-
-
-
                     <div class="wishlist-product-card">
                     <button class="remove-from-cart">
                         <i class="fas fa-trash"></i> 
