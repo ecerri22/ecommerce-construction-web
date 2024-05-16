@@ -15,7 +15,6 @@ class Router
             'controller' => $controller,
             'method' => $method,
             'middleware'=> NULL,
-
             'function' => $function
         ];
 
@@ -52,6 +51,10 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['url'] === $url && $route['method'] === strtoupper($method)) {
+                if($route['middleware']){
+                    Middleware::check($route['middleware']);
+                }
+
                 $controller = new $route['controller']();
                 $function = $route['function'];
                 return $controller->$function();

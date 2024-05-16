@@ -2,5 +2,5 @@
 
 use Pages\UsersAdminView;
 
-$usersAdminView = new UsersAdminView("Products Admin View");
+$usersAdminView = new UsersAdminView("Users Admin");
 $usersAdminView->render();

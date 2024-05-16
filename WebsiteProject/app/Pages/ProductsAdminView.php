@@ -35,42 +35,43 @@ class ProductsAdminView{
             </head>
         <?php
     }
+
     private function renderHeader() {
         ?>
             <div class="sidebar">
-                <h3 class="logo">LOGO</h3>
+                <a href="#" class="logo">
+                    <h3>LOGO</h3>
+                </a>
+                
                 <ul class="tabs-list-sidebar">
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/dashboard" class="tab-link-sidebar <?= (urlUI('/dashboard')) ? 'active' : ''; ?>">
                             <i class="fas fa-th-large"></i>
                             <p class="tab-txt-sidebar">Dashboard</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="products.html" class="tab-link-sidebar active">
+                        <a href="/allProductsAdmin" class="tab-link-sidebar <?= (urlUI('/allProductsAdmin')) ? 'active' : ''; ?>">
                             <i class="fas fa-box-open"></i> 
                             <p class="tab-txt-sidebar">Products</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/allOrdersAdmin" class="tab-link-sidebar <?= (urlUI('/allOrdersAdmin')) ? 'active' : ''; ?>">
                             <i class="fas fa-file-alt"></i>
                             <p class="tab-txt-sidebar">Orders</p>
                         </a>
                     </li>
                     <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
+                        <a href="/allUsersAdmin" class="tab-link-sidebar <?= (urlUI('/allUsersAdmin')) ? 'active' : ''; ?>">
                             <i class="fas fa-user"></i>
                             <p class="tab-txt-sidebar">Users</p>
                         </a>
                     </li>
-                    <li class="tab-sidebar">
-                        <a href="#" class="tab-link-sidebar">
-                            <i class="fas fa-comment"></i>
-                            <p class="tab-txt-sidebar">Reviews</p>
-                        </a>
-                    </li>
                 </ul>
+
+
+
                 <button class="logout-sidebar">
                     <i class="fas fa-sign-out-alt logout-icon"></i>
                     <p class="logout-text-sidebar">LOG OUT</p>
@@ -99,136 +100,137 @@ class ProductsAdminView{
                 <table class="product-table">
                     <thead>
                         <tr>
+                            <th>Product ID</th>
                             <th>Product Name</th>
+                            <th>Product Description</th>
+                            <th>Product Image</th>
                             <th>Category</th>
                             <th>Price</th>
-                            <th>Sale Price</th>
+                            <th>Material</th>
+                            <th>Unit of Measure</th>
                             <th>Stock</th>
-                            <th>Status</th>
-                            <th>View</th>
-                            <th>Published</th>
+                            <th>Buy Price</th>
+                            <th>Bought at</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         
                         <tr>
+                            <td>1</td>
                             <td>Cement</td>
-                            <td>Material</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
                             <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
+                            <td>100</td>
                             <td>$70.00</td>
-                            <td>35</td>
-                            <td>In Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
+                            <td>2024-05-10</td>
                             <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
                                 <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     
-
                         <tr>
-                            <td>Rebar</td>
-                            <td>Material</td>
-                            <td>$90.00</td>
-                            <td>$85.00</td>
-                            <td>22</td>
-                            <td>In Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
-                            <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Planks</td>
-                            <td>Wood</td>
-                            <td>$50.00</td>
-                            <td>$45.00</td>
-                            <td>50</td>
-                            <td>In Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
-                            <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bricks</td>
-                            <td>Material</td>
-                            <td>$100.00</td>
-                            <td>$95.00</td>
+                            <td>1</td>
+                            <td>Cement</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
+                            <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
                             <td>100</td>
-                            <td>Limited Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
+                            <td>$70.00</td>
+                            <td>2024-05-10</td>
                             <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
                                 <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Concrete Mixer</td>
-                            <td>Equipment</td>
-                            <td>$300.00</td>
-                            <td>$250.00</td>
-                            <td>10</td>
-                            <td>Limited Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
+                            <td>1</td>
+                            <td>Cement</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
+                            <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
+                            <td>100</td>
+                            <td>$70.00</td>
+                            <td>2024-05-10</td>
                             <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
                                 <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Safety Helmet</td>
-                            <td>Accessory</td>
-                            <td>$25.00</td>
-                            <td>$20.00</td>
-                            <td>150</td>
-                            <td>In Stock</td>
-                            <td><button class="icon-button view"><i class="fas fa-eye"></i></button></td>
+                            <td>1</td>
+                            <td>Cement</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
+                            <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
+                            <td>100</td>
+                            <td>$70.00</td>
+                            <td>2024-05-10</td>
                             <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
                                 <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
-                        
+                        <tr>
+                            <td>1</td>
+                            <td>Cement</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
+                            <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
+                            <td>100</td>
+                            <td>$70.00</td>
+                            <td>2024-05-10</td>
+                            <td>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Cement</td>
+                            <td>High-quality cement for construction purposes</td>
+                            <td>cement.jpg</td>
+                            <td>category 1</td>
+                            <td>$75.00</td>
+                            <td>Cement</td>
+                            <td>Bag</td>
+                            <td>100</td>
+                            <td>$70.00</td>
+                            <td>2024-05-10</td>
+                            <td>
+                                <a href="/editProduct">
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                </a>
+                                <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

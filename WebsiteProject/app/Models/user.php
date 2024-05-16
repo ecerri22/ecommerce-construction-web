@@ -1,10 +1,11 @@
 <?php
 
 namespace Models;
-
 use Core\App;
 
 class User {
+    protected $user = [];
+
     private $user_id;
     private $firstName;
     private $lastName;
@@ -89,20 +90,72 @@ class User {
         $this->setEmail($email);
     
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $this->setPassword($hashedPassword);
     
         $createdAt = date('Y-m-d H:i:s');
         
         $sql = "INSERT INTO users (first_name, last_name, password, email, role, created_at) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPassword()}', '{$this->getEmail()}', '{$this->getRole()}', '{$createdAt}')";
-        $save = $this->db->query($sql);
+        $save = $this->db->query($sql);        
     
         return $save ? true : false;
     }
-    
-    public function getAllUsers() {
-        $sql = "SELECT * FROM users";
-        $result = $this->db->query($sql)->findOrFail();
 
-        return $result;
+    public function getWishlistProducts(){
+        $user_id = $_SESSION['user']['user_id'];
+        $query = 'SELECT * FROM wishlists w 
+                  INNER JOIN products p ON w.product_id = p.product_id
+                  WHERE w.user_id = ?';
+        $params = [$user_id];
+        
+        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+    }
+
+    public function getShoppingCartProducts(){
+        $user_id = $_SESSION['user']['user_id'];
+        echo "<script>alert('user_id: $user_id')</script>";
+        $query = 'SELECT * FROM carts c 
+                  INNER JOIN products p ON c.product_id = p.product_id
+                  WHERE c.user_id = ?';
+        $params = [$user_id];
+        
+        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+    }
+
+    public function updateShoppingCartQuantity($productId, $quantity){
+        $user_id = $_SESSION['user']['user_id'];
+        $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
+        $params = [
+            $quantity,
+            $user_id,
+            $productId
+        ];
+        return App::container()->resolve('Core\Database')->query($query, $params)->get();
+    }
+    
+
+    public function addToShoppingCart(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
+            if (isset($_POST['product_id'])) {
+        $user_id = $_SESSION['user']['user_id'];
+        $productId=$_POST['product_id'];
+        $query="INSERT INTO carts(item_id, quantity, created_at, updated_at, product_id, user_id) 
+                             VALUES (?, ?, ?, ?, ?, ?)";
+        $params=[
+            $item_id="",
+            $quantity=1,
+            $created_at=date('Y-m-d H:i:s'),
+            $updated_at=date('Y-m-d H:i:s'),
+            $productId,
+            $user_id
+        ];   
     }
 }
+        return App::container()->resolve('Core\Database')->query($query, $params)->get();              
+
+    }
+
+}
+    
+
