@@ -193,6 +193,39 @@ header {
   padding: 0;
 }
 
+.product-card {
+  position: relative;
+  display: inline-block;
+  width: 15rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  box-shadow: 0px 0px 20px 1px rgb(230, 228, 228);
+}
+
+.product-description-container {
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.product-code {
+  font-size: .8rem;
+  color: #939393;
+}
+
+.product-price{
+  font-size: 1.5rem;
+  color: #df6c0e;
+  font-weight: 600;
+  margin-top: .4rem;
+}
+
+
 .wishlist-title{
   color:#061538;
   font-size: 2.5rem;
@@ -214,11 +247,12 @@ header {
   align-items: center;  
 }
 
+
 .wishlist-products{
-  display: inline-block;
   width: 100%;
-  justify-content: space-between;
-  
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
 }
 
 .wishlist-product-card {
@@ -231,16 +265,13 @@ header {
 
 .product-img {
   width: 100%;
+  border-bottom: 5px #fd7e14 solid;
 }
 
 .description-container {
   padding: 1rem;
   align-items: center;
   justify-content: center;
-}
-
-.description-box {
-  margin-bottom: 1rem;
 }
 
 .description-box a {
@@ -270,14 +301,18 @@ header {
 }
 
 .add-to-cart{
-  font-size: medium;
+  font-size: .8rem;
+  text-transform: uppercase;
   font-weight: bold;
   color: #eee;
   width: 100%;
   padding: 0.8rem 0;
   background-color: #fd7e14;
   border: none;
-  box-shadow: 5px 4px 8px  rgb(206, 203, 203);
+}
+
+.description-box {
+  padding: 1rem ;
 }
 
 .add-to-cart:hover {
@@ -536,12 +571,6 @@ input[type=number]::-webkit-outer-spin-button {
   gap: 20px; 
 }
 
-.product-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  text-align: center;
-}
-
 
 /* FOOTER  */
 
@@ -641,34 +670,4 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
   border: none;
   text-transform: uppercase;
-}
-
-.admin-name {
-  display: flex;
-  flex-direction: col;
-  justify-content: center;
-  align-items: center;
-  padding: 0.6rem 1.2rem;
-  background: #fd7e14;
-  color: #eee;
-  border: none;
-  font-size: 1.2rem;
-  gap: 1rem;
-}
-
-.user-pfp {
-  height: 1.4rem;
-  width: 1.4rem;
-  background: #eee;
-}
-
-.header-user-btns {
-  display: flex;
-  gap: .4rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.logout-btn{
-  background: #df6c0e;
 }
