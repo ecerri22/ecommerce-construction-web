@@ -2,6 +2,7 @@ function changefocus(tab) {
     document.getElementsByClassName("tab-link-active")[0].classList.remove("tab-link-active");
     tab.classList.add("tab-link-active");
 }
+
 function makesticky(prod){
     var sticky = prod.parentElement.parentElement.parentElement;
     if (sticky.classList.contains("stickydiv")){
@@ -12,6 +13,7 @@ function makesticky(prod){
         sticky.classList.add("stickydiv");
     }
 }
+
 function Search() {
     var search = $('#searcher').val();
     var Categories = [];
@@ -32,18 +34,20 @@ function Search() {
         }
     });
 }
+
 function toggleButtonColorOnPress(button){
     if (button.style.backgroundColor == "green"){
-        button.style.backgroundColor = "#061538";
+        button.style.backgroundColor = "#0615388c";
     } else {
         button.style.backgroundColor = "green";   
     }
     Search();
    
 }
+
 function clearSearch(){
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
-        document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#061538";
+        document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
     }
     $('#searcher').val("");
     Search();

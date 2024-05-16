@@ -153,6 +153,16 @@ header {
   align-items: center;   
 }
 
+.hero-btn{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+}
+
 /* *******************************CONTINUE STYLING HERE************************************************* */
 /*
   FOR COLORS: 
@@ -182,6 +192,39 @@ header {
 .content{
   padding: 0;
 }
+
+.product-card {
+  position: relative;
+  display: inline-block;
+  width: 15rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  box-shadow: 0px 0px 20px 1px rgb(230, 228, 228);
+}
+
+.product-description-container {
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.product-code {
+  font-size: .8rem;
+  color: #939393;
+}
+
+.product-price{
+  font-size: 1.5rem;
+  color: #df6c0e;
+  font-weight: 600;
+  margin-top: .4rem;
+}
+
 
 .wishlist-title{
   color:#061538;
@@ -221,16 +264,13 @@ header {
 
 .product-img {
   width: 100%;
+  border-bottom: 5px #fd7e14 solid;
 }
 
 .description-container {
   padding: 1rem;
   align-items: center;
   justify-content: center;
-}
-
-.description-box {
-  margin-bottom: 1rem;
 }
 
 .description-box a {
@@ -260,14 +300,18 @@ header {
 }
 
 .add-to-cart{
-  font-size: medium;
+  font-size: .8rem;
+  text-transform: uppercase;
   font-weight: bold;
   color: #eee;
   width: 100%;
   padding: 0.8rem 0;
   background-color: #fd7e14;
   border: none;
-  box-shadow: 5px 4px 8px  rgb(206, 203, 203);
+}
+
+.description-box {
+  padding: 1rem ;
 }
 
 .add-to-cart:hover {
@@ -526,12 +570,6 @@ input[type=number]::-webkit-outer-spin-button {
   gap: 20px; 
 }
 
-.product-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  text-align: center;
-}
-
 
 /* FOOTER  */
 
@@ -589,4 +627,46 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #061538;
   padding: 1rem 0;
   text-align: center;
+}
+
+
+
+.login-btn {
+  border: 2px #eee solid;
+  color: #eee;
+  background-color: #061538;
+  height: 100%;
+}
+
+.login-btn:hover {
+  background-color: #081b44;
+  transition: 400ms;
+}
+
+.signup-btn {
+  background: #eee;
+  color: #061538;
+  height: 100%;
+}
+
+.signup-btn:hover {
+  background:  #eeeeeee1;
+  transition: 400ms;
+}
+
+.login-signup-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+  
+}
+
+.hero-btn{
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
 }

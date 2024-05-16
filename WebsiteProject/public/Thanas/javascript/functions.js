@@ -30,6 +30,7 @@ function undoRemoveStatistic() {
     });
     statisticDiv.style.opacity = 1;
 }
+
 function removeGraphAndAnimate(graphDiv) {
 
     graphDiv.classList.add('fadeOut');

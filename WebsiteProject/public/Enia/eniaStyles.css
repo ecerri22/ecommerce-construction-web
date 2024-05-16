@@ -185,7 +185,7 @@ header {
     justify-content: center;
     align-items: center;
     gap: 1.2rem;
-    background-image: url("/public/image/UntitledDesign.jpg");
+    background-image: url("/image/UntitledDesign.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -466,7 +466,7 @@ header {
 }
 
 .card__picture--1 {
-    background-image: url("/public/image/project-1.jpg");
+    background-image: url("/image/project-1.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -474,7 +474,7 @@ header {
 }
 
 .card__picture--2 {
-    background-image: url("/public/image/project-2.jpg");
+    background-image: url("/image/project-2.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -482,7 +482,7 @@ header {
 }
 
 .card__picture--3 {
-    background-image: url("/public/image/project-3.jpg");
+    background-image: url("/image/project-3.jpg");
     background-size: cover;
     background-origin: border-box;
     background-repeat: no-repeat;
@@ -555,4 +555,34 @@ header {
     background-color: #061538;
     padding: 1rem 0;
     text-align: center;
+}
+
+.login-btn {
+    border: 2px #eee solid;
+    color: #eee;
+    background-color: #061538;
+    height: 100%;
+}
+
+.login-btn:hover {
+    background-color: #081b44;
+    transition: 400ms;
+}
+
+.signup-btn {
+    background: #eee;
+    color: #061538;
+    height: 100%;
+}
+
+.signup-btn:hover {
+    background:  #eeeeeee1;
+    transition: 400ms;
+}
+
+.login-signup-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+    
 }
