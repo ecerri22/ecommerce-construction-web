@@ -3,4 +3,4 @@
 use Pages\ProductsAdminView;
 
 $productsAdminView = new ProductsAdminView("Products Admin");
-$productsAdminView->render();
+$productsAdminView->render($data);

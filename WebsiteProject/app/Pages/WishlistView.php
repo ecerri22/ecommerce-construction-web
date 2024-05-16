@@ -8,59 +8,182 @@ class WishlistView{
         $this->partials = new Header($title, $cssFile);
     }
 
-    public function render($allWishlistProducts=[]) {
+    public function render() {
         ?>
             <?php $this->partials->render() ?>
-            <?php $this->renderContent($allWishlistProducts); ?>
+            <?php $this->renderContent(); ?>
             <?php $this->renderFooter(); ?>
         </body>
         </html>
         <?php
     }
 
-    public function renderContent($allWishlistProducts){
-        echo <<<End
-                <div class="content">
-                    <div class="wishlist-products-container">
-                        <h2 class="wishlist-title">Wishlist products</h2>
-                        <div class="wishlist-products">
-End;
-        foreach($allWishlistProducts as $wishlistProduct) {
-            echo <<<End
-                            <form action="/wishlist" method="post">
-                                <input type="hidden" name="product_id" value="{$wishlistProduct['product_id']}">
-                                
-                                <div class="product-card">
-                                    <button type="submit" class="remove-from-cart">
-                                        <i class="fas fa-trash"></i> 
-                                    </button>    
-                                    <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">    
-                                    <div class="product-description-container">       
-                                        <div class="description-box">        
-                                            <h3 style="display: inline-block; margin-bottom: .4rem;">      
-                                                <a href="/#" class="product-name">{$wishlistProduct['name']}</a>        
-                                            </h3>               
-                                            <p class="product-code">SKU: {$wishlistProduct['product_id']}</p>     
-                                            <p class="product-price">$ {$wishlistProduct['price']}</p>      
-                                        </div>
-                                        <div class="wishlist-btn">     
-                                            <button type="submit" class="add-to-cart">Add to cart</button>    
-                                        </div>     
-                                    </div> 
-                                </div>
-                            </form>
-End;
-        }
-        echo <<<End
+    public function renderContent(){
+        echo<<<End
+        <div class="content">
+            <div class="wishlist-products-container">
+                <h2 class="wishlist-title">Wishlist products</h2>
+                <div class="wishlist-products">
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
                         </div>
-                    </div>         
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wishlist-product-card">
+                    <button class="remove-from-cart">
+                        <i class="fas fa-trash"></i> 
+                    </button>
+                        <div class="product-box">
+                            <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
+                        </div>
+                        <div class="description-container">
+                            <div class="description-box">
+                                <h3>
+                                    <a href="#">Basic Tee</a>
+                                </h3>
+                                <p>Black</p>
+                                <p class="text-sm font-medium text-gray-900">$35</p>
+                            </div>
+                            <div class="wishlist-btn">
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-End;
+            </div>         
+        </div>
+        End;
+
     }
 
     private function renderFooter() {
         $footer = new Footer();
         $footer->render();
     }  
+
 }
 ?>

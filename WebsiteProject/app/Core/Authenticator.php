@@ -25,10 +25,8 @@ class Authenticator
   public function attempt($email, $password)
   {
     $this->user = App::container()->resolve('Core\Database')->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->find();
-    // dd($this->user);
 
     if ($this->user) {
-      echo "ok exists";
       if (password_verify($password, $this->user['password'])) {
         $this->login(['email' => $email]);
         return true;
@@ -62,15 +60,14 @@ class Authenticator
     $this->errors[$key] = $message;
   }
 
+  public function userId()
+  {
+    return $_SESSION['user']['user_id'];
+  }
+
   public function logout()
   {
     Session::destroy();
   }
-
-  public function userId()
-  {
-    return $_SESSION['user']['id'];
-  }
-
 
 }

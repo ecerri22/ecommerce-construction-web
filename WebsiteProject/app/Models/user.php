@@ -1,9 +1,11 @@
 <?php
 
 namespace Models;
+
 use Core\App;
 
-class User {
+class User
+{
     protected $user = [];
 
     private $user_id;
@@ -14,150 +16,172 @@ class User {
     private $profileImg;
     private $role;
     private $db;
-    
+
     public function __construct()
     {
         $this->db = App::container()->resolve('Core\Database');
     }
 
-    public function getUserId(){
+    public function getUserId()
+    {
         return $this->user_id;
     }
 
-    public function setUserId($user_id){
+    public function setUserId($user_id)
+    {
         $this->user_id = $user_id;
         return $this;
     }
-    
-    public function getFirstName(){
+
+    public function getFirstName()
+    {
         return $this->firstName;
     }
 
-    public function setFirstName($firstName){
+    public function setFirstName($firstName)
+    {
         $this->firstName = $firstName;
         return $this;
     }
-    
-    public function getLastName(){
+
+    public function getLastName()
+    {
         return $this->lastName;
     }
 
-    public function setLastName($lastName){
+    public function setLastName($lastName)
+    {
         $this->lastName = $lastName;
         return $this;
     }
-    
-    public function getPassword(){
+
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function setPassword($password){
+    public function setPassword($password)
+    {
         $this->password = $password;
         return $this;
     }
-    
-    public function getEmail(){
+
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email = $email;
         return $this;
     }
-    
-    public function getProfileImage(){
+
+    public function getProfileImage()
+    {
         return $this->profileImg;
     }
 
-    public function setProfileImage($profileImg){
+    public function setProfileImage($profileImg)
+    {
         $this->profileImg = $profileImg;
         return $this;
     }
-    
-    public function getRole(){
+
+    public function getRole()
+    {
         return $this->role;
     }
 
-    public function setRole($role){
+    public function setRole($role)
+    {
         $this->role = $role;
         return $this;
     }
 
-    public function register( $firstName, $lastName, $password, $email){
-        $this->setRole(0);
+    public function register($firstName, $lastName, $password, $email)
+    {
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
         $this->setEmail($email);
-    
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        // Check if the email contains "admin" after the '@' sign
+        $emailParts = explode('@', $email);
+        if (isset($emailParts[1]) && strpos($emailParts[1], 'admin') !== false) {
+            $this->setRole(1);
+        } else {
+            $this->setRole(0);
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->setPassword($hashedPassword);
-    
+
         $createdAt = date('Y-m-d H:i:s');
-        
+
         $sql = "INSERT INTO users (first_name, last_name, password, email, role, created_at) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPassword()}', '{$this->getEmail()}', '{$this->getRole()}', '{$createdAt}')";
-        $save = $this->db->query($sql);        
-    
+        $save = $this->db->query($sql);
+
         return $save ? true : false;
     }
 
-    public function getWishlistProducts(){
+    public function getWishlistProducts()
+    {
         $user_id = $_SESSION['user']['user_id'];
         $query = 'SELECT * FROM wishlists w 
                   INNER JOIN products p ON w.product_id = p.product_id
                   WHERE w.user_id = ?';
         $params = [$user_id];
-        
-        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+
+        return App::container()->resolve('Core\Database')->query($query, $params)->get();
     }
 
-    public function deleteFromWishlist(){
+    public function deleteFromWishlist()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
                 $user_id = $_SESSION['user']['user_id'];
                 $productId = $_POST['product_id'];
-    
-                // SQL query to delete from wishlists table
+
                 $query = "DELETE FROM wishlists WHERE user_id = ? AND product_id = ?";
                 $params = [$user_id, $productId];
-    
-                // Execute the query
-                return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
-            }
-        }
-    }
-    
 
-    public function deleteFromShoppingCart(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
-            if (isset($_POST['product_id'])) {
-                $user_id = $_SESSION['user']['user_id'];
-                $productId = $_POST['product_id'];
-    
-                // SQL query to delete from wishlists table
-                $query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
-                $params = [$user_id, $productId];
-    
-                // Execute the query
-                return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+                return App::container()->resolve('Core\Database')->query($query, $params)->get();
             }
         }
     }
 
-
-    public function getShoppingCartProducts(){
+    public function getShoppingCartProducts()
+    {
         $user_id = $_SESSION['user']['user_id'];
         $query = 'SELECT * FROM carts c 
                   INNER JOIN products p ON c.product_id = p.product_id
                   WHERE c.user_id = ?';
         $params = [$user_id];
-        
-        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+
+        return App::container()->resolve('Core\Database')->query($query, $params)->get();
     }
 
-    public function updateShoppingCartQuantity($productId, $quantity){
+    public function addToShoppingCart()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['product_id'])) {
+                $user_id = $_SESSION['user']['user_id'];
+                $productId = $_POST['product_id'];
+
+                $query = "INSERT INTO carts(quantity, user_id, product_id) VALUES (?, ?, ?)";
+                $params = [
+                    1,
+                    $user_id,
+                    $productId
+                ];
+
+                return App::container()->resolve('Core\Database')->query($query, $params)->get();
+            }
+        }
+    }
+
+    public function updateShoppingCartQuantity($productId, $quantity)
+    {
         $user_id = $_SESSION['user']['user_id'];
         $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
         $params = [
@@ -167,33 +191,19 @@ class User {
         ];
         return App::container()->resolve('Core\Database')->query($query, $params)->get();
     }
-    
 
-    public function addToShoppingCart(){
+    public function deleteFromShoppingCart()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
-                // Retrieve user ID from session
                 $user_id = $_SESSION['user']['user_id'];
-                // Retrieve product ID from POST data
                 $productId = $_POST['product_id'];
-                
-                // Define the SQL query
-                $query = "INSERT INTO carts(quantity, user_id, product_id) VALUES (?, ?, ?)";
-                // Define the parameters for the query
-                $params = [
-                    1, // Default quantity is 1
-                    $user_id,
-                    $productId
-                ];   
-                
-                // Execute the query
+
+                $query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
+                $params = [$user_id, $productId];
+
                 return App::container()->resolve('Core\Database')->query($query, $params)->get();
             }
         }
     }
-    
-
 }
-    
-

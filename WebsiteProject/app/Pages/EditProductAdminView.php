@@ -15,7 +15,7 @@ class EditProductAdminView {
         <html lang="en">
         <?php $this->renderHead(); ?>
         <body>
-            <?php $this->renderSidebar(); ?>
+            <?php $this->renderHeader(); ?>
             <?php $this->renderContent(); ?>
         </body>
         </html>
@@ -24,62 +24,60 @@ class EditProductAdminView {
 
     private function renderHead() {
         ?>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title><?= $this->title; ?></title>
-            
-            <link rel="stylesheet" href="Enia/eniaAdminStyles.css" />
-
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        </head>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title><?= $this->title; ?></title>
+                
+                <link rel="stylesheet" href="Atea/ateaStyles.css" />
+                <link rel="stylesheet" href="Enia/eniaAdminStyles.css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            </head>
         <?php
     }
 
-    private function renderSidebar() {
+    private function renderHeader() {
         ?>
             <div class="sidebar">
-                <a href="#" class="logo">
-                    <h3>LOGO</h3>
-                </a>
-                
-                <ul class="tabs-list-sidebar">
-                    <li class="tab-sidebar">
-                        <a href="/dashboard" class="tab-link-sidebar <?= (urlUI('/dashboard')) ? 'active' : ''; ?>">
-                            <i class="fas fa-th-large"></i>
-                            <p class="tab-txt-sidebar">Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="tab-sidebar">
-                        <a href="/allProductsAdmin" class="tab-link-sidebar <?= (urlUI('/allProductsAdmin')) ? 'active' : ''; ?>">
-                            <i class="fas fa-box-open"></i> 
-                            <p class="tab-txt-sidebar">Products</p>
-                        </a>
-                    </li>
-                    <li class="tab-sidebar">
-                        <a href="/allOrdersAdmin" class="tab-link-sidebar <?= (urlUI('/allOrdersAdmin')) ? 'active' : ''; ?>">
-                            <i class="fas fa-file-alt"></i>
-                            <p class="tab-txt-sidebar">Orders</p>
-                        </a>
-                    </li>
-                    <li class="tab-sidebar">
-                        <a href="/allUsersAdmin" class="tab-link-sidebar <?= (urlUI('/allUsersAdmin')) ? 'active' : ''; ?>">
-                            <i class="fas fa-user"></i>
-                            <p class="tab-txt-sidebar">Users</p>
-                        </a>
-                    </li>
-                </ul>
-
-
-
-                <button class="logout-sidebar">
-                    <i class="fas fa-sign-out-alt logout-icon"></i>
-                    <p class="logout-text-sidebar">LOG OUT</p>
-                </button>
+                <div class="sidebar-content">
+                    <a href="#" class="logo">
+                        <h3>LOGO</h3>
+                    </a>
+                    <ul class="tabs-list-sidebar">
+                        <li class="tab-sidebar">
+                            <a href="/dashboard" class="tab-link-sidebar">
+                                <i class="fas fa-th-large"></i>
+                                <p class="tab-txt-sidebar">Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="tab-sidebar">
+                            <a href="/allProductsAdmin" class="tab-link-sidebar active">
+                                <i class="fas fa-box-open"></i> 
+                                <p class="tab-txt-sidebar">Products</p>
+                            </a>
+                        </li>
+                        <li class="tab-sidebar">
+                            <a href="/allOrdersAdmin" class="tab-link-sidebar">
+                                <i class="fas fa-file-alt"></i>
+                                <p class="tab-txt-sidebar">Orders</p>
+                            </a>
+                        </li>
+                        <li class="tab-sidebar">
+                            <a href="/allUsersAdmin" class="tab-link-sidebar">
+                                <i class="fas fa-user"></i>
+                                <p class="tab-txt-sidebar">Users</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logout-container">
+                    <button class="logout-sidebar">
+                        <i class="fas fa-sign-out-alt logout-icon"></i>
+                        <p class="logout-text-sidebar">LOG OUT</p>
+                    </button>
+                </div>
             </div>
+
         <?php
     }
 

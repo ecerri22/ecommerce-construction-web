@@ -163,6 +163,16 @@ header {
 }
 
 
+.hero-btn{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+}
+
 /* *********************************************************************** */
 
 .contentss{
@@ -441,48 +451,33 @@ header {
     
 }
 
-.hero-btn{
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    padding: 1rem 1.5rem;
-    cursor: pointer;
+
+.admin-name {
+    display: flex;
+    flex-direction: col;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    background: #fd7e14;
+    color: #eee;
     border: none;
-    text-transform: uppercase;
+    font-size: 1.2rem;
+    gap: 1rem;
 }
-.slider-container {
-    width: 80%;
-    margin: 20px auto;
-  }
-  
-  .slider {
-    -webkit-appearance: none; /* Removes default styling */
-    width: 220px; /* Full-width */
-    height: 25px; /* Set desired height */
-    background: #fd7e14 ; /* Gray background */
-    -webkit-transition: .2s; /* 0.2 second transition effect to the thumb */
-    border-radius: 10px;
-    margin-left: -40px;
-  }
-  
-  .slider:hover {
-    background: #ff6600; /* Add a green background on hover */
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Removes default styling */
-    appearance: none;
-    width: 25px; /* Set width of the thumb */
-    height: 25px; /* Set height of the thumb */
-    background: #061538; /* Green background */
-    cursor: pointer; /* Add cursor pointer */
-    border-radius: 10px;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 25px; /* Set width of the thumb */
-    height: 25px; /* Set height of the thumb */
-    background: #061538; /* Green background */
-    cursor: pointer; /* Add cursor pointer */
-  }
-  
+
+.user-pfp {
+    height: 1.4rem;
+    width: 1.4rem;
+    background: #eee;
+}
+
+.header-user-btns {
+    display: flex;
+    gap: .4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-btn{
+    background: #df6c0e;
+}

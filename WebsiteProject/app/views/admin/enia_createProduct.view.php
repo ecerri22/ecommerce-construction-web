@@ -2,6 +2,6 @@
 
 use Pages\AddProductAdminView;
 
-$addProductView = new AddProductAdminView("signup");
+$addProductView = new AddProductAdminView("Create Product");
 $addProductView->render();
 

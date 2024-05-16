@@ -2,6 +2,6 @@
 
 use Pages\EditProductAdminView;
 
-$editProductView = new EditProductAdminView("signup");
+$editProductView = new EditProductAdminView("Edit Product");
 $editProductView->render();
 
