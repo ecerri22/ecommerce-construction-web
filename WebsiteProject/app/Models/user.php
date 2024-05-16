@@ -106,4 +106,25 @@ class User {
         
         return $save ? true : false;
     }
+
+    public function addToShoppingCart(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
+            if (isset($_POST['product_id'])) {
+        $user_id = $_SESSION['user']['user_id'];
+        $productId=$_POST['product_id'];
+        $query="INSERT INTO carts(quantity, user_id, product_id) 
+                             VALUES (?, ?, ?)";
+        $params=[
+            $quantity=1,
+            $user_id,
+            $productId
+        ];   
+    }
 }
+        return App::container()->resolve('Core\Database')->query($query, $params)->get();              
+
+    }
+
+}
+?>

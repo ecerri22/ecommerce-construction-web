@@ -153,14 +153,14 @@ class AllProductsView {
                         <p class="filter-type-title">Filter By Price</p>
                         <div class="slider-container">
                         <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
-                        <p>Price: <span id="sliderValue">500</span></p>
+                        <p>Price: <span id="sliderValue">500$</span></p>
                         <script>
                                 var slider = document.getElementById("mySlider");
                                 var sliderValue = document.getElementById("sliderValue");
 
                                 timeout = null; // Initialize timeout variable
                                 slider.oninput = function() {
-                                sliderValue.innerHTML = this.value * 10;
+                                sliderValue.innerHTML = this.value * 10 + "$";
                                 clearTimeout(timeout); // Clear any existing timeout
                                 timeout = setTimeout(function() {
                                     // Call the search function after a delay of 500 milliseconds

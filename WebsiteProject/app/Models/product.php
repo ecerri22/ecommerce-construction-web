@@ -31,7 +31,7 @@ class Product{
         echo  '     <div class="product-description-container">';
         echo  '       <div class="description-box">';
         echo  '         <h3 style = "display : inline-block; margin-bottom: .4rem; ">';
-        echo  '            <a href="/#" class = "product-name">'.$this->name.'</a>';
+        echo  '            <a href="'.$this->link.'" class = "product-name">'.$this->name.'</a>';
         echo  '         </h3>';
         echo  '         <button class="compare-btn" onclick ="makesticky(this)">Hold</button>';
         echo  '         <p class="product-code">'.$this->minidescription.'</p>';
@@ -86,7 +86,7 @@ class Product{
         // Iterate through the result and return an array of product objects
         $products = array();
         foreach ($result as $row) {
-            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"#", $row['description'], $row['category_name']);
+            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name']);
             $products[] = $product;
         }
         return $products;

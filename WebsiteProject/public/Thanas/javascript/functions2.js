@@ -55,6 +55,6 @@ function clearSearch(page){
     }
     $('#searcher').val("");
     document.getElementById("mySlider").value = 50;
-    document.getElementById("sliderValue").innerHTML = "50";
+    document.getElementById("sliderValue").innerHTML = "500$";
     Search(page);
 }

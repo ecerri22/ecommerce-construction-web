@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2024 at 09:07 PM
+-- Generation Time: May 15, 2024 at 09:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `constructionweb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `about_us_content`
+--
+
+CREATE TABLE `about_us_content` (
+  `id` int(11) NOT NULL,
+  `section_name` varchar(50) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `about_us_content`
+--
+
+INSERT INTO `about_us_content` (`id`, `section_name`, `content`) VALUES
+(1, 'company-description', 'Construction Web has been a pioneer in the construction industry since 1998, specializing in both residential and commercial projects. Our commitment to innovation and excellence has established us as a leader in the field, delivering projects that not only meet but exceed our clients\' expectations.'),
+(2, 'history', 'Founded by a group of ambitious engineers, Construction Web started as a small firm focused on small to medium-sized construction projects. Over the years, we have expanded our expertise to include large-scale commercial developments, gaining recognition for our sustainable practices and cutting-edge architectural designs.'),
+(3, 'mission', 'Our mission is to lead the construction industry by creating unparalleled value for our clients through innovation, foresight, and reliability, ensuring that our projects are completed on time, on budget, and to the highest standards of quality.'),
+(4, 'value', 'Our team has always embraced our clients and partners as part of Our Team. Every project is performed with open communication. The Partnering methodology is implemented and a mutual respect with our clients provides the groundwork for our success.'),
+(5, 'why-us', 'Choose our construction company for unparalleled expertise, meticulous attention to detail, and a commitment to exceeding expectations. With a proven track record of delivering exceptional results, we ensure your project is completed on time, within budget, and to the highest standards.');
 
 -- --------------------------------------------------------
 
@@ -63,44 +86,18 @@ INSERT INTO `addresses` (`street`, `city`, `country`, `state`, `phone`, `zip_cod
 --
 
 CREATE TABLE `carts` (
-  `item_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`item_id`, `quantity`, `created_at`, `updated_at`, `product_id`, `user_id`) VALUES
-(1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
-(2, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 1),
-(3, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 15, 1),
-(4, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 1),
-(5, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 42, 1),
-(6, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 3, 2),
-(7, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 19, 2),
-(8, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 32, 2),
-(9, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 13, 2),
-(10, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 2),
-(11, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 11, 3),
-(12, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 3),
-(13, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 43, 3),
-(14, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 20, 3),
-(15, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 39, 3),
-(16, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 50, 4),
-(17, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 6, 4),
-(18, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 16, 4),
-(19, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 4),
-(20, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 18, 4),
-(21, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 20, 8),
-(22, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 32, 8),
-(23, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 23, 8),
-(24, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 33, 8),
-(25, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 8);
+INSERT INTO `carts` (`user_id`, `product_id`, `quantity`) VALUES
+(72, 1, 1),
+(72, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -135,18 +132,50 @@ INSERT INTO `categories` (`category_id`, `description`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `home_page_content`
+--
+
+CREATE TABLE `home_page_content` (
+  `id` int(11) NOT NULL,
+  `section_name` varchar(50) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `home_page_content`
+--
+
+INSERT INTO `home_page_content` (`id`, `section_name`, `content`) VALUES
+(1, 'hero-head', 'Welcome to our Construction Company'),
+(2, 'hero-descript', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, praesentium.'),
+(3, 'right-content-descript', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum doloribus numquam dolor vel architecto dolore quae qui pariatur. A veritatis dolorum accusantium laborum rerum molestias commodi itaque sapiente iusto dolorem unde pariatur doloribus, quisquam cupiditate alias deleniti, vel tempore asperiores nostrum quaerat? Similique soluta iure earum facilis doloremque obcaecati.'),
+(5, 'Project 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ipsum vitae ipsum convallis viverra.'),
+(6, 'Project 2', 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+(7, 'Project 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderinfo`
+--
+
+CREATE TABLE `orderinfo` (
+  `order_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` decimal(10,0) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `cost` double NOT NULL,
   `status` varchar(20) NOT NULL,
-  `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -154,32 +183,32 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `quantity`, `total`, `created_at`, `updated_at`, `cost`, `status`, `product_id`, `user_id`) VALUES
-(26, 1, 30, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Pending', 26, 1),
-(27, 1, 60, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Processing', 27, 1),
-(28, 1, 200, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Shipped', 28, 1),
-(29, 1, 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Delivered', 29, 1),
-(30, 1, 40, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Canceled', 30, 1),
-(31, 1, 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Pending', 31, 2),
-(32, 1, 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Processing', 32, 2),
-(33, 1, 60, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Shipped', 33, 2),
-(34, 1, 70, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Delivered', 34, 2),
-(35, 1, 40, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Canceled', 35, 2),
-(36, 1, 45, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Pending', 36, 3),
-(37, 1, 25, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Processing', 37, 3),
-(38, 1, 30, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Shipped', 38, 3),
-(39, 1, 90, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Delivered', 39, 3),
-(40, 1, 20, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Canceled', 40, 3),
-(41, 1, 150, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Pending', 41, 4),
-(42, 1, 200, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Processing', 42, 4),
-(43, 1, 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Shipped', 43, 4),
-(44, 1, 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Delivered', 44, 4),
-(45, 1, 120, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Canceled', 45, 4),
-(46, 1, 300, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Pending', 46, 8),
-(47, 1, 180, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Processing', 47, 8),
-(48, 1, 250, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Shipped', 48, 8),
-(49, 1, 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Delivered', 49, 8),
-(50, 1, 30, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'Canceled', 50, 8);
+INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id`) VALUES
+(26, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Pending', 1),
+(27, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Processing', 1),
+(28, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 1),
+(29, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 1),
+(30, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 1),
+(31, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Pending', 2),
+(32, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Processing', 2),
+(33, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 2),
+(34, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 2),
+(35, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 2),
+(36, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Pending', 3),
+(37, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Processing', 3),
+(38, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 3),
+(39, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 3),
+(40, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 3),
+(41, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Pending', 4),
+(42, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Processing', 4),
+(43, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 4),
+(44, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 4),
+(45, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 4),
+(46, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Pending', 8),
+(47, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Processing', 8),
+(48, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 8),
+(49, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 8),
+(50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 8);
 
 -- --------------------------------------------------------
 
@@ -339,6 +368,35 @@ INSERT INTO `reviews` (`review_id`, `review_date`, `review_text`, `stars`, `user
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `statistics`
+--
+
+CREATE TABLE `statistics` (
+  `name` varchar(255) NOT NULL,
+  `value` double NOT NULL,
+  `prev_value` double NOT NULL,
+  `icon` text NOT NULL,
+  `Type` int(11) NOT NULL,
+  `destination` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `statistics`
+--
+
+INSERT INTO `statistics` (`name`, `value`, `prev_value`, `icon`, `Type`, `destination`, `id`) VALUES
+('Canceled Orders', 32, 20, 'icons/cancel.png', 2, 'https://www.microsoft.com/', 1),
+('Page Visits', 2156, 2000, 'icons/visits.png', 2, 'https://www.facebook.com/', 2),
+('Pending Orders', 98, 100, 'icons/box.png', 2, 'https://www.netflix.com/', 3),
+('Quarter Earnings', 676, 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
+('Total Orders', 500, 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
+('Total Products Sold', 300, 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
+('Total Users', 500, 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -346,7 +404,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `profile_image` varchar(255) NOT NULL,
   `role` tinyint(1) NOT NULL,
@@ -377,7 +435,9 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `password`, `email`, 
 (17, 'Daniel', 'Clark', 'test123', 'daniel.clark@example.com', 'profile_images/daniel_clark.jpg', 1, '0000-00-00 00:00:00'),
 (18, 'Ashley', 'Martin', 'test123', 'ashley.martin@example.com', 'profile_images/ashley_martin.jpg', 1, '0000-00-00 00:00:00'),
 (19, 'Peter', 'Rodriguez', 'test123', 'peter.rodriguez@example.com', 'profile_images/peter_rodriguez.jpg', 0, '0000-00-00 00:00:00'),
-(20, 'Linda', 'Hernandez', 'test123', 'linda.hernandez@example.com', 'profile_images/linda_hernandez.jpg', 0, '0000-00-00 00:00:00');
+(20, 'Linda', 'Hernandez', 'test123', 'linda.hernandez@example.com', 'profile_images/linda_hernandez.jpg', 0, '0000-00-00 00:00:00'),
+(72, 'test', 'test', '$2y$10$vPLJH3X6ZxwZlCGJ42ZA7OQevpN3vpdboSHJssDZXsn.oBX6wfsfy', 'test@test.com', '', 0, '2024-05-13 19:16:15'),
+(75, 'enia', 'cerri', '$2y$10$7rlvmzOmbSiJcwUjno9EA.XxmlcN925qLRoMN7sC3D.7T1ywLTl/2', 'admin@admin.com', '', 1, '2024-05-14 18:33:51');
 
 -- --------------------------------------------------------
 
@@ -429,6 +489,12 @@ INSERT INTO `wishlists` (`item_id`, `created_at`, `updated_at`, `product_id`, `u
 --
 
 --
+-- Indexes for table `about_us_content`
+--
+ALTER TABLE `about_us_content`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `addresses`
 --
 ALTER TABLE `addresses`
@@ -438,9 +504,8 @@ ALTER TABLE `addresses`
 -- Indexes for table `carts`
 --
 ALTER TABLE `carts`
-  ADD PRIMARY KEY (`item_id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`user_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `categories`
@@ -449,11 +514,23 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `home_page_content`
+--
+ALTER TABLE `home_page_content`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orderinfo`
+--
+ALTER TABLE `orderinfo`
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `product_id` (`product_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -470,6 +547,13 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`review_id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `statistics`
+--
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `users`
@@ -490,10 +574,28 @@ ALTER TABLE `wishlists`
 --
 
 --
+-- AUTO_INCREMENT for table `about_us_content`
+--
+ALTER TABLE `about_us_content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `home_page_content`
+--
+ALTER TABLE `home_page_content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `statistics`
+--
+ALTER TABLE `statistics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- Constraints for dumped tables
@@ -509,13 +611,20 @@ ALTER TABLE `addresses`
 -- Constraints for table `carts`
 --
 ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `orderinfo`
+--
+ALTER TABLE `orderinfo`
+  ADD CONSTRAINT `orderinfo_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `orderinfo_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
@@ -542,56 +651,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-/* THIS IS THE DASHBOARD PAGE DATABASE FOR NOW */
-
-CREATE TABLE `statistics` (
-  `name` varchar(255) NOT NULL,
-  `value` double NOT NULL,
-  `prev_value` double NOT NULL,
-  `icon` text NOT NULL,
-  `Type` int(11) NOT NULL,
-  `destination` text NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `statistics`
---
-
-INSERT INTO `statistics` (`name`, `value`, `prev_value`, `icon`, `Type`, `destination`, `id`) VALUES
-('Canceled Orders', 32, 20, 'icons/cancel.png', 2, 'https://www.microsoft.com/', 1),
-('Page Visits', 2156, 2000, 'icons/visits.png', 2, 'https://www.facebook.com/', 2),
-('Pending Orders', 98, 100, 'icons/box.png', 2, 'https://www.netflix.com/', 3),
-('Quarter Earnings', 676, 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
-('Total Orders', 500, 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
-('Total Products Sold', 300, 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
-('Total Users', 500, 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `statistics`
---
-ALTER TABLE `statistics`
-  ADD PRIMARY KEY (`name`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `statistics`
---
-ALTER TABLE `statistics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-/* END OF THE DASHBOARD PAGE DATABASE FOR NOW */

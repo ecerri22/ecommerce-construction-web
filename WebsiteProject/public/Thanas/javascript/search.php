@@ -1,11 +1,12 @@
-<?php
 
-      namespace Pages;
+<?php
 
 use Models\Product;
 use Pages\AllProductsView;
-      include_once "C:\\xampp\\htdocs\\ecommerce-construction-web\\WebsiteProject\\app\Models\\product.php";
-      include_once "C:\\xampp\\htdocs\\ecommerce-construction-web\\WebsiteProject\\app\\Pages\\AllProductsView.php";
+$path = __DIR__;
+include_once str_replace("public\\Thanas\\javascript", "app\\Models\\product.php", $path);
+$path = __DIR__;
+include_once str_replace("public\\Thanas\\javascript", "app\\Pages\\AllProductsView.php", $path);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
