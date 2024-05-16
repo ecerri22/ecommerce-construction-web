@@ -440,31 +440,3 @@ input{
     
 }
 
-.admin-name {
-    display: flex;
-    flex-direction: col;
-    justify-content: center;
-    align-items: center;
-    padding: 0.6rem 1.2rem;
-    background: #fd7e14;
-    color: #eee;
-    border: none;
-    font-size: 1.2rem;
-    gap: 1rem;
-}
-
-.user-pfp {
-    height: 1.4rem;
-    width: 1.4rem;
-    background: #eee;
-}
-
-.header-user-btns {
-    display: flex;
-    gap: .4rem;
-    justify-content: center;
-    align-items: center;
-}
-.logout-btn{
-    background: #df6c0e;
-}

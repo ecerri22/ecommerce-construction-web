@@ -450,39 +450,3 @@ header {
     border: none;
     text-transform: uppercase;
 }
-.slider-container {
-    width: 80%;
-    margin: 20px auto;
-  }
-  
-  .slider {
-    -webkit-appearance: none; /* Removes default styling */
-    width: 220px; /* Full-width */
-    height: 25px; /* Set desired height */
-    background: #fd7e14 ; /* Gray background */
-    -webkit-transition: .2s; /* 0.2 second transition effect to the thumb */
-    border-radius: 10px;
-    margin-left: -40px;
-  }
-  
-  .slider:hover {
-    background: #ff6600; /* Add a green background on hover */
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Removes default styling */
-    appearance: none;
-    width: 25px; /* Set width of the thumb */
-    height: 25px; /* Set height of the thumb */
-    background: #061538; /* Green background */
-    cursor: pointer; /* Add cursor pointer */
-    border-radius: 10px;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 25px; /* Set width of the thumb */
-    height: 25px; /* Set height of the thumb */
-    background: #061538; /* Green background */
-    cursor: pointer; /* Add cursor pointer */
-  }
-  
