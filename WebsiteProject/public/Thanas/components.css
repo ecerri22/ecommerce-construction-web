@@ -330,7 +330,7 @@ body {
 }
 
 .piechart{
-  width: 32rem;
+  width: 17rem;
   height: 17rem;
 }
 
@@ -344,7 +344,7 @@ body {
 }
 
 .line-graph{
-  width: 32rem;
+  width: 37rem;
   height: 20rem;
 }
 
@@ -356,14 +356,14 @@ body {
   align-items: center;
   justify-content: center;
   background-color: white;
-  width: 46%;
+  width: 55%;
   height: 22rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   border: 1px solid #ccc;
   /* border-radius: 10px; */
   /* margin-right: 100px; */
-  margin: 10px;
+
 }
 
 .graph-line:hover {
@@ -378,12 +378,11 @@ body {
   align-items: center;
   justify-content: center;
   background-color: white;
-  width: 46%;
+  width: 33%;
   height: 22rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   border: 1px solid #ccc;
-  margin: 10px;
 }
 
 .graph-pie:hover {
@@ -443,6 +442,7 @@ a {
 .plus-icon {
   font-size: 2rem;
   color: #71767f;
+  z-index: 00000;
   /* width: 1.4rem;  */
   /* text-align: center;  */
 }
