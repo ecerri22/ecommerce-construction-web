@@ -27,11 +27,11 @@ class WishlistView{
 End;
         foreach($allWishlistProducts as $wishlistProduct) {
             echo <<<End
-                            <form action="" method="post">
+                            <form action="/wishlist" method="post">
                                 <input type="hidden" name="product_id" value="{$wishlistProduct['product_id']}">
                                 
                                 <div class="product-card">
-                                    <button class="remove-from-cart">
+                                    <button type="submit" class="remove-from-cart">
                                         <i class="fas fa-trash"></i> 
                                     </button>    
                                     <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">    

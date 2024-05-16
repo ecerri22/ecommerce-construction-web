@@ -45,7 +45,7 @@ class shoppingCartView{
                 <p class="cart-prod-price">$ <?= $shoppingCartProduct['price'] ?></p>
                 </div>
 
-                  <input class="quantity" name="quantity" type="number" value="1"/>
+                  <input class="quantity" name="quantity" type="number" value="1" min="1"/>
                   <button class="remove-from-cart">
                     <i class="fas fa-times"></i> 
                 </button>

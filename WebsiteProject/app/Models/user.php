@@ -111,9 +111,26 @@ class User {
         return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
     }
 
+    public function deleteFromWishlist(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
+            if (isset($_POST['product_id'])) {
+                $user_id = $_SESSION['user']['user_id'];
+                $productId = $_POST['product_id'];
+    
+                // SQL query to delete from wishlists table
+                $query = "DELETE FROM wishlists WHERE user_id = ? AND product_id = ?";
+                $params = [$user_id, $productId];
+    
+                // Execute the query
+                return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
+            }
+        }
+    }
+    
+
     public function getShoppingCartProducts(){
         $user_id = $_SESSION['user']['user_id'];
-        echo "<script>alert('user_id: $user_id')</script>";
         $query = 'SELECT * FROM carts c 
                   INNER JOIN products p ON c.product_id = p.product_id
                   WHERE c.user_id = ?';
@@ -138,20 +155,26 @@ class User {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
-        $user_id = $_SESSION['user']['user_id'];
-        $productId=$_POST['product_id'];
-        $query="INSERT INTO carts(quantity, user_id, product_id) 
-                             VALUES (?, ?, ?)";
-        $params=[
-            $quantity=1,
-            $user_id,
-            $productId
-        ];   
+                // Retrieve user ID from session
+                $user_id = $_SESSION['user']['user_id'];
+                // Retrieve product ID from POST data
+                $productId = $_POST['product_id'];
+                
+                // Define the SQL query
+                $query = "INSERT INTO carts(quantity, user_id, product_id) VALUES (?, ?, ?)";
+                // Define the parameters for the query
+                $params = [
+                    1, // Default quantity is 1
+                    $user_id,
+                    $productId
+                ];   
+                
+                // Execute the query
+                return App::container()->resolve('Core\Database')->query($query, $params)->get();
+            }
+        }
     }
-}
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();              
-
-    }
+    
 
 }
     
