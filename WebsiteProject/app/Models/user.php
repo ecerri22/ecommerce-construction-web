@@ -140,15 +140,12 @@ class User {
             if (isset($_POST['product_id'])) {
         $user_id = $_SESSION['user']['user_id'];
         $productId=$_POST['product_id'];
-        $query="INSERT INTO carts(item_id, quantity, created_at, updated_at, product_id, user_id) 
-                             VALUES (?, ?, ?, ?, ?, ?)";
+        $query="INSERT INTO carts(quantity, user_id, product_id) 
+                             VALUES (?, ?, ?)";
         $params=[
-            $item_id="",
             $quantity=1,
-            $created_at=date('Y-m-d H:i:s'),
-            $updated_at=date('Y-m-d H:i:s'),
-            $productId,
-            $user_id
+            $user_id,
+            $productId
         ];   
     }
 }
