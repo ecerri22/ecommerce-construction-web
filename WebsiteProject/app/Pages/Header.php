@@ -30,7 +30,7 @@ class Header {
             
             <link rel="stylesheet" href="<?= $this->cssFile; ?>" />
             <script src="Thanas/javascript/functions2.js"></script>
-
+            <!-- <script src="/../WebsiteProject/app/Models/search.php"></script> -->
 
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,6 +79,14 @@ class Header {
                                     <i class="fas fa-shopping-cart"></i> 
                                 </button>
                             </a>
+
+                            <form action="/login" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button class="logout-btn hero-btn">
+                                    Log out
+                                </button>
+                            </form>
+                            
                             <?php else : ?>
                             <!-- User is logged out -->
                             <div class="login-signup-btns">

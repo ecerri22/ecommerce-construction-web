@@ -25,4 +25,5 @@ class MainPagesController extends Controller
         view('user/denis_error.view.php');
     }
 
+    
 }

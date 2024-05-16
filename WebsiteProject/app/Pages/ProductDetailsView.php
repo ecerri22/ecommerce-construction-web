@@ -87,6 +87,14 @@ class ProductDetailsView {
                                     <i class="fas fa-shopping-cart"></i> 
                                 </button>
                             </a>
+
+                            <form action="/login" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button class="logout-btn hero-btn">
+                                    Log out
+                                </button>
+                            </form>
+                            
                             <?php else : ?>
                             <!-- User is logged out -->
                             <div class="login-signup-btns">

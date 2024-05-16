@@ -14,7 +14,9 @@ function makesticky(prod){
     }
 }
 
-function Search() {
+function Search(page) {
+    console.log(page);
+    console.log("Search function called");
     var search = $('#searcher').val();
     var Categories = [];
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
@@ -23,32 +25,36 @@ function Search() {
         }
     }
     $.ajax({
-        url: 'search.php', // The PHP script that generates the new element
+        url: '/Thanas/javascript/search.php',
         type: 'POST',
         data: {
              dat : search,
-             categories : Categories
-            },
+             page : JSON.stringify(page), // Use the serialized productsArray
+             categories : Categories,
+             maxprice : document.getElementById("mySlider").value,
+        },
         success: function(response) {
             $('#products').replaceWith(response);
         }
     });
 }
 
-function toggleButtonColorOnPress(button){
+function toggleButtonColorOnPress(button, page){
     if (button.style.backgroundColor == "green"){
         button.style.backgroundColor = "#0615388c";
     } else {
         button.style.backgroundColor = "green";   
     }
-    Search();
+    Search(page);
    
 }
 
-function clearSearch(){
+function clearSearch(page){
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
         document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
     }
     $('#searcher').val("");
-    Search();
+    document.getElementById("mySlider").value = 50;
+    document.getElementById("sliderValue").innerHTML = "50";
+    Search(page);
 }

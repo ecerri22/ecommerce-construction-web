@@ -83,76 +83,27 @@ class User {
         return $this;
     }
 
-    public function register( $firstName, $lastName, $password, $email){
-        $this->setRole(0);
+    public function register($firstName, $lastName, $password, $email) {
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
         $this->setEmail($email);
-    
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        // Check if the email contains "admin" after the '@' sign
+        $emailParts = explode('@', $email);
+        if (isset($emailParts[1]) && strpos($emailParts[1], 'admin') !== false) {
+            $this->setRole(1);
+        } else {
+            $this->setRole(0);
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->setPassword($hashedPassword);
-    
+
         $createdAt = date('Y-m-d H:i:s');
         
         $sql = "INSERT INTO users (first_name, last_name, password, email, role, created_at) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}', '{$this->getPassword()}', '{$this->getEmail()}', '{$this->getRole()}', '{$createdAt}')";
         $save = $this->db->query($sql);        
-    
+        
         return $save ? true : false;
     }
-
-    public function getWishlistProducts(){
-        $user_id = $_SESSION['user']['user_id'];
-        $query = 'SELECT * FROM wishlists w 
-                  INNER JOIN products p ON w.product_id = p.product_id
-                  WHERE w.user_id = ?';
-        $params = [$user_id];
-        
-        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
-    }
-
-    public function getShoppingCartProducts(){
-        $user_id = $_SESSION['user']['user_id'];
-        echo "<script>alert('user_id: $user_id')</script>";
-        $query = 'SELECT * FROM carts c 
-                  INNER JOIN products p ON c.product_id = p.product_id
-                  WHERE c.user_id = ?';
-        $params = [$user_id];
-        
-        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
-    }
-
-    public function updateShoppingCartQuantity($productId, $quantity){
-        $user_id = $_SESSION['user']['user_id'];
-        $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
-        $params = [
-            $quantity,
-            $user_id,
-            $productId
-        ];
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();
-    }
-    
-
-    public function addToShoppingCart(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
-            if (isset($_POST['product_id'])) {
-        $user_id = $_SESSION['user']['user_id'];
-        $productId=$_POST['product_id'];
-        $query="INSERT INTO carts(quantity, user_id, product_id) 
-                             VALUES (?, ?, ?)";
-        $params=[
-            $quantity=1,
-            $user_id,
-            $productId
-        ];   
-    }
 }
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();              
-
-    }
-
-}
-    
-
