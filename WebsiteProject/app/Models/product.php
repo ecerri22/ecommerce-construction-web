@@ -1,21 +1,19 @@
 <?php
 
 namespace Models;
-use Core\App;
 
 class Product{
-    public $id;
-    public $name;
-    public $price;
-    public $image;
-    public $link;
-    public $category;
-    public $minidescription;
-    public static $products = array();
+    private $name;
+    private $price;
+    private $image;
+    private $link;
+    private $category;
+    private $minidescription;
+    private static $products = array();
 
-    public function __construct($id,$name, $price, $image, $link, $minidescription, $category)
+
+    public function __construct($name, $price, $image, $link, $minidescription, $category)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->price = $price;
         $this->image = $image;
@@ -31,7 +29,7 @@ class Product{
         echo  '     <div class="product-description-container">';
         echo  '       <div class="description-box">';
         echo  '         <h3 style = "display : inline-block; margin-bottom: .4rem; ">';
-        echo  '            <a href="'.$this->link.'" class = "product-name">'.$this->name.'</a>';
+        echo  '            <a href="/#" class = "product-name">'.$this->name.'</a>';
         echo  '         </h3>';
         echo  '         <button class="compare-btn" onclick ="makesticky(this)">Hold</button>';
         echo  '         <p class="product-code">'.$this->minidescription.'</p>';
@@ -76,21 +74,6 @@ class Product{
     public function getMinidescription()
     {
         return $this->minidescription;
-    }
-
-    public static function getAllproducts()
-    {
-        $result = App::container()->resolve('Core\Database')->query('SELECT * FROM products
-        JOIN categories ON categories.category_id = products.category_id')->get(); 
-
-        // Iterate through the result and return an array of product objects
-        $products = array();
-        foreach ($result as $row) {
-            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name']);
-            $products[] = $product;
-        }
-        return $products;
-         
     }
 
 }
