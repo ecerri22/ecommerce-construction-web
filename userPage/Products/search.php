@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 $nameDistance = 0;
             }
-            if($nameDistance <= 4)
+            if($nameDistance <= 3)
             {
                 if((in_array($product->getCategory(), $categories) || $nrofcategories == 0) && $product->getPrice() >= $minprice && $product->getPrice() <= $maxprice)
                 {
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 $descriptionDistance = 0;
             }
-            if($descriptionDistance <= 4)
+            if($descriptionDistance <= 3)
             {
                 if((in_array($product->getCategory(), $categories) || $nrofcategories == 0) && $product->getPrice() >= $minprice && $product->getPrice() <= $maxprice)
                 {
