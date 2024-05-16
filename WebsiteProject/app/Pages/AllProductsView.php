@@ -2,41 +2,23 @@
 
 namespace Pages;
 use Models\Product;
+use Models\search;
+use Core\App;
 
 
 class AllProductsView {
-    public function __construct() {
-        //this just makes some products which will later be taken from the database.
-        // new Product("Cotton Tee", 1.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","T-shirt");
-        // new Product("Tool Set", 2.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand-tools");
-        // new Product("Power Drill", 3.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Power-tools");
-        // new Product("Wood Planks", 4.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Materials");
-        // new Product("Screws Pack", 5.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hardware");
-        // new Product("Excavator", 6.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Construction Machinery");
-        // new Product("Safety Helmet", 7.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Safty And Personal Protection");
-        // new Product("Wrench Set", 8.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand-tools");
-        // new Product("Circular Saw", 9.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Power-tools");
-        // new Product("Cement Bag", 10.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Materials");
-        // new Product("Nails Pack", 11.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hardware");
-        // new Product("Bulldozer", 12.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Construction Machinery");
-        // new Product("Safety Goggles", 13.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Protects your eyes");
-        // new Product("Hammer", 14.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Hand tool for nailing");
-        // new Product("Angle Grinder", 15.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","For cutting and grinding");
-        // new Product("Steel Rods", 16.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Strong construction material");
-        // new Product("Bolts Pack", 17.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Secure your structures");
-        // new Product("Crane", 18.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Lifts heavy objects");
-        // new Product("Safety Gloves", 19.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","Protects your hands");
-        // new Product("Cotton Tee", 20.99, "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg", "#", "SKU: 797750","T-shirt");
+    public $arr;
 
-        // $_SESSION['productslist'] = Product::getProductsArray();
-        // $_SESSION['updatedproductslist'] = Product::getProductsArray();
+    public function __construct($arr)
+    {
+        $this->arr = $arr;
     }
 
-    public function render($allProducts = []){
+    public function render()
+    {
         $this->display_head();
         $this->display_sidebar();
-        $this->display_products($allProducts);
-        $this->display_footer();
+        $this->display_products($this->arr);
     }
 
     function display_head(){
@@ -71,7 +53,9 @@ class AllProductsView {
                     <!-- center search bar-->
                     <div class="search-bar">
                         <input type="text" name="product" id="searcher" class="input-search" placeholder="Search...">
-                        <button class="btn-search header-btn" onclick="Search()">
+                            <?php
+                                echo "<button class='btn-search header-btn' onclick='Search(".json_encode($this->arr).")'>";
+                            ?>
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -97,14 +81,6 @@ class AllProductsView {
                                 <i class="fas fa-shopping-cart"></i> 
                             </button>
                         </a>
-
-                        <form action="/login" method="POST">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            <button class="logout-btn hero-btn">
-                                Log out
-                            </button>
-                        </form>
-                            
                         <?php else : ?>
                         <!-- User is logged out -->
                         <div class="login-signup-btns">
@@ -153,20 +129,46 @@ class AllProductsView {
             <div class="sidebar-container">
                 <div class="sidebar-header">
                     <p class="filter-section-title">Filter by</p>
-                    <button class="clear-btn" onclick="clearSearch()">Clear</button>
+                    <?php
+                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).");'>Clear</button>";
+                    ?>
                 </div>
                 <div class="sidebar-content">
                     <p class="filter-type-title">Categories</p>
                     <div class="sidebar-list">
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Hand-tools</a>
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Power-tools</a>
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Materials</a>
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Hardware</a>
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Construction Machinery</a>
-                            <a href="#" class="sidebar-link" onclick="toggleButtonColorOnPress(this);">Saftey And Personal Protection</a>
+                        <?php
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Windows</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Electrical</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Steel Profiles</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Wood Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Hydraulics</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Professional Work Tools</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Building Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Roof Covers</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Isolation</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Packaging Materials</a>";
+                            ?>
                     </div>
                     <div class="price-fliter">
                         <p class="filter-type-title">Filter By Price</p>
+                        <div class="slider-container">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
+                        <p>Price: <span id="sliderValue">500 $</span></p>
+                        <script>
+                                var slider = document.getElementById("mySlider");
+                                var sliderValue = document.getElementById("sliderValue");
+
+                                timeout = null; // Initialize timeout variable
+                                slider.oninput = function() {
+                                sliderValue.innerHTML = this.value * 10 + " $";
+                                clearTimeout(timeout); // Clear any existing timeout
+                                timeout = setTimeout(function() {
+                                    // Call the search function after a delay of 500 milliseconds
+                                    Search(<?php echo json_encode($this->arr); ?>);
+                                }, 500); // Adjust the delay time as needed
+                            };
+                            </script>
+                        </div>
                     </div>
 
                 </div>
@@ -175,33 +177,16 @@ class AllProductsView {
         <?php
     }
         
-    function display_products($allProducts = []) {
+    public function display_products($products) {
         echo '<div id="products" class="products-container">';
         echo '<div class="products">';
-        foreach ($allProducts as $product) {
-            ?>
-                <div class="product-card">
-                    <img class="product-img" src="/image/<?= $product['product_image'] ?>" alt="Front of men's Basic Tee in black.">
-                    <div class="product-description-container">
-                        <div class="description-box">
-                            <h3 style="display: inline-block; margin-bottom: .4rem;">
-                                <a href="/#" class="product-name"><?= $product['name'] ?></a>
-                            </h3>
-                            <button class="compare-btn" onclick="makesticky(this)">Hold</button>
-                            <p class="product-code"><?= $product['product_id'] ?></p>
-                            <p class="product-price">$<?= $product['price'] ?></p>
-                        </div>
-                        <div class="wishlist-btn">
-                            <button class="add-to-cart">Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-            <?php
+        foreach($products as $product)
+        {
+            $product->display();
         }
         echo '</div>';
         echo '</div></div>';
     }
-    
 
     public function display_footer(){
         ?>
@@ -234,4 +219,5 @@ class AllProductsView {
             </footer> 
         <?php
     }
+
 }
