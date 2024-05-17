@@ -39,7 +39,7 @@ class DashboardAdminView {
             <body>
             <div class="sidebar">
                 <div class="sidebar-content">
-                    <a href="#" class="logo">
+                    <a href="/" class="logo">
                         <h3>LOGO</h3>
                     </a>
                     <ul class="tabs-list-sidebar">

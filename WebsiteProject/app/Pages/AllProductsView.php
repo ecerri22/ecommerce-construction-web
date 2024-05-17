@@ -175,7 +175,7 @@ class AllProductsView {
             </div>
         </div>
         <script>
-            function addtocart(userid,productid)
+            function addtocart(userid,productid,button)
             {
                 var id = "Thanas";
                 $.ajax({
@@ -186,7 +186,8 @@ class AllProductsView {
                         user_id: userid
                     },
                     success: function(response) {
-                        
+                        button.innerHTML = "Added To Cart";
+                        button.style.backgroundColor = "blue";
                     }
                 });
             }

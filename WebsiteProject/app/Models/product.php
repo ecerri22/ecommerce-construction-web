@@ -11,7 +11,7 @@ class Product{
     public $link;
     public $category;
     public $minidescription;
-    public static $products = array();
+    private $isincart;
 
     public function __construct($id="",$name="", $price="", $image="", $link="", $minidescription="", $category="")
     {
@@ -22,7 +22,7 @@ class Product{
         $this->link = $link;
         $this->minidescription = $minidescription;
         $this->category = $category;
-        array_push(Product::$products, $this);
+        $this->isincart = false;
     }
     public function display()
     {
@@ -40,20 +40,21 @@ class Product{
         echo  '       <div class="wishlist-btn">';
         if(isset($_SESSION['user']))
         {
-            echo  '         <button class="add-to-cart" onclick="addtocart('.@$_SESSION['user']['user_id'].','.$this->id.');">Add to Cart</button>';
+            if($this->isincart)
+            {
+                echo  '         <button class="add-to-cart" style = " background-color : blue " onclick="alert(\'Already in cart\')">Already In Cart</button>';
+            }
+            else
+            echo  '         <button class="add-to-cart" onclick="addtocart('.@$_SESSION['user']['user_id'].','.$this->id.',this);">Add to Cart</button>';
         }
         else
         {
+
             echo  '         <button class="add-to-cart" onclick="alert(\'Please login to add to wishlist\')">Add to Cart</button>';
         }
         echo  '       </div>';
         echo  '     </div>';
         echo  ' </div>';
-    }
-
-    public static function getProductsArray()
-    {
-        return Product::$products;
     }
     public function getName()
     {
@@ -89,14 +90,37 @@ class Product{
     {
         $result = App::container()->resolve('Core\Database')->query('SELECT * FROM products
         JOIN categories ON categories.category_id = products.category_id')->get(); 
+        
+        $products_in_cart = array();
+
+        if(isset($_SESSION['user']))
+        {
+            $user_id = $_SESSION['user']['user_id'];
+            $query = 'SELECT * FROM carts WHERE user_id = ?';
+            $params = [$user_id];
+            foreach(App::container()->resolve('Core\Database')->query($query, $params)->get() as $row)
+            {
+                $products_in_cart[] = $row['product_id'];
+            }
+        }
 
         // Iterate through the result and return an array of product objects
         $products = array();
         foreach ($result as $row) {
             $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name']);
+            if(in_array($row['product_id'], $products_in_cart))
+            {
+                $product->isincart = true;
+            }
             $products[] = $product;
         }
+
+
+
         return $products;
+
+
+
          
     }
     public function deleteProduct()
