@@ -29,7 +29,7 @@ class UsersAdminView{
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title><?= $this->title; ?></title>
-                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                 <link rel="stylesheet" href="/Atea/ateaStyles.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
                 
@@ -97,39 +97,41 @@ class UsersAdminView{
                         <p><?= $_SESSION['user']['first_name'] ?></p>
                     </button>
                 </nav>
-                
+                <script>
+                function atea_search(data)
+                {
+                    var input = document.getElementById('search').value;
+                    $.ajax({
+                        url: 'Atea/SearchUsers.php',
+                        type: 'POST',
+                        data: {
+                            search: input,
+                            data: JSON.stringify(data),
+                            basics: [""],
+                            params: ['first_name'],
+                            vars: [""],
+                            id: 'user_id',
+                            searchspan: ['first_name','email']
+                        },
+                        success: function(response) {
+                            $('#prod-table').replaceWith(response);
+                        },
+                        error : function(response){
+                            alert(response);
+                        }
+                    });
+                }
+                </script>
                 <div class="admin-dashboard">
                     <h1 class="page-title">Users</h1>
-                    <table class="product-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Joining Date</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($data as $user): ?>
+                    <div class="search-container">
+                        <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
+                        <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
+                            <i class="fas fa-search searchlogo"></i>
+                        </button>
 
-                        
-                            <tr>
-                                <td><?= $user['user_id'] ?></td>
-                                <td><?= $user['created_at'] ?></td>
-                                <td><?= $user['first_name'] ?></td>
-                                <td><?= $user['email'] ?></td>
-                                <td>000-000</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-
-                            <?php endforeach; ?>
-
+                    </div>
+                    <?php self::showtable($data); ?>
                             <!-- <tr>
                                 <td>94IF</td>
                                 <td>Apr 21, 2024</td>
@@ -196,8 +198,7 @@ class UsersAdminView{
                             </tr> -->
 
                             
-                        </tbody>
-                    </table>
+                        
                 </div>
             </div>
         <?php
@@ -210,5 +211,43 @@ class UsersAdminView{
             </footer> 
         <?php
     }
+
+    public static function showtable($data) {
+
+        ?>
+        <table class="product-table" id = "prod-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Joining Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($data as $user): ?>
+
+                        
+                            <tr>
+                                <td><?= $user['user_id'] ?></td>
+                                <td><?= $user['created_at'] ?></td>
+                                <td><?= $user['first_name'] ?></td>
+                                <td><?= $user['email'] ?></td>
+                                <td>000-000</td>
+                                <td>
+                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
+                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
+                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+
+                            <?php endforeach; ?>
+                         </tbody>
+            </table>
+        <?php
+    }
+
 
 }

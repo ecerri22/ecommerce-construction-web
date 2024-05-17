@@ -1,87 +1,105 @@
 <?php
 
-use Pages\ProductsAdminView;
-
-$path = __DIR__;
-include_once str_replace("public\\Atea", "app\\Pages\\ProductsAdminView.php", $path);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-        $search = $_POST['search'];
-        $search = trim($search); // Remove any whitespace from the beginning and end of the data
-        $search = htmlspecialchars($search);
-        $data = json_decode($_POST['data'],true);
+function search(callable $function){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
-        if($search == "Reset" || $search == "Mumbo Jumbo") // If the data is empty, display all products
-        {
-            return ProductsAdminView::showtable($data);
-        }
-
-        $category = $_POST['category'];
-        $material = $_POST['Material'];
-        $measures = $_POST['measurement'];
-
-        if($category == "Select category")
-        {
-            $category = "";
-        }
-        if($material == "Select Material")
-        {
-            $material = "";
-        }
-        if($measures == "Select Unit of Measurement")
-        {
-            $measures = "";
-        }
-
-        foreach($data as $rows)
-        {
-            $nameDistance = levenshtein($search, $rows['name']);
-            $descriptionDistance = levenshtein($search, $rows['description']);
-            if ($nameDistance <= $descriptionDistance/25 || str_contains($rows['name'], $search)) {
-                if(str_contains($rows['name'], $search))
-                {
-                    $nameDistance = 0;
-                }
-                if($nameDistance <= 4)
-                {
-                    if((($rows["category_name"] == $category) || $category == "") && (($rows["material"] ==  $material) || $material == "") && (($rows["unit_of_measure"] == $measures) || $measures == ""))
-                    {
-                        $matches[] = ['product' => $rows, 'distance' => $nameDistance];
-                    }
-                    
-                }
-                
+            $search = $_POST['search'];
+            $search = trim($search); // Remove any whitespace from the beginning and end of the data
+            $search = htmlspecialchars($search);
+            $data = json_decode($_POST['data'],true);
+            
+            if($search == "Reset" || $search == "Mumbo Jumbo") // If the data is empty, display all products
+            {
+                return $function($data);
             }
-            // If the description is a better match, add to matches
-            else {
-                if(str_contains($rows['description'], $search))
+            
+            $basics = $_POST['basics'];
+            $paras = $_POST['params'];
+            $vars = $_POST['vars'];
+            $id = $_POST['id'];
+            $searchspan = $_POST['searchspan'];
+            for($i = 0; $i<count($basics); $i++)
+            {
+                if($basics[$i] == $vars[$i])
                 {
-                    if((($rows["category_name"] == $category) || $category == "") && (($rows["material"] ==  $material) || $material == "") && (($rows["unit_of_measure"] == $measures) || $measures == ""))
+                    $vars[$i] = "";
+                }
+            }
+
+            if(ctype_digit($search))
+            {
+                $search = (int)$search;
+                foreach($data as $rows)
+                {
+                    if($rows[$id] == $search)
                     {
-                        $matches[] = ['product' => $rows, 'distance' => $nameDistance];
+                        $matches[] = ['product' => $rows, 'distance' => 0];
                     }
                 }
-            }
-        }
-
-        if(isset($matches)){
-            usort($matches, function($a, $b) {
-                return $a['distance'] - $b['distance'];
-            });
-            }
-            else{
-                $matches = array();
+                $prods = array_map(function($match) {
+                    return $match['product'];
+                }, $matches);
+                return $function($prods);
             }
 
-        $newdata = array_map(function($match) {
-            return $match['product'];
-        }, $matches);
-        return ProductsAdminView::showtable($newdata);
-        
+            foreach($data as $rows)
+            {
+                $closest = $searchspan[findminlev($rows,$searchspan,$search)];
+                $distance = levenshtein($search, $rows[$closest]);
+                if($distance <= 15 || str_contains($rows[$closest], $search))
+                {
+
+                    if(hasall($paras,$vars,$rows))
+                    $matches[] = ['product' => $rows, 'distance' => $distance];
+                }
+
+
+            }
+
+            if(isset($matches)){
+                usort($matches, function($a, $b) {
+                    return $a['distance'] - $b['distance'];
+                });
+                }
+                else{
+                    $matches = array();
+                }
+
+            $newdata = array_map(function($match) {
+                return $match['product'];
+            }, $matches);
+            return $function($newdata);
+            
+    }
+    else
+    {
+        header("Location: /allProducts");
+    }
 }
-else
-{
-    header("Location: /allProducts");
+
+function findminlev($row,$searchspan,$search){
+    $minimum = 10000000;
+    $index = -1;
+    for($i = 0; $i<count($searchspan); $i++)
+    {
+        $distance = (float) levenshtein($search, $row[$searchspan[$i]])/strlen($row[$searchspan[$i]]);
+        if($distance < $minimum)
+        {
+            $minimum = $distance;
+            $index = $i;
+        }
+    }
+    return $index;
+}
+
+function hasall($paras,$vars,$row){
+    for($i = 0; $i<count($vars); $i++)
+    {
+        if($vars[$i] != $row[$paras[$i]] && $vars[$i] != "")
+        {
+            return false;
+        }
+    }
+    return true;
 }
 ?>

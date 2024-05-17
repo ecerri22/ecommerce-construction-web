@@ -103,17 +103,22 @@ class ProductsAdminView{
                 {
                     var input = document.getElementById('search').value;
                     $.ajax({
-                        url: 'Atea/Search.php',
+                        url: 'Atea/SearchProds.php',
                         type: 'POST',
                         data: {
                             search: input,
                             data: JSON.stringify(data),
-                            category: document.getElementById('category').value,
-                            Material: document.getElementById('Material').value,
-                            measurement: document.getElementById('measurement').value
+                            basics: ['Select category','Select Material','Select Unit of Measurement'],
+                            params: ['category_name','material','unit_of_measure'],
+                            vars: [document.getElementById('category').value , document.getElementById('Material').value , document.getElementById('measurement').value],
+                            id: 'product_id',
+                            searchspan: ['name','description']
                         },
                         success: function(response) {
                             $('#prod-table').replaceWith(response);
+                        },
+                        error : function(response){
+                            alert(response);
                         }
                     });
                 }

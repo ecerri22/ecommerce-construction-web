@@ -96,6 +96,30 @@ class OrdersAdminView{
                         <p><?= $_SESSION['user']['first_name'] ?></p>
                     </button>
                 </nav>
+
+                <script>
+                function atea_search(data)
+                {
+                    var input = document.getElementById('search').value;
+                    $.ajax({
+                        url: 'Atea/Search.php',
+                        type: 'POST',
+                        data: {
+                            search: input,
+                            data: JSON.stringify(data),
+                            category: document.getElementById('category').value,
+                            Material: document.getElementById('Material').value,
+                            measurement: document.getElementById('measurement').value,
+                            base1 : 'category_name',
+                            base2 : 'material',
+                            base3 : 'unit_of_measure'
+                        },
+                        success: function(response) {
+                            $('#prod-table').replaceWith(response);
+                        }
+                    });
+                }
+                </script>
                 
                 <div class="admin-dashboard">
                     <h1 class="page-title">Orders</h1>
@@ -226,6 +250,21 @@ class OrdersAdminView{
             </div>
         <?php
 
+    }
+
+    public function displaydropdown($data,$base)
+    {
+                $seen = array();
+                foreach ($data as $row) {
+                    if(!isset($seen[$row[$base]])){
+                        $seen[$row[$base]] = false;
+                    }
+                        if ($seen[$row[$base]] == false ){
+                            $seen[$row[$base]] = true;
+                            echo '<option value="' . $row[$base] . '">' . $row[$base] . '</option>';
+                        }
+                        
+                    }
     }
 
 

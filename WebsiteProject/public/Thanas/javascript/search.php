@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Loop through products to find matches
     foreach ($page->arr as $product) {
         $nameDistance = levenshtein($data, $product['name']);
-        $descriptionDistance = levenshtein($data, $product['minidescription']);
+        $descriptionDistance = levenshtein($data, $product['minidescription']); 
         
          // If the name is a better match, add to matches
         if ($nameDistance <= $descriptionDistance/25 || str_contains($product['name'], $data)) {
