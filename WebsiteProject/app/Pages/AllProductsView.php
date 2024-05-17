@@ -174,6 +174,23 @@ class AllProductsView {
                 </div>
             </div>
         </div>
+        <script>
+            function addtocart(userid,productid)
+            {
+                var id = "Thanas";
+                $.ajax({
+                    url: 'Thanas/javascript/addtocart.php',
+                    type: 'POST',
+                    data: {
+                        product_id: productid,
+                        user_id: userid
+                    },
+                    success: function(response) {
+                        alert(response);
+                    }
+                });
+            }
+</script>
         <?php
     }
         
@@ -219,5 +236,6 @@ class AllProductsView {
             </footer> 
         <?php
     }
+
 
 }

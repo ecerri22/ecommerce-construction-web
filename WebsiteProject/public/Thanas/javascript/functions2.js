@@ -58,3 +58,4 @@ function clearSearch(page){
     document.getElementById("sliderValue").innerHTML = "500$";
     Search(page);
 }
+
