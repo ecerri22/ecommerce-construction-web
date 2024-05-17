@@ -10,15 +10,16 @@ include_once str_replace("public\\Thanas\\javascript", "app\\Core\\Container.php
 $path = __DIR__;
 include_once str_replace("public\\Thanas\\javascript", "app\\Core\\Database.php", $path);
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $product_id = $_POST['product_id'];
     $quantity = 1;
-
     if(is_null(App::container())){
         App::setContainer(new \Core\Container());
         App::container()->bind('Core\Database', function () {
-            $config = require "C:\\xampp\\htdocs\\ecommerce-construction-web\\WebsiteProject\\app\\config.php";
+            $path = __DIR__;
+            $config = require str_replace("public\\Thanas\\javascript", "app\\config.php", $path);
             return new Database($config);
         });
     }

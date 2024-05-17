@@ -186,7 +186,7 @@ class AllProductsView {
                         user_id: userid
                     },
                     success: function(response) {
-                        alert(response);
+                        
                     }
                 });
             }
