@@ -175,9 +175,12 @@ class AllProductsView {
             </div>
         </div>
         <script>
-            function addtocart(userid,productid,button)
+            function addtocart(userid,productid,button,isincart)
             {
-                var id = "Thanas";
+                if(isincart)
+                {
+                    return;
+                }
                 $.ajax({
                     url: 'Thanas/javascript/addtocart.php',
                     type: 'POST',

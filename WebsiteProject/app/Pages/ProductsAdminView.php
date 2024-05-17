@@ -15,6 +15,7 @@ class ProductsAdminView{
         <html lang="en">
         <?php $this->renderHead(); ?>
         <body>
+
             <?php $this->renderHeader(); ?>
             <?php $this->renderContent($data); ?>
             <?php $this->renderFooter(); ?>
@@ -29,7 +30,7 @@ class ProductsAdminView{
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title><?= $this->title; ?></title>
-                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                 <link rel="stylesheet" href="Atea/ateaStyles.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
             </head>
@@ -97,10 +98,76 @@ class ProductsAdminView{
                     <p><?= $_SESSION['user']['first_name'] ?></p>
                 </button>
             </nav>
-            
+            <script>
+                function atea_search(data)
+                {
+                    var input = document.getElementById('search').value;
+                    $.ajax({
+                        url: 'Atea/Search.php',
+                        type: 'POST',
+                        data: {
+                            search: input,
+                            data: JSON.stringify(data),
+                            category: document.getElementById('category').value,
+                            Material: document.getElementById('Material').value,
+                            measurement: document.getElementById('measurement').value
+                        },
+                        success: function(response) {
+                            $('#prod-table').replaceWith(response);
+                        }
+                    });
+                }
+                </script>
             <div class="admin-dashboard">
                 <h1 class="page-title">Products</h1>
-                <table class="product-table">
+                <div class="search-container">
+            <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
+            <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
+                <i class="fas fa-search searchlogo"></i>
+            </button>
+            <select class="dropdown" id="category">
+                <option value="">Select category</option>
+                <?php
+                    $this->displaydropdown($data,'category_name');
+                ?>
+                <!-- Add more category options as needed -->
+            </select>
+            <select class="dropdown" id="Material">
+                <option value="">Select Material</option>
+                <?php
+                    $this->displaydropdown($data,'material')
+                ?>
+                <!-- Add more price range options as needed -->
+            </select>
+            <select class="dropdown" id="measurement">
+                <option value="">Select Unit of Measurement</option>
+                <?php
+                    $this->displaydropdown($data,'unit_of_measure');
+                ?>
+                <!-- Add more buy price range options as needed -->
+            </select>
+
+</div>
+
+                <?php self::showtable($data); ?>
+            </div>
+            </div>
+        <?php
+
+    }
+
+    private function renderFooter() {
+        ?>
+            <footer class="footer">
+                <!-- Footer content goes here -->
+            </footer> 
+        <?php
+    }
+
+    public static function showtable($data)
+    {
+        ?>
+        <table class="product-table" id="prod-table">
                     <thead>
                         <tr>
                             <th>Product ID</th>
@@ -125,7 +192,7 @@ class ProductsAdminView{
                                 <td><?php echo $row['name']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td><img src="/image/<?php echo $row['product_image']; ?>" alt="<?= $row['description']; ?>" style="height: 5rem; width: 5rem;"></td>
-                                <td><?php echo $row['category_id']; ?></td>
+                                <td><?php echo $row['category_name']; ?></td>
                                 <td><?php echo '$' . $row['price']; ?></td>
                                 <td><?php echo $row['material']; ?></td>
                                 <td><?php echo $row['unit_of_measure']; ?></td>
@@ -147,18 +214,21 @@ class ProductsAdminView{
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-            </div>
-            </div>
-        <?php
-
-    }
-
-    private function renderFooter() {
-        ?>
-            <footer class="footer">
-                <!-- Footer content goes here -->
-            </footer> 
         <?php
     }
 
+    public function displaydropdown($data,$base)
+    {
+                $seen = array();
+                foreach ($data as $row) {
+                    if(!isset($seen[$row[$base]])){
+                        $seen[$row[$base]] = false;
+                    }
+                        if ($seen[$row[$base]] == false ){
+                            $seen[$row[$base]] = true;
+                            echo '<option value="' . $row[$base] . '">' . $row[$base] . '</option>';
+                        }
+                        
+                    }
+    }
 }

@@ -130,8 +130,7 @@ class Admin
 
     public function getallproducts() 
     {
-        return App::container()->resolve('Core\Database')->query('SELECT * FROM
-        products')->get();
+        return App::container()->resolve('Core\Database')->query('SELECT * FROM products Join categories ON products.category_id = categories.category_id')->get();
     }
 
     public function createProduct($name, $description, $image, $category_id, $material, $unit_of_measure, $brand, $price, $stock, $buy_price) {
@@ -174,5 +173,15 @@ class Admin
                 return false; 
             }
           }
+    }
+    public function getFilteredProducts($search)
+    {
+        if (!empty($search)) {
+            $sql = "SELECT * FROM products Join categories ON products.category_id = categories.category_id WHERE name LIKE ?";
+            $params = ["%" . $search . "%"];
+            return $this->db->query($sql, $params)->get();
+        } else {
+            return $this->getallproducts(); // This calls the existing method to fetch all products
+        }
     }
 }

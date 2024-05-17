@@ -43,11 +43,14 @@ class AdminController extends Controller{
     }
 
     public function renderProductsAdminController()
-    {
-        view('admin/atea_allProducts.view.php', [
-            'data' => $this->user->getallproducts()
-        ]);
-    }
+{
+    $search = $_GET['search'] ?? '';
+    $products = $this->user->getFilteredProducts($search); // This will be a new method
+    view('admin/atea_allProducts.view.php', [
+        'data' => $products
+    ]);
+}
+
     
     public function insertProduct()
     {

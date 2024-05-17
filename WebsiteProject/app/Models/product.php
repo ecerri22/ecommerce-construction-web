@@ -45,7 +45,7 @@ class Product{
                 echo  '         <button class="add-to-cart" style = " background-color : blue " onclick="alert(\'Already in cart\')">Already In Cart</button>';
             }
             else
-            echo  '         <button class="add-to-cart" onclick="addtocart('.@$_SESSION['user']['user_id'].','.$this->id.',this);">Add to Cart</button>';
+            echo  '         <button class="add-to-cart" onclick="addtocart('.@$_SESSION['user']['user_id'].','.$this->id.',this'.true.');">Add to Cart</button>';
         }
         else
         {
