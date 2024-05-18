@@ -3,4 +3,4 @@
 use Pages\OrdersAdminView;
 
 $ordersAdminView = new OrdersAdminView("Orders Admin");
-$ordersAdminView->render();
+$ordersAdminView->render($orders);

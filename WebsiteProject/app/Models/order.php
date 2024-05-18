@@ -85,16 +85,11 @@ class Order {
 
     public function updateOrderStatus($status, $orderId) {
         $query = "UPDATE orders SET status = :status WHERE order_id = :order_id";
-        // dd($_POST);
         $this->db->query($query, ['status' => $status, 'order_id' => $orderId]);
     }
 
     public function getAllOrders(){
-        $result = 'SELECT orders.*, orderinfo.*
-        FROM `orders`
-        JOIN `orderinfo` ON orders.order_id = orderinfo.order_id
-        GROUP BY orders.order_id;';
-
+        $result = 'SELECT orders.*, orderinfo.* FROM `orders` JOIN `orderinfo` ON orders.order_id = orderinfo.order_id GROUP BY orders.order_id;';
         return $this->db->query($result)->get();
     }   
 }

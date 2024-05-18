@@ -5,14 +5,19 @@ use Core\Controller;
 use Models\Admin;
 use Models\Product;
 use Models\Order;
+use Models\User;
 
 class AdminController extends Controller{
     private $user;
+    private $order;
+    private $guest;
 
     public function __construct()
     {
         parent::__construct();
         $this->user = new Admin();
+        $this->order = new Order();
+        $this->guest = new User();
     }
 
     public function renderDashboardAdminPage()
@@ -33,7 +38,9 @@ class AdminController extends Controller{
 
     public function renderOrdersAdminController()
     {
-        view('admin/atea_allOrders.view.php');
+        view('admin/atea_allOrders.view.php', [
+            'orders' => $this->order->getAllOrders()
+        ]);
     }
 
     public function renderUsersAdminController()
@@ -44,13 +51,13 @@ class AdminController extends Controller{
     }
 
     public function renderProductsAdminController()
-{
-    $search = $_GET['search'] ?? '';
-    $products = $this->user->getFilteredProducts($search); // This will be a new method
-    view('admin/atea_allProducts.view.php', [
-        'data' => $products
-    ]);
-}
+    {
+        $search = $_GET['search'] ?? '';
+        $products = $this->user->getFilteredProducts($search); // This will be a new method
+        view('admin/atea_allProducts.view.php', [
+            'data' => $products
+        ]);
+    }
 
     
     public function insertProduct()
@@ -87,7 +94,7 @@ class AdminController extends Controller{
                     
             // dd($_FILES);
 
-            $this->user->register($name,$lastName, $email, $password);
+            $this->guest->register($name,$lastName, $email, $password);
 
             redirect('/allProductsAdmin');
         }
