@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $page->display_products($products); // Display the products
 }
 else{
-    header("Location: http://localhost/ecommerce-construction-web/userPage/Products/Products.php"); // Redirect to the products page
+    header("Location: /error"); // Redirect to the products page
 }
 
 ?>

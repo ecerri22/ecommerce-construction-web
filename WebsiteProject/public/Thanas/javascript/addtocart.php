@@ -46,6 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 else
 {
-    header("Location: /allProducts");
+    header("Location: /error");
 }
 ?>

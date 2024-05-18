@@ -206,7 +206,6 @@ class AllProductsView {
                     },
                     success: function(response) {
                         changed.push(productid);
-                        
                         button.innerHTML = "Added To Cart";
                         button.style.backgroundColor = "blue";
                     }
@@ -216,15 +215,11 @@ class AllProductsView {
         <?php
     }
         
-    public function display_products($products,$product_id="") {
+    public function display_products($products) {
         echo '<div id="products" class="products-container">';
         echo '<div class="products">';
         foreach($products as $product)
         {
-            if($product->id == $product_id)
-            {
-                $product->isincart = true;
-            }
             $product->display();
         }
         echo '</div>';
