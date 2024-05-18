@@ -21,6 +21,7 @@ class SignUpView {
 
     private function renderContent() {
         ?>
+        <link rel="stylesheet" href="Daniela/styleSignup.css">
         <div class="content">
                 <h1 class="titleH1"> Create your Account</h1>
                 <form class="formSignUp" method="post" action="/signup">

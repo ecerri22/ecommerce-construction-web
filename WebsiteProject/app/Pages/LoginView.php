@@ -20,6 +20,7 @@ class LoginView {
 
     private function renderContent($errors = []) {
         ?>
+         <link rel="stylesheet" href="Daniela/styleLogin.css">
         <div class="content">
         <h1 class="titleH1">Customer Login </h1>
 

@@ -20,6 +20,7 @@ class HelpAdviceView {
 
     private function renderContent() {
         ?>
+        <link rel="stylesheet" href="Daniela/danielaStyles.css">
          <div class="content">
         <h1 class="titleH1">Help and Advice</h1>
         <ol class="listO">
