@@ -45,3 +45,34 @@ function addClickEventToDiv(destination, divId) {
         //this used to have another purpose but im leaving it here in case we want the statistics to do something when clicked.
     });
 }
+
+function createform2()
+{
+    $.ajax({
+        url: 'Thanas/javascript/form2.php',
+        type: 'post',
+        data: {name: 'test'},
+        success: function(response) {
+            document.getElementById('form2').innerHTML = response;
+        }
+    });
+
+}
+
+function removeform(deleteButton)
+{
+        //statisticID is here so when i remove the statistic i can use the id to remove it from the database
+        var statisticDiv = deleteButton.parentElement;
+        statisticDiv.classList.add('fadeOut');
+        
+        statisticDiv.style.transition = 'opacity 0.2s';
+        statisticDiv.style.opacity = 0;
+        statisticDiv.parentElement.style.opacity = 0;
+
+    
+        setTimeout(function() {
+            statisticDiv.parentElement.parentElement.innerHTML="";
+        }, 500);
+        
+    
+}
