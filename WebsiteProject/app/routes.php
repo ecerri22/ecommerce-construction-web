@@ -73,6 +73,8 @@ $router->get('/allProductsAdmin', $ac, 'renderProductsAdminController')->only('r
 
 // ADMIN - ALL ORDERS //
 $router->get('/allOrdersAdmin', $ac, 'renderOrdersAdminController')->only('role');
+$router->patch('/allOrdersAdmin', $ac, 'editOrderStatus')->only('role');
+
 
 // ADMIN - ALL USERS //
 $router->get('/allUsersAdmin', $ac, 'renderUsersAdminController')->only('role');
