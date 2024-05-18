@@ -174,6 +174,27 @@ class AllProductsView {
                 </div>
             </div>
         </div>
+        <script>
+            function addtocart(userid,productid,button,isincart)
+            {
+                if(isincart)
+                {
+                    return;
+                }
+                $.ajax({
+                    url: 'Thanas/javascript/addtocart.php',
+                    type: 'POST',
+                    data: {
+                        product_id: productid,
+                        user_id: userid
+                    },
+                    success: function(response) {
+                        button.innerHTML = "Added To Cart";
+                        button.style.backgroundColor = "blue";
+                    }
+                });
+            }
+</script>
         <?php
     }
         
@@ -219,5 +240,6 @@ class AllProductsView {
             </footer> 
         <?php
     }
+
 
 }

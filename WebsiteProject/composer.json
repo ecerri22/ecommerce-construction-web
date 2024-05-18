@@ -1,0 +1,13 @@
+{
+    "name": "user/project-php",
+    "type": "n",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "app/Core/",
+            "Models\\": "app/Models/",
+            "Controllers\\": "app/Controllers/",
+            "Pages\\": "app/Pages/"
+        }
+    }
+}
