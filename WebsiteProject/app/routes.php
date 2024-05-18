@@ -31,7 +31,7 @@ $router->get('/helpAdvice', $uc, 'renderHelpAdvice');
 
 // MY ACCOUNT PAGE //
 $router->get('/myAccount',$uc,'renderMyAccount')->only('auth');
-
+$router->post('/myAccount',$uc,'renderMyAccount');
 // ORDER HISTORY PAGE //
 $router->get('/myOrders', $uc, 'renderMyOrders')->only('auth');
 
@@ -50,8 +50,8 @@ $router->get('/allProducts', $pc, 'renderAllProductsPage');
 
 // PRODUCT DETAILS PAGE //
 $router->get('/productDetails', $pc, 'renderProductDetails');
-
-/********************************/
+$router->post('/productDetails', $pc, 'renderProductDetails');
+    /********************************/
 //********ADMIN********* //
 $ac = new AdminController();
 

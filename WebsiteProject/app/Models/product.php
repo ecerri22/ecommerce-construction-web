@@ -123,9 +123,88 @@ class Product{
 
          
     }
+    public static function getProductFromWishList($productId,$userId){
+        return App::container()->resolve('Core\Database')->query('SELECT * from wishlists where product_id = :productId AND  user_id = :userId',['productId'=> $productId,'userId'=> $userId])->get();
+    }
+
+    public static function getProductFromShoppingCart($productId,$userId){
+        return App::container()->resolve('Core\Database')->query('SELECT * from carts where product_id = :productId AND  user_id = :userId',['productId'=> $productId,'userId'=> $userId])->get();
+    }
+    public static function updateProductFromShoppingCart($userId,$productId,$quantity){
+        $query = "UPDATE carts SET quantity = ? WHERE user_id=? AND product_id=?";
+        $params = [$quantity,$userId,$productId];
+        return App::container()->resolve("Core\Database")->query($query,$params);
+    }
+
+    public static function addProductToShoppingCart($userId,$productId,$quantity){
+        $sql = "INSERT INTO carts(`user_id`,`product_id','quantity') 
+        VALUES($userId,$productId,$quantity)";
+        $addedProd = App::container()->resolve('Core\Database')->query($sql);
+    
+
+    if ($addedProd) { 
+        return true;
+    } else {
+        return false; 
+    }
+}
+    public static function addProductToWishlist($productId,$userId){
+        $sql = "INSERT INTO wishlists(`product_id`,`user_id') 
+        VALUES($productId,$userId)";
+        $addedProd = App::container()->resolve('Core\Database')->query($sql);
+    
+
+    if ($addedProd) { 
+        return true;
+    } else {
+        return false; 
+    }
+    }
+    public static function deleteProductFromWishlist($productId,$userId){
+        $sql = 'DELETE FROM wishlist WHERE user_id = ? AND product_id=?';
+        $params =[$userId,$productId];
+        $removedProd = App::container()->resolve('Core\Database')->query($sql);
+        if ($removedProd) { 
+            return true;
+        } else {
+            return false; 
+        }
+    }
+    public static function getProduct($productId){
+        return  App::container()->resolve('Core\Database')->query('SELECT * from products where product_id = :product_id', ['product_id' => $productId])->findOrFail();
+    }
+
+    public static function getProductCategory($productId){
+        return App::container()->resolve('Core\Database')->query('SELECT * from categories where category_id = :id',['id' => Product::getProduct($productId)['category_id']] )->findOrFail();
+    }
+    public static function getProductReviews($productId){
+        return App::container()->resolve('Core\Database')->query('SELECT * from reviews where product_id = :product_id', ['product_id' => $productId] )->get();
+    }
+
+    public static function getReview($productId,$userId){
+        return App::container()->resolve('Core\Database')->query('SELECT * from reviews where product_id = :product_id, user_id = :user_id', ['product_id' => $productId,'user_id' => $userId] )->findOrFail();
+
+    }
+    public static function getOrderInfo($orderId){
+        
+        
+        return App::container()->resolve('Core\Database')->query('SELECT * from orderInfo where order_id = :orderid',['orderid'=>$orderId]);
+    }
+    public static function addReview($review_date,$description,$stars,$userId,$productId){
+        $sql = "INSERT INTO reviews(`review_date`,`description`, `start`, `user_id`, `product_id`) 
+                VALUES($review_date,$description,$stars,$userId,$productId)";
+                $addedProd = App::container()->resolve('Core\Database')->query($sql);
+            
+
+            if ($addedProd) { 
+                return true;
+            } else {
+                return false; 
+            }
+    }
     public function deleteProduct()
     {
-        $product = App::container()->resolve('Core\Database')->query('select * from products where product_id = :product_id', ['product_id' => $_POST['product_id']])->findOrFail();
+        $product = App::container()->resolve('Core\Database')->query('SELECT * from products where product_id = :product_id', ['product_id' => $_POST['product_id']])->findOrFail();
 
         $sql = "DELETE FROM products WHERE product_id = :product_id";
         return App::container()->resolve('Core\Database')->query($sql, ['product_id' => $_POST['product_id']]);

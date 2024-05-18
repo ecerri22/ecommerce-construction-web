@@ -161,6 +161,7 @@ class User
         return App::container()->resolve('Core\Database')->query($query, $params)->get();
     }
 
+   
     public function addToShoppingCart()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -179,6 +180,26 @@ class User
             }
         }
     }
+    public static function updateUserPhoto($userId,$path){
+        $query = "UPDATE users SET profile_image = ? WHERE user_id = ?";
+        $params = [$path,$userId];
+        return App::container()->resolve("Core\Database")->query($query, $params)->get();
+        
+    }
+
+    public static function updateUser($userId,$firstName,$lastName){
+        $query = "UPDATE users SET first_name= ?, last_Name = ? WHERE user_id = ? ";
+        $params = [ $firstName, $lastName,$userId];
+        return App::container()->resolve("Core\Database")->query($query, $params)->get();
+    }
+
+    public static function updateAddress($userId,$street,$city,$country,$state,$phone,$zip_code){
+        $query = "UPDATE addresses SET street= ?, city = ?,country=?,`state`=?, phone=?, zip_code=? WHERE user_id = ? ";
+        $params = [ $street, $city,$country, $state, $phone, $zip_code,$userId];
+        return App::container()->resolve("Core\Database")->query($query, $params)->get();
+    }
+
+    
 
     public function updateShoppingCartQuantity($productId, $quantity)
     {
@@ -206,4 +227,27 @@ class User
             }
         }
     }
+
+    public static function getUser($user_id){
+          return App::container()->resolve('Core\Database')->query('SELECT * from users where user_id = :userid', ['userid' => $user_id])->findOrFail();
+
+    }
+    public static function getOrders($user_id){
+        
+        return App::container()->resolve('Core\Database')->query('SELECT * from orders where user_id = :userid', ['userid' => $user_id])->get();
+
+  }
+    public static function getUserAddress($user_id){
+        return App::container()->resolve('Core\Database')->query('SELECT * from addresses where user_id = :id',['id' => $user_id])->findOrFail();
+    }
+    public static function addAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip){
+        $sql = "INSERT INTO addresses (street, city, country, `state`, phone, zip_code, user_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $params = [$street, $city, $country, $state, $phoneNumber, $zip, $userID];
+        $addedProd = App::container()->resolve('Core\Database')->query($sql, $params);
+    }
+    
+    
 }
+
+?>
