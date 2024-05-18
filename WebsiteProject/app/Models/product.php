@@ -11,9 +11,11 @@ class Product{
     public $link;
     public $category;
     public $minidescription;
-    private $isincart;
+    public $isincart;
+    public $user_id;
+    public $user;
 
-    public function __construct($id="",$name="", $price="", $image="", $link="", $minidescription="", $category="")
+    public function __construct($id="",$name="", $price="", $image="", $link="", $minidescription="", $category="",$user_id=false,$isincart=false,$user=(-1))
     {
         $this->id = $id;
         $this->name = $name;
@@ -22,7 +24,9 @@ class Product{
         $this->link = $link;
         $this->minidescription = $minidescription;
         $this->category = $category;
-        $this->isincart = false;
+        $this->isincart = $isincart;
+        $this->user_id = $user_id;
+        $this->user = $user;
     }
     public function display()
     {
@@ -38,20 +42,21 @@ class Product{
         echo  '         <p class="product-price">$'.$this->price.'</p>';
         echo  '       </div>';
         echo  '       <div class="wishlist-btn">';
-        if(isset($_SESSION['user']))
+        if($this->user_id)
         {
             if($this->isincart)
             {
-                echo  '         <button class="add-to-cart" style = " background-color : blue " onclick="alert(\'Already in cart\')">Already In Cart</button>';
+                echo  '         <button class="add-to-cart" style = " background-color : blue " onclick="alert(\'Already in cart\')" id = "product_'.$this->id.'">Already In Cart</button>';
             }
             else
-            echo  '         <button class="add-to-cart" onclick="addtocart('.@$_SESSION['user']['user_id'].','.$this->id.',this,'.false.');">Add to Cart</button>';
+            echo  '         <button class="add-to-cart" onclick="addtocart('.$this->user.','.$this->id.',this,'.false.');">Add to Cart</button>';
         }
         else
         {
 
             echo  '         <button class="add-to-cart" onclick="alert(\'Please login to add to wishlist\')">Add to Cart</button>';
         }
+        echo '<input type="hidden" name="product_id" value="'.$this->isincart.'">';
         echo  '       </div>';
         echo  '     </div>';
         echo  ' </div>';
@@ -107,10 +112,14 @@ class Product{
         // Iterate through the result and return an array of product objects
         $products = array();
         foreach ($result as $row) {
-            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name']);
+            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name'],false,false,$_SESSION['user']['user_id']);
             if(in_array($row['product_id'], $products_in_cart))
             {
                 $product->isincart = true;
+            }
+            if(isset($_SESSION['user']))
+            {
+                $product->user_id = true;
             }
             $products[] = $product;
         }

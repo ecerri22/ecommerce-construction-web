@@ -98,6 +98,10 @@ class AdminController extends Controller{
 
             redirect('/allProductsAdmin');
         }
+        else
+        {
+            header("Location: /error");
+        }
     }
 
 

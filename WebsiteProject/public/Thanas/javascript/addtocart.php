@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Models\Product;
 
 $path = __DIR__;
 include_once str_replace("public\\Thanas\\javascript", "app\\Core\\App.php", $path);
@@ -9,7 +10,8 @@ $path = __DIR__;
 include_once str_replace("public\\Thanas\\javascript", "app\\Core\\Container.php", $path);
 $path = __DIR__;
 include_once str_replace("public\\Thanas\\javascript", "app\\Core\\Database.php", $path);
-
+$path = __DIR__;
+include_once str_replace("public\\Thanas\\javascript", "app\\Models\\product.php", $path);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return new Database($config);
         });
     }
+    try{
     $user_id = $_POST['user_id'];
+    echo $user_id;
     $query = "SELECT * FROM carts WHERE user_id = ? AND product_id = ?";
     $params = [$user_id, $product_id];
     $result = App::container()->resolve('Core\Database')->query($query, $params)->get();
@@ -36,9 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $params = [1, $user_id, $product_id];
         App::container()->resolve('Core\Database')->query($query, $params)->get();
     }
+}catch(Exception $e){
+    echo $e->getMessage();
+}
 }
 else
 {
-    header("Location: /allProducts");
+    header("Location: /error");
 }
 ?>

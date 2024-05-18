@@ -158,6 +158,10 @@ class User
                 }
             }
         }
+        else
+        {
+            header("Location: /error");
+        }
     }
 
     public function getWishlistProducts(){
@@ -184,6 +188,10 @@ class User
                 // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
             }
+        }
+        else
+        {
+            header("Location: /error");
         }
     }
 
@@ -218,6 +226,10 @@ class User
                 // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get();
             }
+        }
+        else
+        {
+            header("Location: /error");
         }
     }
 
@@ -282,6 +294,10 @@ class User
                 // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
             }
+        }
+        else
+        {
+            header("Location: /error");
         }
     }
 

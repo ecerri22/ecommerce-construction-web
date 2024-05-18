@@ -79,7 +79,7 @@ function search(callable $function){
     }
     else
     {
-        header("Location: /allProducts");
+        header("Location: /error");
     }
 }
 
