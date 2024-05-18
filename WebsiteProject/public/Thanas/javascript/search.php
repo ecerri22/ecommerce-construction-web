@@ -10,7 +10,10 @@ include_once str_replace("public\\Thanas\\javascript", "app\\Pages\\AllProductsV
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
+    if(isset($_POST['dat']))
     $data = $_POST['dat']; // Get the data sent from JavaScript
+    else 
+    $data = "";
     $data = trim($data); // Remove any whitespace from the beginning and end of the data
     $data = htmlspecialchars($data);
     $page = new AllProductsView(json_decode($_POST['page'],true)); // Get the page sent from JavaScript

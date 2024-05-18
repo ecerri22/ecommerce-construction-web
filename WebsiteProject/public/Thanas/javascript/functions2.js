@@ -11,14 +11,12 @@ function makesticky(prod){
         sticky.style.boxShadow = "0px 0px 20px 1px rgb(230, 228, 228)";
     } else {
         prod.style.backgroundColor = "green";
-        sticky.style.boxShadow = "0px 0px 20px 1px rgb(140, 255, 140)";
+        sticky.style.boxShadow = "0px 0px 20px 1px rgb(140, 255, 10)";
         sticky.classList.add("stickydiv");
     }
 }
 
 function Search(page) {
-    console.log(page);
-    console.log("Search function called");
     var search = $('#searcher').val();
     var Categories = [];
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){

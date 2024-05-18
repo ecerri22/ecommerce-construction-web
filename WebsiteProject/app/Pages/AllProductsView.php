@@ -52,8 +52,8 @@ class AllProductsView {
 
                         <!-- center search bar-->
                         <form action="#" class="search-bar">
-                            <input type="text" class="input-search" placeholder="Search...">
-                            <button class="btn-search header-btn">
+                            <input type="text" class="input-search" placeholder="Search..." id = "searcher">
+                            <button onclick='Search(<?php echo json_encode($this->arr) ?>)' class='btn-search header-btn'>
                                 <i class="fas fa-search"></i>
                             </button>
                         </form>
