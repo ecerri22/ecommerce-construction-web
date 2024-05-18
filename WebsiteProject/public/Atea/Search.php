@@ -8,7 +8,8 @@ function search(callable $function){
             $search = htmlspecialchars($search);
             $data = json_decode($_POST['data'],true);
             
-            if($search == "Reset" || $search == "Mumbo Jumbo") // If the data is empty, display all products
+            $search = strtoupper($search);
+            if($search == "RESET" || $search == "MUMBO JUMBO") // If the data is empty, display all products
             {
                 return $function($data);
             }
@@ -45,8 +46,13 @@ function search(callable $function){
             foreach($data as $rows)
             {
                 $closest = $searchspan[findminlev($rows,$searchspan,$search)];
-                $distance = levenshtein($search, $rows[$closest]);
-                if($distance <= 15 || str_contains($rows[$closest], $search))
+                $distance = (float) levenshtein($search, strtoupper($rows[$closest]))/strlen($rows[$closest]);
+                if(str_contains(strtoupper($rows[$closest]), $search))
+                {
+                    if(hasall($paras,$vars,$rows))
+                    $matches[] = ['product' => $rows, 'distance' => -1];
+                }
+                else if($distance <= 0.799)
                 {
 
                     if(hasall($paras,$vars,$rows))
@@ -82,8 +88,8 @@ function findminlev($row,$searchspan,$search){
     $index = -1;
     for($i = 0; $i<count($searchspan); $i++)
     {
-        $distance = (float) levenshtein($search, $row[$searchspan[$i]])/strlen($row[$searchspan[$i]]);
-        if($distance < $minimum)
+        $distance = (float) levenshtein($search, strtoupper($row[$searchspan[$i]]))/strlen($row[$searchspan[$i]]);
+        if($distance <= $minimum)
         {
             $minimum = $distance;
             $index = $i;
