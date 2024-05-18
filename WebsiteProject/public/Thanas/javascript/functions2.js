@@ -16,7 +16,7 @@ function makesticky(prod){
     }
 }
 
-function Search(page) {
+function Search(page,user,userid) {
     var search = $('#searcher').val();
     var Categories = [];
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
@@ -32,6 +32,9 @@ function Search(page) {
              page : JSON.stringify(page), // Use the serialized productsArray
              categories : Categories,
              maxprice : document.getElementById("mySlider").value,
+             user : user,
+             userid : userid,
+             changed : JSON.stringify(changed)
         },
         success: function(response) {
             $('#products').replaceWith(response);
@@ -39,23 +42,23 @@ function Search(page) {
     });
 }
 
-function toggleButtonColorOnPress(button, page){
+function toggleButtonColorOnPress(button, page,user,userid){
     if (button.style.backgroundColor == "green"){
         button.style.backgroundColor = "#0615388c";
     } else {
         button.style.backgroundColor = "green";   
     }
-    Search(page);
+    Search(page,user,userid);
    
 }
 
-function clearSearch(page){
+function clearSearch(page,user,userid){
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
         document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
     }
     $('#searcher').val("");
     document.getElementById("mySlider").value = 50;
     document.getElementById("sliderValue").innerHTML = "500$";
-    Search(page);
+    Search(page,user,userid);
 }
 

@@ -51,12 +51,12 @@ class AllProductsView {
                         </a>
 
                         <!-- center search bar-->
-                        <form action="#" class="search-bar">
+                        <div class="search-bar">
                             <input type="text" class="input-search" placeholder="Search..." id = "searcher">
-                            <button onclick='Search(<?php echo json_encode($this->arr) ?>)' class='btn-search header-btn'>
+                            <button onclick='Search(<?php echo json_encode($this->arr) ?>,<?php echo isset($_SESSION["user"]["user_id"]) ?>,<?php echo $_SESSION["user"]["user_id"] ?>)' class='btn-search header-btn'>
                                 <i class="fas fa-search"></i>
                             </button>
-                        </form>
+                        </div>
 
                         <!-- right side -->
                         <div class="header-user-btns">
@@ -139,23 +139,26 @@ class AllProductsView {
                 <div class="sidebar-header">
                     <p class="filter-section-title">Filter by</p>
                     <?php
-                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).");'>Clear</button>";
+                    $istrue=false;
+                    if(isset($_SESSION["user"]))
+                    $istrue=true;
+                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Clear</button>";
                     ?>
                 </div>
                 <div class="sidebar-content">
                     <p class="filter-type-title">Categories</p>
                     <div class="sidebar-list">
                         <?php
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Windows</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Electrical</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Steel Profiles</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Wood Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Hydraulics</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Professional Work Tools</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Building Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Roof Covers</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Isolation</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).");'>Packaging Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Windows</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Electrical</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Wood Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Hydraulics</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Building Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Roof Covers</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Isolation</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
                             ?>
                     </div>
                     <div class="price-fliter">
@@ -173,7 +176,10 @@ class AllProductsView {
                                 clearTimeout(timeout); // Clear any existing timeout
                                 timeout = setTimeout(function() {
                                     // Call the search function after a delay of 500 milliseconds
-                                    Search(<?php echo json_encode($this->arr); ?>);
+                                    Search(<?php echo json_encode($this->arr); ?>, <?php if(isset($_SESSION['user']))
+                                    echo true;
+                                else
+                                echo false; ?>,<?php echo $_SESSION['user']['user_id']; ?>);
                                 }, 500); // Adjust the delay time as needed
                             };
                             </script>
@@ -184,6 +190,7 @@ class AllProductsView {
             </div>
         </div>
         <script>
+            var changed = [];
             function addtocart(userid,productid,button,isincart)
             {
                 if(isincart)
@@ -195,9 +202,11 @@ class AllProductsView {
                     type: 'POST',
                     data: {
                         product_id: productid,
-                        user_id: userid
+                        user_id: userid,
                     },
                     success: function(response) {
+                        changed.push(productid);
+                        
                         button.innerHTML = "Added To Cart";
                         button.style.backgroundColor = "blue";
                     }
@@ -207,11 +216,15 @@ class AllProductsView {
         <?php
     }
         
-    public function display_products($products) {
+    public function display_products($products,$product_id="") {
         echo '<div id="products" class="products-container">';
         echo '<div class="products">';
         foreach($products as $product)
         {
+            if($product->id == $product_id)
+            {
+                $product->isincart = true;
+            }
             $product->display();
         }
         echo '</div>';

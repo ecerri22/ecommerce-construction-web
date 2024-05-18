@@ -17,12 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = trim($data); // Remove any whitespace from the beginning and end of the data
     $data = htmlspecialchars($data);
     $page = new AllProductsView(json_decode($_POST['page'],true)); // Get the page sent from JavaScript
+    if(isset($_POST['user']))
+    $user = $_POST['user'];
+    else
+    $user = false;
+    if(isset($_POST['userid']))
+    $userid = $_POST['userid'];
+    else
+    $userid = (-1);
+    $changedids = json_decode($_POST['changed'],true); // Get the changed ids sent from JavaScript
     if($data == "Reset" || $data == "Mumbo Jumbo") // If the data is empty, display all products
     {
         $products = array();
         foreach($page->arr as $product)
         {
-            $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['category'], $product['minidescription']);
+            $prod = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['category'], $product['minidescription']);
+            $prod->user_id = $user;
+            echo '<script>console.log("'.$prod->user_id.'");</script>';
+            $products[] = $prod;
         }
         $page->display_products($products);
         return;
@@ -89,7 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach(array_map(function($match) {
         return $match['product'];
     }, $matches) as $product) {
-        $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['minidescription'], $product['category']);
+        $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['minidescription'], $product['category'],$user, $product['isincart'], $userid);
+        if(in_array($product['id'], $changedids))
+        {
+            $products[count($products)-1]->isincart = true;
+        }
     }
 
     $page->display_products($products); // Display the products
