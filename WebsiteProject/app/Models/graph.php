@@ -20,7 +20,6 @@ class Graph{
     function display_graph(){
         if($this->graph_type == "line"){
             echo '<div class = "graph-line">';
-            echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>';
                 echo '<h2 class = "graph-title">'.$this->graph_name.'</h2>';
                 echo '<div class = "line-graph">';
                     echo '<canvas class="myLineChart"></canvas>';//the Line-graph class is just there so i can access it with javascript. i must target the canvas element
@@ -34,7 +33,6 @@ class Graph{
                 $data[$this->graph_labels[$i]] = $this->graph_data[$i];
             }
             echo '<div class = "graph-pie">';
-            echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>';
             echo '<h2 class = "graph-title">'.$this->graph_name.'</h2>';
             echo '<div  class = "piechart">';
             echo '<canvas class="myPieChart"></canvas>';
