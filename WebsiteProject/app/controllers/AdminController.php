@@ -1,13 +1,15 @@
 <?php
 
 namespace Controllers;
+
 use Core\Controller;
 use Models\Admin;
 use Models\Product;
 use Models\Order;
 use Models\User;
 
-class AdminController extends Controller{
+class AdminController extends Controller
+{
     private $user;
     private $order;
     private $guest;
@@ -42,6 +44,7 @@ class AdminController extends Controller{
             'orders' => $this->order->getAllOrders()
         ]);
     }
+    
 
     public function renderUsersAdminController()
     {
@@ -59,7 +62,7 @@ class AdminController extends Controller{
         ]);
     }
 
-    
+
     public function insertProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -69,19 +72,17 @@ class AdminController extends Controller{
             $category = $_POST['prod-category'];
             $image = $_FILES['image_name']['name'];
             $material = $_POST['prod-material'];
-            $unit_of_measure= $_POST['prod-unit-of-measure'];
+            $unit_of_measure = $_POST['prod-unit-of-measure'];
             $brand = $_POST['prod-brand'];
             $stock = $_POST['prod-stock'];
             $buy_price = $_POST['prod-buy-price'];
-        
+
             // dd($_FILES);
 
             $this->user->createProduct($name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
 
             redirect('/allProductsAdmin');
         }
-
-       
     }
 
     public function createAdminDashboard()
@@ -91,28 +92,24 @@ class AdminController extends Controller{
             $lastName = $_POST['lname'];
             $email = $_POST['email'];
             $password = $_POST['pass'];
-                    
+
             // dd($_FILES);
 
-            $this->guest->register($name,$lastName, $email, $password);
+            $this->guest->register($name, $lastName, $email, $password);
 
             redirect('/allProductsAdmin');
-        }
-        else
-        {
+        } else {
             header("Location: /error");
         }
     }
 
 
-    public function editOrderStatus(){
+    public function editOrderStatus()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // dd($_POST);
             $this->order->updateOrderStatus($_POST['newStatus'], $_POST['id']);
             redirect("/allOrdersAdmin");
         }
     }
-
-    
-
 }
