@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Search.php';
+include_once '../Atea/Search.php';
 
 use Pages\OrdersAdminView;
 

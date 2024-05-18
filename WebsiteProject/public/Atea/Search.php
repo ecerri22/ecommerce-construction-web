@@ -29,6 +29,7 @@ function search(callable $function){
 
             if(ctype_digit($search))
             {
+                $matches = array();
                 $search = (int)$search;
                 foreach($data as $rows)
                 {
@@ -69,6 +70,11 @@ function search(callable $function){
                 }
                 else{
                     $matches = array();
+                }
+
+                if(count($matches) == 0)
+                {
+                    return $function(array());
                 }
 
             $newdata = array_map(function($match) {
