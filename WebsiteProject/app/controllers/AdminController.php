@@ -4,6 +4,7 @@ namespace Controllers;
 use Core\Controller;
 use Models\Admin;
 use Models\Product;
+use Models\Order;
 
 class AdminController extends Controller{
     private $user;
@@ -74,6 +75,31 @@ class AdminController extends Controller{
         }
 
        
+    }
+
+    public function createAdminDashboard()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['fname'];
+            $lastName = $_POST['lname'];
+            $email = $_POST['email'];
+            $password = $_POST['pass'];
+                    
+            // dd($_FILES);
+
+            $this->user->register($name,$lastName, $email, $password);
+
+            redirect('/allProductsAdmin');
+        }
+    }
+
+
+    public function editOrderStatus(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // dd($_POST);
+            $this->order->updateOrderStatus($_POST['newStatus'], $_POST['id']);
+            redirect("/allOrdersAdmin");
+        }
     }
 
     
