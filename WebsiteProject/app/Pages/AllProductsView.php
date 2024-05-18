@@ -53,7 +53,7 @@ class AllProductsView {
                         <!-- center search bar-->
                         <div class="search-bar">
                             <input type="text" class="input-search" placeholder="Search..." id = "searcher">
-                            <button onclick='Search(<?php echo json_encode($this->arr) ?>,<?php echo isset($_SESSION["user"]["user_id"]) ?>,<?php echo $_SESSION["user"]["user_id"] ?>)' class='btn-search header-btn'>
+                            <button onclick='Search(<?php echo json_encode($this->arr) ?>,<?php echo isset($_SESSION["user"]["user_id"]) ?>,<?php echo @$_SESSION["user"]["user_id"] ?>)' class='btn-search header-btn'>
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -142,23 +142,23 @@ class AllProductsView {
                     $istrue=false;
                     if(isset($_SESSION["user"]))
                     $istrue=true;
-                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Clear</button>";
+                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Clear</button>";
                     ?>
                 </div>
                 <div class="sidebar-content">
                     <p class="filter-type-title">Categories</p>
                     <div class="sidebar-list">
                         <?php
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Windows</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Electrical</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Wood Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Hydraulics</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Building Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Roof Covers</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Isolation</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Windows</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Electrical</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Wood Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Hydraulics</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Building Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Roof Covers</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Isolation</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
                             ?>
                     </div>
                     <div class="price-fliter">
@@ -179,7 +179,7 @@ class AllProductsView {
                                     Search(<?php echo json_encode($this->arr); ?>, <?php if(isset($_SESSION['user']))
                                     echo true;
                                 else
-                                echo false; ?>,<?php echo $_SESSION['user']['user_id']; ?>);
+                                echo false; ?>,<?php echo @$_SESSION['user']['user_id']; ?>);
                                 }, 500); // Adjust the delay time as needed
                             };
                             </script>

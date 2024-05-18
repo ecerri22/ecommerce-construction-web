@@ -580,9 +580,11 @@ a {
 
     width: 0;
     height: 0;
+    opacity: 0;
   }
   to {
     width: 200px;
     height: auto;
+    opacity: 1;
   }
 }

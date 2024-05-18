@@ -33,6 +33,7 @@ class OrdersAdminView{
 
             <link rel="stylesheet" href="Atea/ateaStyles.css" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         </head>
         <?php
@@ -85,16 +86,63 @@ class OrdersAdminView{
         <?php
     }
 
-    private function renderContent($orders = []) {
+    private function renderContent($data = []) {
         ?>
             <div class="content"> 
                 <nav class="admin-navbar">
                     <!-- Navbar code remains the same -->
                 </nav>
-        
+                <script>
+                function atea_search(data)
+                {
+                    var input = document.getElementById('search').value;
+                    $.ajax({
+                        url: 'Daniela/SearchOrders.php',
+                        type: 'POST',
+                        data: {
+                            search: input,
+                            data: JSON.stringify(data),
+                            basics: ['Select Status'],
+                            params: ['status'],
+                            vars: [document.getElementById('status').value],
+                            id: 'order_id',
+                            searchspan: ['created_at']
+                        },
+                        success: function(response) {
+                            $('#prod-table').replaceWith(response);
+                        },
+                        error : function(response){
+                            alert(response);
+                        }
+                    });
+                }
+                </script>
                 <div class="admin-dashboard">
                     <h1 class="page-title">Orders</h1>
-                        <table class="product-table">
+                    <div class="search-container">
+                        <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
+                        <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
+                            <i class="fas fa-search searchlogo"></i>
+                        </button>
+                        <select class="dropdown" id="status">
+                            <option value="">Select Status</option>
+                            <?php
+                                $this->displaydropdown($data,'status');
+                            ?>
+                            <!-- Add more category options as needed -->
+                        </select>
+                    </div>
+                    <?php $this::showtable($data); ?>
+                </div>
+            </div>
+        <?php
+        }
+ 
+
+public static function showtable($orders) {
+
+    ?>
+    <table class="product-table" id = "prod-table">
                             <thead>
                                 <tr>
                                     <th>Order ID</th>
@@ -121,6 +169,7 @@ class OrdersAdminView{
                                                     <option value="Pending" <?= ($order['status'] === 'Pending' ? 'selected' : '') ?>>Pending</option>
                                                     <option value="Delivered" <?= ($order['status'] === 'Delivered' ? 'selected' : '') ?>>Delivered</option>
                                                     <option value="Cancelled" <?= ($order['status'] === 'Cancelled' ? 'selected' : '') ?>>Cancelled</option>
+                                                    <option value="Cancelled" <?= ($order['status'] === 'DELIVERING' ? 'selected' : '') ?>>DELIVERING</option>
                                                 </select>
                                                 <button type="submit" name="submit" class="icon-button view">
                                                     <i class="fas fa-save"></i>
@@ -133,11 +182,21 @@ class OrdersAdminView{
                                 <?php endforeach ; ?>
                             </tbody>
                         </table>
-                </div>
-            </div>
-        <?php
-        }
- 
+    <?php
 }
-
+public function displaydropdown($data,$base)
+    {
+                $seen = array();
+                foreach ($data as $row) {
+                    if(!isset($seen[$row[$base]])){
+                        $seen[$row[$base]] = false;
+                    }
+                        if ($seen[$row[$base]] == false ){
+                            $seen[$row[$base]] = true;
+                            echo '<option value="' . $row[$base] . '">' . $row[$base] . '</option>';
+                        }
+                        
+                    }
+    }
+}
 ?>

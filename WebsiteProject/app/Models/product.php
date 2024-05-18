@@ -112,7 +112,7 @@ class Product{
         // Iterate through the result and return an array of product objects
         $products = array();
         foreach ($result as $row) {
-            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name'],false,false,$_SESSION['user']['user_id']);
+            $product = new Product($row['product_id'],$row['name'], $row['price'], $row['product_image'],"/productDetails?productID=".$row['product_id'], $row['description'], $row['category_name'],false,false,@$_SESSION['user']['user_id']);
             if(in_array($row['product_id'], $products_in_cart))
             {
                 $product->isincart = true;
