@@ -37,12 +37,19 @@ $router->get('/myOrders', $uc, 'renderMyOrders')->only('auth');
 
 // CHECKOUT PAGE //
 $router->get('/checkout', $uc, 'renderCheckout')->only('auth');
+$router->post('/checkout', $uc, 'renderCheckout')->only('auth');
+
+$router->post('/checkout', $uc, 'createOrder')->only('auth');
+$router->patch('/checkout', $uc, 'createOrder')->only('auth');
 
 // WISHLIST PAGE //
-$router->get('/wishlist', $uc, 'renderWishlist')->only('auth');
+$router->get('/wishlist', $uc, 'renderWishlist')->only("auth");
+$router->post('/wishlist', $uc, 'renderWishlist')->only("auth");
 
 // SHOPPING CART PAGE //
 $router->get('/shoppingCart', $uc, 'renderShoppingCart')->only('auth');
+$router->post('/shoppingCart', $uc, 'renderShoppingCart')->only('auth');
+
 
 // ALL PRODUCTS PAGE //
 $pc = new ProductController();
@@ -51,7 +58,8 @@ $router->get('/allProducts', $pc, 'renderAllProductsPage');
 // PRODUCT DETAILS PAGE //
 $router->get('/productDetails', $pc, 'renderProductDetails');
 $router->post('/productDetails', $pc, 'renderProductDetails');
-    /********************************/
+
+/********************************/
 //********ADMIN********* //
 $ac = new AdminController();
 

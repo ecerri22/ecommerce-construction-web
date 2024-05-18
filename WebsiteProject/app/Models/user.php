@@ -3,6 +3,7 @@
 namespace Models;
 
 use Core\App;
+use PDOException;
 
 class User
 {
@@ -124,62 +125,102 @@ class User
         return $save ? true : false;
     }
 
-    public function getWishlistProducts()
-    {
+    public function createOrder(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            if(@is_null($_POST['product_ids'])){
+                return;
+            }
+
+            $productIds = json_decode($_POST['product_ids'],true);
+            $user_id = $_SESSION['user']['user_id'];
+
+            $orderid = rand(100,999999);
+            $createdAt = date('Y-m-d H:i:s');
+            $updatedAt = date('Y-m-d H:i:s');
+            $query = "INSERT INTO orders (order_id, created_at, updated_at, status ,user_id) VALUES (?, ?, ?, ?, ?)";
+            $params = [$orderid, $createdAt, $updatedAt, "DELIVERING" ,$user_id];
+            
+            try {
+                App::container()->resolve('Core\Database')->query($query, $params); 
+            } catch (PDOException $e) {
+                echo "Error: Duplicate entry";
+                return;
+            }
+            
+            foreach($productIds as $k=>$v){
+                try {
+                    $query = "INSERT INTO orderinfo (order_id, product_id, quantity) VALUES (?, ?, ?)";
+                    $params = [$orderid, $k, $v];
+                    App::container()->resolve('Core\Database')->query($query, $params); 
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
+        }
+    }
+
+    public function getWishlistProducts(){
         $user_id = $_SESSION['user']['user_id'];
         $query = 'SELECT * FROM wishlists w 
                   INNER JOIN products p ON w.product_id = p.product_id
                   WHERE w.user_id = ?';
         $params = [$user_id];
-
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();
+        
+        return $this->db->query($query, $params)->get(); 
     }
 
-    public function deleteFromWishlist()
-    {
+    public function deleteFromWishlist(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
                 $user_id = $_SESSION['user']['user_id'];
                 $productId = $_POST['product_id'];
-
+    
+                // SQL query to delete from wishlists table
                 $query = "DELETE FROM wishlists WHERE user_id = ? AND product_id = ?";
                 $params = [$user_id, $productId];
-
-                return App::container()->resolve('Core\Database')->query($query, $params)->get();
+    
+                // Execute the query
+                return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
             }
         }
     }
 
-    public function getShoppingCartProducts()
-    {
+    public function getShoppingCartProducts(){
         $user_id = $_SESSION['user']['user_id'];
         $query = 'SELECT * FROM carts c 
                   INNER JOIN products p ON c.product_id = p.product_id
                   WHERE c.user_id = ?';
         $params = [$user_id];
-
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();
+        
+        return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
     }
-
    
-    public function addToShoppingCart()
-    {
+    public function addToShoppingCart(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
+                // Retrieve user ID from session
                 $user_id = $_SESSION['user']['user_id'];
+                // Retrieve product ID from POST data
                 $productId = $_POST['product_id'];
-
+                
+                // Define the SQL query
                 $query = "INSERT INTO carts(quantity, user_id, product_id) VALUES (?, ?, ?)";
+                // Define the parameters for the query
                 $params = [
-                    1,
+                    1, // Default quantity is 1
                     $user_id,
                     $productId
-                ];
-
+                ];   
+                
+                // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get();
             }
         }
     }
+
     public static function updateUserPhoto($userId,$path){
         $query = "UPDATE users SET profile_image = ? WHERE user_id = ?";
         $params = [$path,$userId];
@@ -199,10 +240,23 @@ class User
         return App::container()->resolve("Core\Database")->query($query, $params)->get();
     }
 
-    
-
-    public function updateShoppingCartQuantity($productId, $quantity)
+    public function updateUserAddress($addressData)
     {
+        $user_id = $_SESSION['user']['user_id'];
+        $query = "UPDATE addresses SET street = ?, city = ?, country = ?, phone = ?, zip_code = ? WHERE user_id = ?";
+        $params = [
+            $addressData['street'],
+            $addressData['city'],
+            $addressData['country'],
+            $addressData['phone'],
+            $addressData['zip_code'],
+            $user_id
+        ];
+
+        $this->db->query($query, $params);
+    }
+
+    public function updateShoppingCartQuantity($productId, $quantity){
         $user_id = $_SESSION['user']['user_id'];
         $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
         $params = [
@@ -210,20 +264,23 @@ class User
             $user_id,
             $productId
         ];
-        return App::container()->resolve('Core\Database')->query($query, $params)->get();
+
+        App::container()->resolve('Core\Database')->query($query, $params);
     }
 
-    public function deleteFromShoppingCart()
-    {
+    public function deleteFromShoppingCart(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
                 $user_id = $_SESSION['user']['user_id'];
                 $productId = $_POST['product_id'];
-
+    
+                // SQL query to delete from wishlists table
                 $query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
                 $params = [$user_id, $productId];
-
-                return App::container()->resolve('Core\Database')->query($query, $params)->get();
+    
+                // Execute the query
+                return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
             }
         }
     }
@@ -232,14 +289,22 @@ class User
           return App::container()->resolve('Core\Database')->query('SELECT * from users where user_id = :userid', ['userid' => $user_id])->findOrFail();
 
     }
+
     public static function getOrders($user_id){
         
         return App::container()->resolve('Core\Database')->query('SELECT * from orders where user_id = :userid', ['userid' => $user_id])->get();
 
-  }
-    public static function getUserAddress($user_id){
-        return App::container()->resolve('Core\Database')->query('SELECT * from addresses where user_id = :id',['id' => $user_id])->findOrFail();
     }
+    
+    public function getUserAddress(){
+        $user_id = $_SESSION['user']['user_id'];
+        $query = 'SELECT * FROM addresses WHERE user_id = ?';
+        $params = [$user_id];
+        
+        $result = App::container()->resolve('Core\Database')->query($query, $params)->find(); 
+        return $result; 
+    }
+
     public static function addAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip){
         $sql = "INSERT INTO addresses (street, city, country, `state`, phone, zip_code, user_id) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";

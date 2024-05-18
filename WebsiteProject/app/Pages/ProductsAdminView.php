@@ -196,7 +196,7 @@ class ProductsAdminView{
                                 <td><?php echo $row['product_id']; ?></td>
                                 <td><?php echo $row['name']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
-                                <td><img src="/image/<?php echo $row['product_image']; ?>" alt="<?= $row['description']; ?>" style="height: 5rem; width: 5rem;"></td>
+                                <td><img src="<?php echo $row['product_image']; ?>" alt="<?= $row['description']; ?>" style="height: 5rem; width: 5rem;"></td>
                                 <td><?php echo $row['category_name']; ?></td>
                                 <td><?php echo '$' . $row['price']; ?></td>
                                 <td><?php echo $row['material']; ?></td>

@@ -132,73 +132,7 @@ class UsersAdminView{
 
                     </div>
                     <?php self::showtable($data); ?>
-                            <!-- <tr>
-                                <td>94IF</td>
-                                <td>Apr 21, 2024</td>
-                                <td>Santoo Chakraborty</td>
-                                <td>santoo@gmail.com</td>
-                                <td>+355 68 7980 655</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>94IF</td>
-                                <td>Apr 21, 2024</td>
-                                <td>Santoo Chakraborty</td>
-                                <td>santoo@gmail.com</td>
-                                <td>+355 68 7980 655</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>94IF</td>
-                                <td>Apr 21, 2024</td>
-                                <td>Santoo Chakraborty</td>
-                                <td>santoo@gmail.com</td>
-                                <td>+355 68 7980 655</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>94IF</td>
-                                <td>Apr 21, 2024</td>
-                                <td>Santoo Chakraborty</td>
-                                <td>santoo@gmail.com</td>
-                                <td>+355 68 7980 655</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>94IF</td>
-                                <td>Apr 21, 2024</td>
-                                <td>Santoo Chakraborty</td>
-                                <td>santoo@gmail.com</td>
-                                <td>+355 68 7980 655</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr> -->
-
-                            
-                        
+                                                   
                 </div>
             </div>
         <?php
@@ -220,7 +154,8 @@ class UsersAdminView{
                             <tr>
                                 <th>ID</th>
                                 <th>Joining Date</th>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th> 
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Actions</th>
@@ -234,6 +169,7 @@ class UsersAdminView{
                                 <td><?= $user['user_id'] ?></td>
                                 <td><?= $user['created_at'] ?></td>
                                 <td><?= $user['first_name'] ?></td>
+                                <td><?= $user['last_name'] ?></td>
                                 <td><?= $user['email'] ?></td>
                                 <td>000-000</td>
                                 <td>

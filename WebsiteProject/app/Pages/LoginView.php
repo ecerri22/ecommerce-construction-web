@@ -30,7 +30,7 @@ class LoginView {
 
                 <div class="input-field">
                     <label for="email" class="labels">Email address</label>
-                    <input type="text" name="email">
+                    <input class="login-input" type="text" name="email">
                     <?php if (isset($errors['email'])) : ?>
                         <p style="color: red; font-size:1rem; margin-top:0.4;"><?= $errors['email'] ?></p>
                     <?php endif ?>
@@ -39,7 +39,7 @@ class LoginView {
 
                 <div class="input-field">
                     <label for="pass" class="labels">Password</label>
-                    <input type="password" name="pass">
+                    <input class="login-input" type="password" name="pass">
                     <?php if (isset($errors['password'])) : ?>
                         <p style="color: red; font-size:1rem; margin-top:0.4;"><?= $errors['password'] ?></p>
                     <?php endif ?>

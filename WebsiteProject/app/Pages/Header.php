@@ -42,7 +42,7 @@ class Header {
 
     private function renderHeader() {
         ?>
-         <header class="">
+            <header class="">
                 <div class="header-container">
                     <div class="upper-bar">
                         <!-- logo -->

@@ -8,57 +8,82 @@ class shoppingCartView{
         $this->partials = new Header($title, $cssFile);
     }
 
-    public function render() {
+    public function render($allShoppingCartProducts=[]) {
         ?>
             <?php $this->partials->render() ?>
-            <?php $this->renderContent(); ?>
+            <?php $this->renderContent($allShoppingCartProducts); ?>
             <?php $this->renderFooter(); ?>
         </body>
         </html>
         <?php
     }
 
-    public function renderContent(){
+    public function renderContent($allShoppingCartProducts){
       ?>
       <div class="cart-content">
-          <h2 class="wishlist-title">Shopping Cart</h2>
-          <div class="cart-container">
-              <div class="cart-products-container">
-                <!-- foreach ketu -->
-                  <div class="cart-product-card">
-                      <img class="product-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men's Basic Tee in black.">
-                      <div class="description-box-cart">
-                          <h4><a href="#">Basic Tee</a></h4>
-                          <input type="hidden" value="" name="price">
-                          <p>456</p>
-                          <p class="cart-prod-price">$35</p>
-                      </div> 
-                      <input name="quantity" type="number" value="1" class="quantity"/>
-                      <button class="remove-from-cart">
+      
+      <h2 class="wishlist-title">Shopping Cart</h2>
+      <div class="cart-container">
+      <div class="cart-products-container">
+
+      <?php foreach($allShoppingCartProducts as $shoppingCartProduct) : ?>
+
+        <?php
+        echo '<form action="/shoppingCart" method="POST"><div class="cart-product-card" data-product-id="'.$shoppingCartProduct['product_id'].'">'
+        ?>
+                
+                <div class="description-box-cart">
+                  <img class="product-img product-img-carts" src="<?= $shoppingCartProduct['product_image'] ?>" alt="Front of men's Basic Tee in black.">
+                  <div class="prod-info-cart">
+                    <div class="left-box">
+                      <h4>
+                          <a href="#">
+                            <?= $shoppingCartProduct['name'] ?>
+                          </a>
+                      </h4>
+                      <p class="product-id" productid>SKU: 
+                        <?= $shoppingCartProduct['product_id'] ?>
+                      </p>
+                      <p class="cart-prod-price">$ <?= $shoppingCartProduct['price'] ?></p>
+                    </div>
+                    <div class="right-box">
+                      <input type="hidden" name="product_id" value="<?= $shoppingCartProduct['product_id'] ?>">
+                      <input class="quantity" name="quantity" type="number" value="1" min="1"/>
+                      <button type="button" class="quantity-btn decrement">-</button>
+                      <button type="button" class="quantity-btn increment">+</button>
+                      <button type="submit" class="remove-from-cart">
                           <i class="fas fa-times"></i> 
                       </button>
+                    </div>
                   </div>
-                <!-- end foreach -->
+                </div>
               </div>
-              <div class="price-container">
-                  <h2>Order summary</h2>
-                  <div class="subtotal">
-                      <h3>Subtotal:</h3>
-                      <p id="subtotal-value">$35</p> 
-                  </div>
-                  <hr/>
-                  <div class="shipping">
-                      <h3>Shipping:</h3>
-                      <p>$5</p>
-                  </div>
-                  <hr/>
-                  <div class="total">
-                      <h3>Total:</h3>
-                      <p>$40</p>
-                  </div>
-                  <button class="add-to-cart">Checkout</button>
+              </form>
+        <?php endforeach ; ?>
+
+            </div>
+
+            <div class="price-container">
+              <p class="order-summary">Order summary</p>
+              <div class="order-info subtotal">
+                <p>Subtotal:</p>
+                <p id="subtotal-value">$0</p>
               </div>
+              <hr/>
+              <div class="order-info shipping">
+                <p>Shipping:</p>
+                <p>+ $5</p>
+              </div>
+              <hr/>
+              <div class="order-info total">
+                <p>Total:</p>
+                <p id="total-value">$5</p>
+              </div>
+              <a><button class="add-to-cart  order-checkout-btn" >Checkout</button></a>
+            </div>
           </div>
+          </div>
+          
       </div>
       <script>
         function updateSubtotal() {
@@ -68,36 +93,81 @@ class shoppingCartView{
             productCards.forEach(card => {
                 const priceElement = card.querySelector('.cart-prod-price');
                 const quantityInput = card.querySelector('.quantity');
-
-                if (priceElement && quantityInput && /^\$\d+(\.\d+)?$/.test(priceElement.textContent.trim())) {
-                    const price = parseFloat(priceElement.textContent.replace('$', '').trim());
-                    let quantity = parseInt(quantityInput.value);
-
-                    // Ensure quantity is non-negative
-                    if (quantity < 0) {
-                        quantity = 0;
-                        quantityInput.value = 0; // Reset input value if negative
-                    }
-
-                    if (!isNaN(price) && !isNaN(quantity)) {
-                        subtotal += price * quantity;
-                    }
-                }
+                const price = parseFloat(priceElement.textContent.replace('$', ''));
+                const quantity = parseInt(quantityInput.value);
+                subtotal += price * quantity;
             });
 
+            const shipping = 5; // Example shipping cost
+            const total = subtotal + shipping;
+
             document.getElementById('subtotal-value').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('total-value').textContent = '$' + total.toFixed(2);
         }
 
         // Initial update
         updateSubtotal();
 
-        // Listen for changes in quantity
-        const quantityInputs = document.querySelectorAll('.quantity');
-        quantityInputs.forEach(input => {
-            input.addEventListener('change', updateSubtotal);
+    // Listen for changes in quantity
+    const quantityButtons = document.querySelectorAll('.quantity-btn');
+    quantityButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const quantityInput = this.parentElement.querySelector('.quantity');
+            const currentQuantity = parseInt(quantityInput.value);
+            if (this.classList.contains('increment')) {
+                quantityInput.value = currentQuantity + 1;
+            } else if (this.classList.contains('decrement')) {
+                if (currentQuantity > 1) {
+                    quantityInput.value = currentQuantity - 1;
+                }
+            }
+            updateSubtotal(); // Update subtotal and total after changing quantity
         });
-      </script>
-    <?php
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkoutButton = document.querySelector('.add-to-cart');
+
+        checkoutButton.addEventListener('click', function() {
+            const productCards = document.querySelectorAll('.cart-product-card');
+            let products = {}; // Object to store product IDs and quantities
+
+            productCards.forEach(card => {
+                const productId = card.dataset.productId;
+                const quantityInput = card.querySelector('.quantity');
+                const quantity = parseInt(quantityInput.value);
+
+                if (!isNaN(quantity) && quantity > 0) {
+                    products[productId] = quantity; // Save product ID and quantity
+                }
+            });
+
+            // Convert products object to JSON string
+            const productsJSON = JSON.stringify(products);
+
+            // Create a form dynamically
+            const form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', '/checkout');
+
+            // Create a hidden input field for products data
+            const productsInput = document.createElement('input');
+            productsInput.setAttribute('type', 'hidden');
+            productsInput.setAttribute('name', 'products');
+            productsInput.setAttribute('value', productsJSON);
+
+            // Append the input field to the form
+            form.appendChild(productsInput);
+
+            // Append the form to the document body and submit it
+            document.body.appendChild(form);
+            form.submit();
+        });
+    });
+</script>
+
+
+      <?php
     }
   
     private function renderFooter() {

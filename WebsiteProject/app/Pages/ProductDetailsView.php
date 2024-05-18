@@ -78,6 +78,7 @@ class ProductDetailsView
         }
 
         $this->updatePage($userId);
+        
         ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -126,25 +127,25 @@ class ProductDetailsView
     private function renderHeader()
     {
         ?>
-        <header class="">
-            <div class="header-container">
-                <div class="upper-bar">
-                    <!-- logo -->
-                    <a href="#" class="logo">
-                        <h3>LOGO</h3>
-                    </a>
+            <header class="">
+                <div class="header-container">
+                    <div class="upper-bar">
+                        <!-- logo -->
+                        <a href="#" class="logo">
+                            <h3>LOGO</h3>
+                        </a>
 
-                    <!-- center search bar-->
-                    <form action="#" class="search-bar">
-                        <input type="text" class="input-search" placeholder="Search...">
-                        <button class="btn-search header-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
+                        <!-- center search bar-->
+                        <form action="#" class="search-bar">
+                            <input type="text" class="input-search" placeholder="Search...">
+                            <button class="btn-search header-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
 
-                    <!-- right side -->
-                    <div class="header-user-btns">
-                        <?php if ($_SESSION['user'] ?? false): ?>
+                        <!-- right side -->
+                        <div class="header-user-btns">
+                            <?php if ($_SESSION['user'] ?? false) : ?>
                             <!-- User is logged in -->
                             <a href="/myAccount">
                                 <button class="user-profile-btn header-btn">
@@ -154,13 +155,13 @@ class ProductDetailsView
 
                             <a href="/wishlist">
                                 <button class="user-wishlist-btn header-btn">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i> 
                                 </button>
                             </a>
 
                             <a href="/shoppingCart">
                                 <button class="user-shopping-bag-btn header-btn">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i class="fas fa-shopping-cart"></i> 
                                 </button>
                             </a>
 
@@ -170,8 +171,8 @@ class ProductDetailsView
                                     Log out
                                 </button>
                             </form>
-
-                        <?php else: ?>
+                            
+                            <?php else : ?>
                             <!-- User is logged out -->
                             <div class="login-signup-btns">
                                 <a href=/login>
@@ -180,34 +181,37 @@ class ProductDetailsView
                                     </button>
                                 </a>
 
-                                <a href=/signUp>
+                                <a href=/signup>
                                     <button class="signup-btn hero-btn">
                                         Signup
                                     </button>
                                 </a>
                             </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+                    <div class="lower-bar">
+                        <ul class="tabs-list">
+                            <li>
+                                <a href="/" class="tab-link <?= (urlUI('/')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Home</a>
+                            </li>
+                            <li>
+                                <a href="/allProducts" class="tab-link <?= (urlUI('/allProducts')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Products</a>
+                            </li>
+                            <li>
+                                <a href="/aboutUs" class="tab-link <?= (urlUI('/aboutUs')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/helpAdvice" class="tab-link <?= (urlUI('/helpAdvice')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Help & Advice</a>
+                            </li>
+                        </ul>
                     </div>
 
+                    
+
                 </div>
-                <div class="lower-bar">
-                    <ul class="tabs-list">
-                        <li>
-                            <a href="/" class="tab-link tab-link-active">Home</a>
-                        </li>
-                        <li>
-                            <a href="/allProducts" class="tab-link">Products</a>
-                        </li>
-                        <li>
-                            <a href="/aboutUs" class="tab-link">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/helpAdvice" class="tab-link">Help & Advice</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+            </header>
         <?php
     }
 
@@ -227,7 +231,7 @@ class ProductDetailsView
             <div class="row">
                 <div class="col-xl-6 ml-5 mb-2">
                     <div class="product-photo">
-                        <img src="/image/<?= $product['product_image'] ?>" class="prod" alt="..." style="max-height: 400px;">
+                        <img src="/<?= $product['product_image'] ?>" class="prod" alt="..." style="max-height: 400px;">
                     </div>
                 </div>
                 <div class="col-xl-6">

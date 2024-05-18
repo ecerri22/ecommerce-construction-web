@@ -43,81 +43,90 @@ class AllProductsView {
         </head>
         <body>
         <header class="">
-            <div class="header-container">
-                <div class="upper-bar">
-                    <!-- logo -->
-                    <a href="#" class="logo">
-                        <h3>LOGO</h3>
-                    </a>
-
-                    <!-- center search bar-->
-                    <div class="search-bar">
-                        <input type="text" name="product" id="searcher" class="input-search" placeholder="Search...">
-                            <?php
-                                echo "<button class='btn-search header-btn' onclick='Search(".json_encode($this->arr).")'>";
-                            ?>
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-
-                    <!-- right side -->
-                    <div class="header-user-btns">
-                        <?php if ($_SESSION['user'] ?? false) : ?>
-                        <!-- User is logged in -->
-                        <a href="/myAccount">
-                            <button class="user-profile-btn header-btn">
-                                <i class="fas fa-user"></i>
-                            </button>
+                <div class="header-container">
+                    <div class="upper-bar">
+                        <!-- logo -->
+                        <a href="#" class="logo">
+                            <h3>LOGO</h3>
                         </a>
 
-                        <a href="/wishlist">
-                            <button class="user-wishlist-btn header-btn">
-                                <i class="fas fa-heart"></i> 
+                        <!-- center search bar-->
+                        <form action="#" class="search-bar">
+                            <input type="text" class="input-search" placeholder="Search...">
+                            <button class="btn-search header-btn">
+                                <i class="fas fa-search"></i>
                             </button>
-                        </a>
+                        </form>
 
-                        <a href="/shoppingCart">
-                            <button class="user-shopping-bag-btn header-btn">
-                                <i class="fas fa-shopping-cart"></i> 
-                            </button>
-                        </a>
-                        <?php else : ?>
-                        <!-- User is logged out -->
-                        <div class="login-signup-btns">
-                            <a href=/login>
-                                <button class="login-btn hero-btn">
-                                    Login
+                        <!-- right side -->
+                        <div class="header-user-btns">
+                            <?php if ($_SESSION['user'] ?? false) : ?>
+                            <!-- User is logged in -->
+                            <a href="/myAccount">
+                                <button class="user-profile-btn header-btn">
+                                    <i class="fas fa-user"></i>
                                 </button>
                             </a>
 
-                            <a href=/signUp>
-                                <button class="signup-btn hero-btn">
-                                    Signup
+                            <a href="/wishlist">
+                                <button class="user-wishlist-btn header-btn">
+                                    <i class="fas fa-heart"></i> 
                                 </button>
                             </a>
+
+                            <a href="/shoppingCart">
+                                <button class="user-shopping-bag-btn header-btn">
+                                    <i class="fas fa-shopping-cart"></i> 
+                                </button>
+                            </a>
+
+                            <form action="/login" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button class="logout-btn hero-btn">
+                                    Log out
+                                </button>
+                            </form>
+                            
+                            <?php else : ?>
+                            <!-- User is logged out -->
+                            <div class="login-signup-btns">
+                                <a href=/login>
+                                    <button class="login-btn hero-btn">
+                                        Login
+                                    </button>
+                                </a>
+
+                                <a href=/signup>
+                                    <button class="signup-btn hero-btn">
+                                        Signup
+                                    </button>
+                                </a>
+                            </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
+
+                    </div>
+                    <div class="lower-bar">
+                        <ul class="tabs-list">
+                            <li>
+                                <a href="/" class="tab-link <?= (urlUI('/')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Home</a>
+                            </li>
+                            <li>
+                                <a href="/allProducts" class="tab-link <?= (urlUI('/allProducts')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Products</a>
+                            </li>
+                            <li>
+                                <a href="/aboutUs" class="tab-link <?= (urlUI('/aboutUs')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/helpAdvice" class="tab-link <?= (urlUI('/helpAdvice')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Help & Advice</a>
+                            </li>
+                        </ul>
                     </div>
 
+                    
+
                 </div>
-                <div class="lower-bar">
-                    <ul class="tabs-list">
-                        <li>
-                            <a href="/" class="tab-link "onclick="changefocus(this)">Home</a>
-                        </li>
-                        <li>
-                            <a href="/allProducts" class="tab-link tab-link-active" onclick="changefocus(this)">Products</a>
-                        </li>
-                        <li>
-                            <a href="/aboutUs" class="tab-link" onclick="changefocus(this)">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/helpAdvice" class="tab-link" onclick="changefocus(this)">Help & Advice</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+            </header>
         <div class="contentss">
 
         <?php

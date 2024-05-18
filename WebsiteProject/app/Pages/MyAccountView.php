@@ -12,7 +12,9 @@ class MyAccountView
     public function __construct($title)
     {
         $this->title = $title;
+        $this->user = new User();
     }
+
     public function updateProfile()
     {
         if (isset($_POST["saveChangesButton"]) && !empty($_POST['inputFirstName']) && !empty($_POST['inputLastName'])) {
@@ -29,12 +31,12 @@ class MyAccountView
             $zip = $_POST['inputZipCode'];
             $phoneNumber = $_POST['inputPhone'];
 
-            if (count(User::getUserAddress($userID)) == 0) {
-                User::addAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip);
+            if (count($this->user->getUserAddress()) == 0) {
+                $this->user->addAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip);
 
             } else {
 
-                User::updateAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip);
+                $this->user->updateAddress($userID, $street, $city, $country, $state, $phoneNumber, $zip);
 
             }
             
@@ -74,7 +76,6 @@ class MyAccountView
         } 
     }
 
-
     public function render()
     {
         $this->updateProfile();
@@ -86,7 +87,7 @@ class MyAccountView
 
         <body>
             <?php $this->renderHeader(); ?>
-            <?php $this->renderContent(User::getUser($_SESSION['user']['user_id']), User::getUserAddress($_SESSION['user']['user_id'])); ?>
+            <?php $this->renderContent(User::getUser($_SESSION['user']['user_id']), $this->user->getUserAddress()); ?>
             <?php $this->renderFooter(); ?>
 
         </body>
@@ -133,24 +134,24 @@ class MyAccountView
     {
         ?>
         <header class="">
-            <div class="header-container">
-                <div class="upper-bar">
-                    <!-- logo -->
-                    <a href="#" class="logo">
-                        <h3>LOGO</h3>
-                    </a>
+                <div class="header-container">
+                    <div class="upper-bar">
+                        <!-- logo -->
+                        <a href="#" class="logo">
+                            <h3>LOGO</h3>
+                        </a>
 
-                    <!-- center search bar-->
-                    <form action="#" class="search-bar">
-                        <input type="text" class="input-search" placeholder="Search...">
-                        <button class="btn-search header-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
+                        <!-- center search bar-->
+                        <form action="#" class="search-bar">
+                            <input type="text" class="input-search" placeholder="Search...">
+                            <button class="btn-search header-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
 
-                    <!-- right side -->
-                    <div class="header-user-btns">
-                        <?php if ($_SESSION['user'] ?? false): ?>
+                        <!-- right side -->
+                        <div class="header-user-btns">
+                            <?php if ($_SESSION['user'] ?? false) : ?>
                             <!-- User is logged in -->
                             <a href="/myAccount">
                                 <button class="user-profile-btn header-btn">
@@ -160,16 +161,24 @@ class MyAccountView
 
                             <a href="/wishlist">
                                 <button class="user-wishlist-btn header-btn">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i> 
                                 </button>
                             </a>
 
                             <a href="/shoppingCart">
                                 <button class="user-shopping-bag-btn header-btn">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i class="fas fa-shopping-cart"></i> 
                                 </button>
                             </a>
-                        <?php else: ?>
+
+                            <form action="/login" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button class="logout-btn hero-btn">
+                                    Log out
+                                </button>
+                            </form>
+                            
+                            <?php else : ?>
                             <!-- User is logged out -->
                             <div class="login-signup-btns">
                                 <a href=/login>
@@ -178,41 +187,44 @@ class MyAccountView
                                     </button>
                                 </a>
 
-                                <a href=/signUp>
+                                <a href=/signup>
                                     <button class="signup-btn hero-btn">
                                         Signup
                                     </button>
                                 </a>
                             </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+                    <div class="lower-bar">
+                        <ul class="tabs-list">
+                            <li>
+                                <a href="/" class="tab-link <?= (urlUI('/')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Home</a>
+                            </li>
+                            <li>
+                                <a href="/allProducts" class="tab-link <?= (urlUI('/allProducts')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Products</a>
+                            </li>
+                            <li>
+                                <a href="/aboutUs" class="tab-link <?= (urlUI('/aboutUs')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/helpAdvice" class="tab-link <?= (urlUI('/helpAdvice')) ? 'tab-link-active' : ''; ?>" onclick="changefocus(this)">Help & Advice</a>
+                            </li>
+                        </ul>
                     </div>
 
+                    
+
                 </div>
-                <div class="lower-bar">
-                    <ul class="tabs-list">
-                        <li>
-                            <a href="/" class="tab-link tab-link-active">Home</a>
-                        </li>
-                        <li>
-                            <a href="/allProducts" class="tab-link">Products</a>
-                        </li>
-                        <li>
-                            <a href="/aboutUs" class="tab-link">About Us</a>
-                        </li>
-                        <li>
-                            <a href="/helpAdvice" class="tab-link">Help & Advice</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+            </header>
         <?php
     }
 
     public function renderContent($user, $address)
     {
         ?>
-        <<div class="content">
+        <div class="content">
             <div class="container-xl px-4 mt-4">
                 <!-- Account page navigation-->
 
@@ -236,10 +248,10 @@ class MyAccountView
                                         <img class="img-account-profile rounded-circle mb-2" id="profilePhoto" src="\<?php 
                                         if(!empty($user['profile_image'])){
                                             echo $user['profile_image'] ;
-                                            
                                         }else{
                                             echo 'image\default-profile.png'; 
                                         }?>"
+
                                         alt="">
                                             
 
