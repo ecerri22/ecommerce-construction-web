@@ -2,6 +2,6 @@
 
 use Pages\LoginView;
 
-$loginView = new LoginView("Log in", 'Daniela/danielaStyles.css');
-$loginView->render($errors);
+$loginView = new LoginView("Log in","Daniela/danielaStyles.css");
+$loginView->render();
 

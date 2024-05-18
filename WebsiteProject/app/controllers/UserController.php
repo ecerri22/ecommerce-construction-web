@@ -59,27 +59,37 @@ class UserController extends Controller
     }
 
     public function signUp()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $firstName = $_POST['fname'] ?? '';
-            $lastName = $_POST['lname'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['pass'] ?? '';
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $firstName = $_POST['fname'] ?? '';
+        $lastName = $_POST['lname'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['pass'] ?? '';
 
-            if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
-                echo "Please fill in all fields.";
-                return;
-            } else {
-                $result = $this->user->register($firstName, $lastName, $password, $email);
-
-                if ($result) {
-                    echo "User registered successfully.";
+        if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
+            echo "Please fill in all fields.";
+            return;
+        } else {
+            $result = $this->user->register($firstName, $lastName, $password, $email);
+            if ($result) {
+                echo "User registered successfully.";
+            //daniela additions 
+                if (strpos($email, 'admin.com') !== false) {
+                   // redirect('/admin/dashboard');
+                   redirect('/allProductsAdmin');
                 } else {
-                    echo "Failed to register user.";
+                  //  redirect('/my-account');
+                   // $this->renderMyAccount();
+                   redirect('/allProducts');
                 }
+                //ending additions here
+            } else {
+                echo "Failed to register user.";
             }
         }
     }
+}
+
 
     // public function logIn()
     // {
@@ -131,5 +141,6 @@ class UserController extends Controller
         redirect('/');
     }
 
+    
 
 }
