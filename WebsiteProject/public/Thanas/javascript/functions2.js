@@ -8,8 +8,10 @@ function makesticky(prod){
     if (sticky.classList.contains("stickydiv")){
         prod.style.backgroundColor = "#061538";
         sticky.classList.remove("stickydiv");
+        sticky.style.boxShadow = "0px 0px 20px 1px rgb(230, 228, 228)";
     } else {
         prod.style.backgroundColor = "green";
+        sticky.style.boxShadow = "0px 0px 20px 1px rgb(140, 255, 140)";
         sticky.classList.add("stickydiv");
     }
 }
