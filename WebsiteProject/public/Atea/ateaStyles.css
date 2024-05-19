@@ -190,6 +190,29 @@ body {
     padding-left: 18%;
 }
 
+
+.green-button {
+    background-color: #fd7e14;
+    color: white;
+    padding: 0.5rem 1.21rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 3rem;
+    width: 4rem;
+    z-index: 9999;
+    margin-left: 2rem;
+}
+
+.green-button:hover {
+    background-color: #df6c0e;
+}
+
+.green-button:focus {
+    outline: none;
+}
+  
+
 /* *******************************CONTINUE STYLING HERE************************************************* */
 /*
     FOR COLORS: 

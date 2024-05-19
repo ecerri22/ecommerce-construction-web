@@ -99,8 +99,6 @@ class ProductsAdminView{
                     <i class="fas fa-bell"></i>
                 </button>
                 <button class="admin-name">
-                    <!-- <img src=""/> -->
-                    <div class="user-pfp"></div>
                     <p><?= $_SESSION['user']['first_name'] ?></p>
                 </button>
             </nav>
@@ -159,7 +157,7 @@ class ProductsAdminView{
                     </select>
 
                     <a href="/createProduct" class="green-button-link">
-                        <button class="green-button">
+                        <button class="green-button" id="add-button">
                             <i class="fas fa-plus" style="color: white;"></i>
                         </button>
                     </a>

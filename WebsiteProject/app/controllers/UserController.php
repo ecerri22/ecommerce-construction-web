@@ -126,22 +126,8 @@ class UserController extends Controller
                 echo "Please fill in all fields.";
                 return;
             } else {
-                $result = $this->user->register($firstName, $lastName, $password, $email);
-                if ($result) {
-                    echo "User registered successfully.";
-                //daniela additions 
-                    if (strpos($email, 'admin.com') !== false) {
-                    // redirect('/admin/dashboard');
-                    redirect('/allProductsAdmin');
-                    } else {
-                    //  redirect('/my-account');
-                    // $this->renderMyAccount();
-                    redirect('/allProducts');
-                    }
-                    //ending additions here
-                } else {
-                    echo "Failed to register user.";
-                }
+                $this->user->register($firstName, $lastName, $password, $email);
+                $this->logIn();
             }
         }
     }
@@ -159,7 +145,7 @@ class UserController extends Controller
                     if ($_SESSION['user']['role'] === 1) {
                         redirect('/dashboard');
                     } else {
-                        redirect('/allProducts');
+                        redirect('/myAccount');
                     }
                 } else {
                     Session::flash('errors', 'Invalid email or password.');

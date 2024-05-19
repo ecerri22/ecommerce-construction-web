@@ -120,8 +120,6 @@ class ChangeContentsView {
                 <i class="fas fa-bell"></i>
             </button>
             <button class="admin-name">
-                <!-- <img src=""/> -->
-                <div class="user-pfp"></div>
                 <p><?= $_SESSION['user']['first_name'] ?></p>
             </button>
         </nav>

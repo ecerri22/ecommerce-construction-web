@@ -207,23 +207,17 @@ class User
    
     public function addToShoppingCart(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
-                // Retrieve user ID from session
                 $user_id = $_SESSION['user']['user_id'];
-                // Retrieve product ID from POST data
                 $productId = $_POST['product_id'];
                 
-                // Define the SQL query
                 $query = "INSERT INTO carts(quantity, user_id, product_id) VALUES (?, ?, ?)";
-                // Define the parameters for the query
                 $params = [
-                    1, // Default quantity is 1
+                    1, 
                     $user_id,
                     $productId
                 ];   
                 
-                // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get();
             }
         }
@@ -282,16 +276,13 @@ class User
 
     public function deleteFromShoppingCart(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the 'product_id' is set in the POST data
             if (isset($_POST['product_id'])) {
                 $user_id = $_SESSION['user']['user_id'];
                 $productId = $_POST['product_id'];
     
-                // SQL query to delete from wishlists table
                 $query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
                 $params = [$user_id, $productId];
     
-                // Execute the query
                 return App::container()->resolve('Core\Database')->query($query, $params)->get(); 
             }
         }
@@ -327,7 +318,6 @@ class User
         $params = [$street, $city, $country, $state, $phoneNumber, $zip, $userID];
         $addedProd = App::container()->resolve('Core\Database')->query($sql, $params);
     }
-    
     
 }
 
