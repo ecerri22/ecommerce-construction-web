@@ -59,6 +59,16 @@ class UserController extends Controller
     }
 
     public function renderCheckout(){
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (isset($_POST['products'])) {
+                $products = json_decode($_POST['products'], true);
+        
+                foreach ($products as $productId => $quantity) {
+                    $this->user->updateShoppingCartQuantity($productId, $quantity);
+                }
+            }
+        }
+        
         view('user/rosela_checkout.view.php', [
             'allCheckoutProducts' => $this->user->getShoppingCartProducts(),
             'userAddress'=>$this->user->getUserAddress()

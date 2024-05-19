@@ -164,7 +164,6 @@ class UsersAdminView{
                                 <th>Last Name</th> 
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,11 +177,7 @@ class UsersAdminView{
                                 <td><?= $user['last_name'] ?></td>
                                 <td><?= $user['email'] ?></td>
                                 <td>000-000</td>
-                                <td>
-                                    <button class="icon-button view"><i class="fas fa-search"></i></button>
-                                    <button class="icon-button edit"><i class="fas fa-edit"></i></button>
-                                    <button class="icon-button delete"><i class="fas fa-trash-alt"></i></button>
-                                </td>
+                
                             </tr>
 
                             <?php endforeach; ?>
