@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 07:42 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 19, 2024 at 10:15 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -97,7 +97,10 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`user_id`, `product_id`, `quantity`) VALUES
-(72, 54, 1);
+(72, 1, 1),
+(72, 2, 1),
+(72, 6, 1),
+(72, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +218,13 @@ INSERT INTO `orderinfo` (`order_id`, `product_id`, `quantity`) VALUES
 (774579, 1, 1),
 (310654, 4, 1),
 (56138, 2, 1),
-(333411, 54, 1);
+(333411, 54, 1),
+(247131, 2, 1),
+(963146, 2, 1),
+(191156, 1, 1),
+(191156, 2, 1),
+(191156, 6, 1),
+(191156, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -261,24 +270,26 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (48, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Shipped', 8),
 (49, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Delivered', 8),
 (50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 8),
-(14854, '2024-05-18 09:51:16', '2024-05-18 09:51:16', 'DELIVERING', 72),
-(56138, '2024-05-18 18:04:58', '2024-05-18 18:04:58', 'DELIVERING', 72),
+(14854, '2024-05-18 09:51:16', '2024-05-18 09:51:16', 'Pending', 72),
+(56138, '2024-05-18 18:04:58', '2024-05-18 18:04:58', 'Pending', 72),
 (85281, '2024-05-18 08:41:20', '2024-05-18 08:41:20', 'DELIVERING', 72),
-(87540, '2024-05-18 10:05:05', '2024-05-18 10:05:05', 'DELIVERING', 72),
-(106531, '2024-05-18 11:28:03', '2024-05-18 11:28:03', 'DELIVERING', 72),
+(87540, '2024-05-18 10:05:05', '2024-05-18 10:05:05', 'Cancelled', 72),
+(106531, '2024-05-18 11:28:03', '2024-05-18 11:28:03', 'Delivered', 72),
 (129358, '2024-05-18 08:26:58', '2024-05-18 08:26:58', 'DELIVERING', 72),
 (144987, '2024-05-17 21:38:36', '2024-05-17 21:38:36', 'DELIVERING', 72),
 (173121, '2024-05-18 08:46:56', '2024-05-18 08:46:56', 'DELIVERING', 72),
 (181645, '2024-05-18 10:53:17', '2024-05-18 10:53:17', 'DELIVERING', 72),
 (181722, '2024-05-17 21:38:06', '2024-05-17 21:38:06', 'DELIVERING', 72),
 (188505, '2024-05-18 09:42:12', '2024-05-18 09:42:12', 'DELIVERING', 72),
+(191156, '2024-05-19 02:45:34', '2024-05-19 02:45:34', 'DELIVERING', 72),
 (202028, '2024-05-17 12:37:47', '2024-05-17 12:37:47', 'DELIVERING', 72),
 (216258, '2024-05-18 11:01:06', '2024-05-18 11:01:06', 'DELIVERING', 72),
+(247131, '2024-05-19 00:59:56', '2024-05-19 00:59:56', 'DELIVERING', 72),
 (251483, '2024-05-18 10:56:48', '2024-05-18 10:56:48', 'DELIVERING', 72),
 (251832, '2024-05-18 11:13:27', '2024-05-18 11:13:27', 'DELIVERING', 72),
 (253787, '2024-05-18 10:30:03', '2024-05-18 10:30:03', 'DELIVERING', 72),
 (272036, '2024-05-18 09:27:42', '2024-05-18 09:27:42', 'DELIVERING', 72),
-(277592, '2024-05-17 12:45:44', '2024-05-17 12:45:44', 'DELIVERING', 72),
+(277592, '2024-05-17 12:45:44', '2024-05-17 12:45:44', 'Cancelled', 72),
 (277992, '2024-05-17 21:57:46', '2024-05-17 21:57:46', 'DELIVERING', 72),
 (310654, '2024-05-18 15:23:42', '2024-05-18 15:23:42', 'DELIVERING', 72),
 (325822, '2024-05-18 11:02:48', '2024-05-18 11:02:48', 'DELIVERING', 72),
@@ -293,7 +304,7 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (478244, '2024-05-18 08:27:48', '2024-05-18 08:27:48', 'DELIVERING', 72),
 (478492, '2024-05-18 10:24:28', '2024-05-18 10:24:28', 'DELIVERING', 72),
 (519762, '2024-05-18 09:26:45', '2024-05-18 09:26:45', 'DELIVERING', 72),
-(526970, '2024-05-18 09:26:02', '2024-05-18 09:26:02', 'DELIVERING', 72),
+(526970, '2024-05-18 09:26:02', '2024-05-18 09:26:02', 'Cancelled', 72),
 (566052, '2024-05-17 21:56:45', '2024-05-17 21:56:45', 'DELIVERING', 72),
 (620208, '2024-05-18 09:46:24', '2024-05-18 09:46:24', 'DELIVERING', 72),
 (621255, '2024-05-18 11:09:44', '2024-05-18 11:09:44', 'DELIVERING', 72),
@@ -317,8 +328,9 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (916098, '2024-05-18 09:20:11', '2024-05-18 09:20:11', 'DELIVERING', 72),
 (918767, '2024-05-18 10:06:50', '2024-05-18 10:06:50', 'DELIVERING', 72),
 (923259, '2024-05-18 11:06:53', '2024-05-18 11:06:53', 'DELIVERING', 72),
-(931183, '2024-05-17 22:28:12', '2024-05-17 22:28:12', 'DELIVERING', 72),
+(931183, '2024-05-17 22:28:12', '2024-05-17 22:28:12', 'Delivered', 72),
 (932819, '2024-05-18 11:07:20', '2024-05-18 11:07:20', 'DELIVERING', 72),
+(963146, '2024-05-19 02:44:48', '2024-05-19 02:44:48', 'DELIVERING', 72),
 (970249, '2024-05-18 10:40:37', '2024-05-18 10:40:37', 'DELIVERING', 72),
 (994170, '2024-05-18 11:21:23', '2024-05-18 11:21:23', 'DELIVERING', 72),
 (999475, '2024-05-18 10:51:59', '2024-05-18 10:51:59', 'DELIVERING', 72);
@@ -481,7 +493,7 @@ INSERT INTO `reviews` (`review_id`, `review_date`, `review_text`, `stars`, `user
 
 CREATE TABLE `statistics` (
   `name` varchar(255) NOT NULL,
-  `value` double NOT NULL,
+  `value` text NOT NULL,
   `prev_value` double NOT NULL,
   `icon` text NOT NULL,
   `Type` int(11) NOT NULL,
@@ -494,13 +506,14 @@ CREATE TABLE `statistics` (
 --
 
 INSERT INTO `statistics` (`name`, `value`, `prev_value`, `icon`, `Type`, `destination`, `id`) VALUES
-('Canceled Orders', 32, 20, 'icons/cancel.png', 2, 'https://www.microsoft.com/', 1),
-('Page Visits', 2156, 2000, 'icons/visits.png', 2, 'https://www.facebook.com/', 2),
-('Pending Orders', 98, 100, 'icons/box.png', 2, 'https://www.netflix.com/', 3),
-('Quarter Earnings', 676, 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
-('Total Orders', 500, 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
-('Total Products Sold', 300, 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
-('Total Users', 500, 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
+('Canceled Orers', 'SELECT COUNT(*) FROM orders WHERE status = \'Cancelled\';', -1, 'icons/cancel.png', 2, '/allOrdersAdmin', 2934677),
+('Delivered Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'Delivered\';', -1, 'icons/order.png', 2, '/allOrdersAdmin', 7585404),
+('Delivering Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'DELIVERING\';', -1, 'icons/checkout.png', 2, '/allOrdersAdmin', 9060399),
+('Pending Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'Pending\';', -1, 'icons/box.png', 2, '/allOrdersAdmin', 7816493),
+('Quarter Earnings', '676', 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
+('Total Orders', '89', 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
+('Total Products Sold', '300', 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
+('Total Users', '25', 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
 
 -- --------------------------------------------------------
 
@@ -688,7 +701,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `statistics`
 --
 ALTER TABLE `statistics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9867546;
 
 --
 -- AUTO_INCREMENT for table `users`

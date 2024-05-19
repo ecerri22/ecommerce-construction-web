@@ -131,7 +131,7 @@ class OrdersAdminView{
                 <div class="admin-dashboard">
                     <h1 class="page-title">Orders</h1>
                     <div class="search-container">
-                        <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
+                        <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for order" value="<?php echo $_GET['search'] ?? ''; ?>">
                         <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
                             <i class="fas fa-search searchlogo"></i>
                         </button>
