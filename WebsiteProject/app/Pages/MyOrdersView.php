@@ -24,8 +24,6 @@ if (isset($_POST["Submit"])) {
   unset($_POST["description"]);
   unset($_POST["userId"]);
   unset($_POST["productId"]);
-  
-
 }
 
 
@@ -196,6 +194,8 @@ class MyOrdersView
             $total += $product['price'] * $orderInfo[$i]['quantity'];
           }
 
+          // Unique modal id for each order
+          $modalId = "reviewModal_" . $order['order_id'];
 
           ?>
           <!-- Example invoice panel -->
@@ -207,8 +207,7 @@ class MyOrdersView
               </div>
               <div>
                 <p class="text-muted m-0">Status: <?= $order['status'] ?></p>
-
-                <p class="text-muted m-0">Total: <?= $total ?></p>
+                <p class="text-muted m-0">Total: <?= $total ?>$</p>
               </div>
             </div>
             <div class="card-body">
@@ -221,7 +220,7 @@ class MyOrdersView
                 ?>
                 <div class="d-flex align-items-center mb-3">
                   <div class="flex-shrink-0 me-3">
-                    <img src="/Image/<?= $product['product_image'] ?>" alt="Product Image" class="img-fluid rounded"
+                    <img src="<?= $product['product_image'] ?>" alt="Product Image" class="img-fluid rounded"
                       style="width: 64px; height: 64px;">
                   </div>
                   <div class="flex-grow-1 me-3">
@@ -230,45 +229,41 @@ class MyOrdersView
                   </div>
                   <div class=" col-xl-0">
                     <div>
-                      <p class="m-0">Price: <?= $product['price'] ?></p>
+                      <p class="m-0" > Price: <?= $product['price'] ?>$</p>
 
                     </div>
-                    <?php if ($order['status'] == "Not delivered"): ?>
+                    <?php if ($order['status'] != "DELIVERED"): ?>
                       <div>
-                        <button type="button" class="btn btn-link" onclick="alert('Order is not finished yet')">Write
-                          review</button>
-                      </div>
-                    <?php else: ?>
-                      <div>
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#reviewModal">Write
-                          review</button>
+                        <button class="btn btn-primary review-button" data-bs-toggle="modal"
+                          data-bs-target="#<?= $modalId ?>">
+                          Write a review
+                        </button>
                       </div>
                     <?php endif; ?>
+
                   </div>
                 </div>
-              </div>
+
+              <?php } ?>
             </div>
           </div>
 
-
-
-
-
-          <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+          <!-- Review modal -->
+          <div class="modal fade" id="<?= $modalId ?>" tabindex="-1" aria-labelledby="reviewModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
-              <class="modal-content">
+              <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="reviewModalLabel">Write a Review</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="" method="POST">
-                    <input type="hidden" name="productId" value="<?= $product['product_id'] ?>">
-                    <input type="hidden" name="userId" value="<?= $user['user_id'] ?>">
-
-                    <div class="mb-3">
-                      <label for="rating" name="rating" class="form-label">Rating</label>
-                      <select required class="form-select" id="rating">
+                  <form method="POST" action="">
+                    <input type="hidden" name="userId" value="<?= $_SESSION['user']['user_id']; ?>">
+                    <input type="hidden" name="productId" value="<?= $product['product_id']; ?>">
+                    <div class="form-group">
+                      <label for="rating">Rating:</label>
+                      <select name="rating" id="rating" class="form-control">
                         <option value="1">1 Star</option>
                         <option value="2">2 Stars</option>
                         <option value="3">3 Stars</option>
@@ -276,56 +271,31 @@ class MyOrdersView
                         <option value="5">5 Stars</option>
                       </select>
                     </div>
-                    <div class="mb-3">
-                      <label for="comment" class="form-label">Comment</label>
-                      <textarea required class="form-control" id="comment" name="description" rows="3"></textarea>
+                    <div class="form-group">
+                      <label for="description">Description:</label>
+                      <textarea name="description" id="description" rows="4" class="form-control"></textarea>
                     </div>
+                    <div class="form-group">
+                      <button type="submit" name="Submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                  </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" name="submit">Submit Review</button>
-                </div>
-                </form>
+              </div>
             </div>
           </div>
-        </div>
-        <?php
-              }
-        }
-  }
+          <!-- End of Review modal -->
+        <?php } ?>
+      </div>
+    </div>
 
+  <?php }
   private function renderFooter()
   {
     ?>
-    <footer class="footer">
-      <div class="footer-content">
-        <a href="#" class="logo logo-footer">
-          <h3>LOGO</h3>
-        </a>
-        <ul class="footer-links ftlink-main">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Products</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-        <ul class="footer-links ftlink-account">
-          <li><a href="#">Create Account</a></li>
-          <li><a href="#">My account</a></li>
-          <li><a href="#">Shopping Cart</a></li>
-        </ul>
-        <div class="footer-social">
-          <ul>
-            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Company. All rights reserved.</p>
-      </div>
-    </footer>
+
     <?php
-
   }
-
 }
+
+?>
+

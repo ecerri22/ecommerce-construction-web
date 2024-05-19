@@ -34,6 +34,7 @@ $router->get('/myAccount',$uc,'renderMyAccount')->only('auth');
 $router->post('/myAccount',$uc,'renderMyAccount');
 // ORDER HISTORY PAGE //
 $router->get('/myOrders', $uc, 'renderMyOrders')->only('auth');
+$router->post('/myOrders', $uc, 'renderMyOrders')->only('auth');
 
 // CHECKOUT PAGE //
 $router->get('/checkout', $uc, 'renderCheckout')->only('auth');

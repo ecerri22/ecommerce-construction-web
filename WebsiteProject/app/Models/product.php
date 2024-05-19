@@ -191,18 +191,19 @@ class Product{
     }
 
     public static function getReview($productId,$userId){
-        return App::container()->resolve('Core\Database')->query('SELECT * from reviews where product_id = :product_id, user_id = :user_id', ['product_id' => $productId,'user_id' => $userId] )->findOrFail();
+        return App::container()->resolve('Core\Database')->query('SELECT * from reviews where product_id = :product_id AND user_id = :user_id', ['product_id' => $productId,'user_id' => $userId] )->get();
 
     }
     public static function getOrderInfo($orderId){
         
         
-        return App::container()->resolve('Core\Database')->query('SELECT * from orderInfo where order_id = :orderid',['orderid'=>$orderId]);
+        return App::container()->resolve('Core\Database')->query('SELECT * from orderInfo where order_id = :orderid',['orderid'=>$orderId])->get();
     }
-    public static function addReview($review_date,$description,$stars,$userId,$productId){
-        $sql = "INSERT INTO reviews(`review_date`,`description`, `start`, `user_id`, `product_id`) 
-                VALUES($review_date,$description,$stars,$userId,$productId)";
-                $addedProd = App::container()->resolve('Core\Database')->query($sql);
+    public static function addReview($review_date,$review_text,$stars,$userId,$productId){
+        $sql = "INSERT INTO reviews(`review_date`,`review_text`, `stars`, `user_id`, `product_id`) 
+                VALUES(?,?,?,?,?)";
+                $params = [$review_date,$review_text,$stars,$userId,$productId];
+                $addedProd = App::container()->resolve('Core\Database')->query($sql,$params);
             
 
             if ($addedProd) { 

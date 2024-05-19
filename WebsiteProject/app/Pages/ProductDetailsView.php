@@ -221,7 +221,7 @@ class ProductDetailsView
 
         $sumOfRatings = 0;
         foreach ($reviews as $review) {
-            $sumOfRatings += $review['rating'];
+            $sumOfRatings += $review['stars'];
         }
 
         $averageRating = $nrOfReviews > 0 ? $sumOfRatings / $nrOfReviews : 0;
