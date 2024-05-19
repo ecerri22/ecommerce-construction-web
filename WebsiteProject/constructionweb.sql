@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 10:15 PM
+-- Generation Time: May 20, 2024 at 01:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -91,16 +91,6 @@ CREATE TABLE `carts` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`user_id`, `product_id`, `quantity`) VALUES
-(72, 1, 1),
-(72, 2, 1),
-(72, 6, 1),
-(72, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +214,43 @@ INSERT INTO `orderinfo` (`order_id`, `product_id`, `quantity`) VALUES
 (191156, 1, 1),
 (191156, 2, 1),
 (191156, 6, 1),
-(191156, 11, 1);
+(191156, 11, 1),
+(702958, 1, 1),
+(702958, 2, 1),
+(702958, 6, 1),
+(702958, 11, 1),
+(65196, 1, 1),
+(65196, 2, 1),
+(65196, 6, 1),
+(65196, 11, 1),
+(375041, 81, 1),
+(375041, 82, 1),
+(375041, 86, 1),
+(375041, 88, 1),
+(557228, 1, 10),
+(74224, 14, 1),
+(74224, 16, 1),
+(74224, 19, 1),
+(993089, 16, 1),
+(818800, 1, 10),
+(818800, 2, 10),
+(818800, 3, 10),
+(287435, 1, 10),
+(287435, 2, 10),
+(287435, 3, 10),
+(493223, 1, 10),
+(493223, 2, 10),
+(493223, 3, 10),
+(555886, 1, 1),
+(555886, 2, 1),
+(555886, 3, 1),
+(419774, 1, 1),
+(419774, 2, 1),
+(419774, 3, 1),
+(205425, 2, 1),
+(999317, 51, 3),
+(999317, 52, 3),
+(999317, 53, 2);
 
 -- --------------------------------------------------------
 
@@ -272,6 +298,8 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'Canceled', 8),
 (14854, '2024-05-18 09:51:16', '2024-05-18 09:51:16', 'Pending', 72),
 (56138, '2024-05-18 18:04:58', '2024-05-18 18:04:58', 'Pending', 72),
+(65196, '2024-05-20 00:13:55', '2024-05-20 00:13:55', 'DELIVERING', 72),
+(74224, '2024-05-20 00:36:43', '2024-05-20 00:36:43', 'DELIVERING', 72),
 (85281, '2024-05-18 08:41:20', '2024-05-18 08:41:20', 'DELIVERING', 72),
 (87540, '2024-05-18 10:05:05', '2024-05-18 10:05:05', 'Cancelled', 72),
 (106531, '2024-05-18 11:28:03', '2024-05-18 11:28:03', 'Delivered', 72),
@@ -283,6 +311,7 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (188505, '2024-05-18 09:42:12', '2024-05-18 09:42:12', 'DELIVERING', 72),
 (191156, '2024-05-19 02:45:34', '2024-05-19 02:45:34', 'DELIVERING', 72),
 (202028, '2024-05-17 12:37:47', '2024-05-17 12:37:47', 'DELIVERING', 72),
+(205425, '2024-05-20 01:01:43', '2024-05-20 01:01:43', 'DELIVERING', 72),
 (216258, '2024-05-18 11:01:06', '2024-05-18 11:01:06', 'DELIVERING', 72),
 (247131, '2024-05-19 00:59:56', '2024-05-19 00:59:56', 'DELIVERING', 72),
 (251483, '2024-05-18 10:56:48', '2024-05-18 10:56:48', 'DELIVERING', 72),
@@ -291,32 +320,42 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (272036, '2024-05-18 09:27:42', '2024-05-18 09:27:42', 'DELIVERING', 72),
 (277592, '2024-05-17 12:45:44', '2024-05-17 12:45:44', 'Cancelled', 72),
 (277992, '2024-05-17 21:57:46', '2024-05-17 21:57:46', 'DELIVERING', 72),
+(287435, '2024-05-20 00:45:14', '2024-05-20 00:45:14', 'DELIVERING', 72),
 (310654, '2024-05-18 15:23:42', '2024-05-18 15:23:42', 'DELIVERING', 72),
 (325822, '2024-05-18 11:02:48', '2024-05-18 11:02:48', 'DELIVERING', 72),
 (333411, '2024-05-18 19:30:08', '2024-05-18 19:30:08', 'DELIVERING', 72),
 (346782, '2024-05-18 10:05:27', '2024-05-18 10:05:27', 'DELIVERING', 72),
 (363180, '2024-05-18 08:28:28', '2024-05-18 08:28:28', 'DELIVERING', 72),
+(375041, '2024-05-20 00:15:20', '2024-05-20 00:15:20', 'DELIVERING', 72),
 (376766, '2024-05-18 08:47:05', '2024-05-18 08:47:05', 'DELIVERING', 72),
 (382759, '2024-05-18 10:38:30', '2024-05-18 10:38:30', 'DELIVERING', 72),
 (415007, '2024-05-17 22:25:40', '2024-05-17 22:25:40', 'DELIVERING', 72),
+(419774, '2024-05-20 00:56:39', '2024-05-20 00:56:39', 'DELIVERING', 72),
 (439439, '2024-05-17 22:27:35', '2024-05-17 22:27:35', 'DELIVERING', 72),
 (453687, '2024-05-18 09:21:48', '2024-05-18 09:21:48', 'DELIVERING', 72),
 (478244, '2024-05-18 08:27:48', '2024-05-18 08:27:48', 'DELIVERING', 72),
 (478492, '2024-05-18 10:24:28', '2024-05-18 10:24:28', 'DELIVERING', 72),
+(493223, '2024-05-20 00:46:09', '2024-05-20 00:46:09', 'DELIVERING', 72),
+(501868, '2024-05-20 00:24:20', '2024-05-20 00:24:20', 'DELIVERING', 72),
 (519762, '2024-05-18 09:26:45', '2024-05-18 09:26:45', 'DELIVERING', 72),
 (526970, '2024-05-18 09:26:02', '2024-05-18 09:26:02', 'Cancelled', 72),
+(555886, '2024-05-20 00:48:54', '2024-05-20 00:48:54', 'DELIVERING', 72),
+(557228, '2024-05-20 00:25:31', '2024-05-20 00:25:31', 'DELIVERING', 72),
 (566052, '2024-05-17 21:56:45', '2024-05-17 21:56:45', 'DELIVERING', 72),
+(605382, '2024-05-20 00:24:57', '2024-05-20 00:24:57', 'DELIVERING', 72),
 (620208, '2024-05-18 09:46:24', '2024-05-18 09:46:24', 'DELIVERING', 72),
 (621255, '2024-05-18 11:09:44', '2024-05-18 11:09:44', 'DELIVERING', 72),
 (655152, '2024-05-18 08:53:09', '2024-05-18 08:53:09', 'DELIVERING', 72),
 (657475, '2024-05-18 09:21:09', '2024-05-18 09:21:09', 'DELIVERING', 72),
 (668691, '2024-05-17 12:46:48', '2024-05-17 12:46:48', 'DELIVERING', 72),
 (698058, '2024-05-18 10:57:18', '2024-05-18 10:57:18', 'DELIVERING', 72),
+(702958, '2024-05-20 00:13:38', '2024-05-20 00:13:38', 'DELIVERING', 72),
 (721475, '2024-05-18 14:38:42', '2024-05-18 14:38:42', 'DELIVERING', 72),
 (722586, '2024-05-18 08:24:36', '2024-05-18 08:24:36', 'DELIVERING', 72),
 (774579, '2024-05-18 15:20:05', '2024-05-18 15:20:05', 'DELIVERING', 72),
 (778335, '2024-05-17 12:42:39', '2024-05-17 12:42:39', 'DELIVERING', 72),
 (812144, '2024-05-18 09:16:32', '2024-05-18 09:16:32', 'DELIVERING', 72),
+(818800, '2024-05-20 00:42:56', '2024-05-20 00:42:56', 'DELIVERING', 72),
 (821168, '2024-05-18 08:52:15', '2024-05-18 08:52:15', 'DELIVERING', 72),
 (822993, '2024-05-18 11:13:46', '2024-05-18 11:13:46', 'DELIVERING', 72),
 (825365, '2024-05-18 09:43:19', '2024-05-18 09:43:19', 'DELIVERING', 72),
@@ -332,7 +371,9 @@ INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`, `status`, `user_id
 (932819, '2024-05-18 11:07:20', '2024-05-18 11:07:20', 'DELIVERING', 72),
 (963146, '2024-05-19 02:44:48', '2024-05-19 02:44:48', 'DELIVERING', 72),
 (970249, '2024-05-18 10:40:37', '2024-05-18 10:40:37', 'DELIVERING', 72),
+(993089, '2024-05-20 00:37:28', '2024-05-20 00:37:28', 'DELIVERING', 72),
 (994170, '2024-05-18 11:21:23', '2024-05-18 11:21:23', 'DELIVERING', 72),
+(999317, '2024-05-20 01:02:42', '2024-05-20 01:02:42', 'DELIVERING', 72),
 (999475, '2024-05-18 10:51:59', '2024-05-18 10:51:59', 'DELIVERING', 72);
 
 -- --------------------------------------------------------
@@ -362,9 +403,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `description`, `product_image`, `price`, `material`, `unit_of_measure`, `brand`, `stock`, `created_at`, `updated_at`, `buy_price`, `category_id`) VALUES
-(1, 'Double Hung Vinyl Window', 'Energy-efficient vinyl window with double-hung functionality.', 'image/DOUBLE-HUNG-VINYL-WINDOWS.jpg', 150.00, 'Vinyl', 'Piece', 'EnergySaver', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 120, 1),
-(2, 'Aluminum Casement Window', 'Modern aluminum casement window for residential and commercial use.', 'image/Aluminum Casement Window.jpg', 200.00, 'Aluminum', 'Piece', 'ModernDesign', 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 150, 1),
-(3, 'Wooden Sash Window', 'Classic wooden sash window with traditional design.', 'image/Wooden Sash Window.jpg', 250.00, 'Wood', 'Piece', 'HeritageCraft', 60, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 200, 1),
+(1, 'Double Hung Vinyl Window', 'Energy-efficient vinyl window with double-hung functionality.', 'image/DOUBLE-HUNG-VINYL-WINDOWS.jpg', 150.00, 'Vinyl', 'Piece', 'EnergySaver', 68, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 120, 1),
+(2, 'Aluminum Casement Window', 'Modern aluminum casement window for residential and commercial use.', 'image/Aluminum Casement Window.jpg', 200.00, 'Aluminum', 'Piece', 'ModernDesign', 67, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 150, 1),
+(3, 'Wooden Sash Window', 'Classic wooden sash window with traditional design.', 'image/Wooden Sash Window.jpg', 250.00, 'Wood', 'Piece', 'HeritageCraft', 48, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 200, 1),
 (4, 'Frosted Glass Bathroom Window', 'Privacy glass window suitable for bathrooms.', 'image/Frosted Glass Bathroom Window.jpg', 180.00, 'Glass', 'Piece', 'BathSense', 120, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 140, 1),
 (5, 'Bay Window Kit', 'Complete bay window kit for easy installation.', 'image/Bay Window Kit.jpg', 500.00, 'Vinyl', 'Set', 'HomeSolutions', 40, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 400, 1),
 (6, 'Skylight Roof Window', 'Skylight window for bringing natural light into interior spaces.', 'image/Skylight Roof Window.jpg', 300.00, 'Glass', 'Piece', 'LightMaster', 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 250, 1),
@@ -375,12 +416,12 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `product_image`, `p
 (11, 'Wireless Smart Plug', 'Smart plug with wireless control via smartphone app.', 'image/Wireless Smart Plug.jpg', 20.00, 'Plastic', 'Piece', 'TechSmart', 200, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 15, 2),
 (12, 'LED Light Bulbs (Pack of 4)', 'Energy-efficient LED light bulbs suitable for residential use.', 'image/LED Light Bulbs (Pack of 4).jpg', 25.00, 'Glass', 'Set', 'EcoBright', 300, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 20, 2),
 (13, 'Smart Wi-Fi Thermostat', 'Programmable thermostat with Wi-Fi connectivity.', 'image/Smart Wi-Fi Thermostat.jpg', 150.00, 'Plastic', 'Piece', 'EcoTemp', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 120, 2),
-(14, 'Electric Drill Kit', 'Cordless electric drill kit with multiple drill bits and accessories.', 'image/Electric Drill Kit.jpg', 80.00, 'Metal', 'Set', 'PowerPro', 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 60, 2),
+(14, 'Electric Drill Kit', 'Cordless electric drill kit with multiple drill bits and accessories.', 'image/Electric Drill Kit.jpg', 80.00, 'Metal', 'Set', 'PowerPro', 49, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 60, 2),
 (15, 'Ceiling Fan with Light', 'Ceiling fan featuring integrated LED light.', 'image/Ceiling Fan with Light.jpg', 120.00, 'Metal', 'Piece', 'CoolBreeze', 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 100, 2),
-(16, 'USB Wall Outlet', 'Wall outlet with built-in USB charging ports.', 'image/USB Wall Outlet.jpg', 30.00, 'Plastic', 'Piece', 'ChargeHub', 150, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 25, 2),
+(16, 'USB Wall Outlet', 'Wall outlet with built-in USB charging ports.', 'image/USB Wall Outlet.jpg', 30.00, 'Plastic', 'Piece', 'ChargeHub', 148, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 25, 2),
 (17, 'Electrical Wire Assortment (50ft)', 'Assortment of electrical wires for various applications.', 'image/Electrical Wire Assortment (50ft).jpg', 40.00, 'Copper', 'Roll', 'PowerFlex', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 30, 2),
 (18, 'Smart Doorbell Camera', 'Video doorbell with motion detection and smartphone connectivity.', 'image/Smart Doorbell Camera.jpg', 200.00, 'Plastic', 'Piece', 'SecuraView', 60, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 150, 2),
-(19, 'Wireless Indoor Security Camera', 'Wireless indoor security camera with night vision capabilities.', 'image/Wireless Indoor Security Camera.jpg', 100.00, 'Plastic', 'Piece', 'WatchGuard', 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 80, 2),
+(19, 'Wireless Indoor Security Camera', 'Wireless indoor security camera with night vision capabilities.', 'image/Wireless Indoor Security Camera.jpg', 100.00, 'Plastic', 'Piece', 'WatchGuard', 79, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 80, 2),
 (20, 'Power Strip Surge Protector', 'Surge protector power strip with multiple outlets and USB ports.', 'image/Power Strip Surge Protector.jpg', 35.00, 'Plastic', 'Piece', 'SafeGuard', 120, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 25, 2),
 (21, 'Steel I-Beam (10ft)', 'Structural steel I-beam for building support.', 'image/Steel I-Beam (10ft).jpg', 150.00, 'Steel', 'Piece', 'Structura', 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 120, 3),
 (22, 'Steel Angle Bar (6ft)', 'Steel angle bar for bracing and framing applications.', 'image/Steel Angle Bar (6ft).jpg', 80.00, 'Steel', 'Piece', 'AngleMaster', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 60, 3),
@@ -410,9 +451,9 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `product_image`, `p
 (48, 'Hydraulic Ram Cylinder (4-inch Bore)', 'Hydraulic ram cylinder for lifting and pushing applications.', 'image/Hydraulic Ram Cylinder (4-inch Bore).jpg', 250.00, 'Steel', 'Piece', 'RamMaster', 30, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 200, 5),
 (49, 'Hydraulic Reservoir Tank (10 Gallon)', 'Hydraulic reservoir tank for storing hydraulic fluid.', 'image/Hydraulic Reservoir Tank (10 Gallon).jpg', 100.00, 'Steel', 'Piece', 'FluidTank', 50, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 80, 5),
 (50, 'Hydraulic Pressure Gauge (5000 PSI)', 'Hydraulic pressure gauge for measuring hydraulic pressure.', 'image/Hydraulic Pressure Gauge (5000 PSI).jpg', 30.00, 'Steel', 'Piece', 'PressureMaster', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 25, 5),
-(51, 'Cordless Hammer Drill Kit', 'Cordless hammer drill kit with lithium-ion battery and charger.', 'image/Cordless Hammer Drill Kit.jpg', 120.00, 'Metal', 'Set', 'PowerTech', 70, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 100, 6),
-(52, 'Mechanic Tool Set (200 Pieces)', 'Comprehensive mechanic tool set for automotive and DIY repairs.', 'image/Mechanic Tool Set (200 Pieces).jpg', 250.00, 'Steel', 'Set', 'AutoPro', 40, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 200, 6),
-(53, 'Digital Multimeter', 'Digital multimeter for measuring voltage, current, and resistance.', 'image/Digital Multimeter.jpg', 50.00, 'Plastic', 'Piece', 'TechPro', 100, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 40, 6),
+(51, 'Cordless Hammer Drill Kit', 'Cordless hammer drill kit with lithium-ion battery and charger.', 'image/Cordless Hammer Drill Kit.jpg', 120.00, 'Metal', 'Set', 'PowerTech', 67, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 100, 6),
+(52, 'Mechanic Tool Set (200 Pieces)', 'Comprehensive mechanic tool set for automotive and DIY repairs.', 'image/Mechanic Tool Set (200 Pieces).jpg', 250.00, 'Steel', 'Set', 'AutoPro', 37, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 200, 6),
+(53, 'Digital Multimeter', 'Digital multimeter for measuring voltage, current, and resistance.', 'image/Digital Multimeter.jpg', 50.00, 'Plastic', 'Piece', 'TechPro', 98, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 40, 6),
 (54, 'Carpenter Tool Belt', 'Durable carpenter tool belt with multiple pockets and hammer loop.', 'image/Carpenter Tool Belt.jpg', 30.00, 'Nylon', 'Piece', 'CarpenterGear', 150, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 25, 6),
 (55, 'Adjustable Wrench Set (3 Pieces)', 'Set of adjustable wrenches in various sizes for plumbing and mechanical work.', 'image/Adjustable Wrench Set (3 Pieces).jpg', 40.00, 'Steel', 'Set', 'AdjustMaster', 80, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 30, 6),
 (56, 'Electrician Tool Kit', 'Essential tools for electricians including wire strippers, pliers, and screwdrivers.', 'image/Electrician Tool Kit.jpg', 80.00, 'Metal', 'Set', 'WireTech', 60, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 60, 6),
@@ -506,14 +547,13 @@ CREATE TABLE `statistics` (
 --
 
 INSERT INTO `statistics` (`name`, `value`, `prev_value`, `icon`, `Type`, `destination`, `id`) VALUES
-('Canceled Orers', 'SELECT COUNT(*) FROM orders WHERE status = \'Cancelled\';', -1, 'icons/cancel.png', 2, '/allOrdersAdmin', 2934677),
-('Delivered Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'Delivered\';', -1, 'icons/order.png', 2, '/allOrdersAdmin', 7585404),
-('Delivering Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'DELIVERING\';', -1, 'icons/checkout.png', 2, '/allOrdersAdmin', 9060399),
+('Building Materials', 'SELECT COUNT(*) FROM products JOIN categories on products.category_id = categories.category_id WHERE category_name = \'Building Materials\';', -1, 'icons/construction.png', 2, '/allProductsAdmin', 6789889),
+('Canceled Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'Cancelled\';', -1, 'icons/cancel.png', 2, '/allOrdersAdmin', 9726312),
 ('Pending Orders', 'SELECT COUNT(*) FROM orders WHERE status = \'Pending\';', -1, 'icons/box.png', 2, '/allOrdersAdmin', 7816493),
-('Quarter Earnings', '676', 800, 'icons/bar-chart.png', 1, 'https://www.apple.com/', 4),
-('Total Orders', '89', 200, 'icons/order.png', 1, 'https://www.amazon.com/', 5),
-('Total Products Sold', '300', 100, 'icons/checkout.png', 1, 'https://www.google.com/', 6),
-('Total Users', '25', 500, 'icons/user.png', 1, 'https://www.youtube.com/', 7);
+('Quarter Earnings', '880', 800, 'icons/bar-chart.png', 1, '/allOrdersAdmin', 4),
+('Total Orders', '89', 60, 'icons/order.png', 1, '/allOrdersAdmin', 5),
+('Total Products Sold', '300', 100, 'icons/checkout.png', 1, '/allProductsAdmin', 6),
+('Total Users', '25', 20, 'icons/user.png', 1, '/allUsersAdmin', 7);
 
 -- --------------------------------------------------------
 
