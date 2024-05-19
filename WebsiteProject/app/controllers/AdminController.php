@@ -4,7 +4,6 @@ namespace Controllers;
 
 use Core\Controller;
 use Models\Admin;
-use Models\Product;
 use Models\Order;
 use Models\User;
 

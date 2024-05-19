@@ -26,8 +26,12 @@ class HomePageView {
                 <h2 class="hero-head"><?= $homepagecontents[0]['content']; ?></h2>
                 <p class="hero-descript"><?= $homepagecontents[1]['content']; ?></p>
                 <div class="hero-btns">
-                    <button class="hero-btn hero-abt-us">About Us</button>
-                    <button class="hero-btn hero-products">Products</button>
+                    <a href="/aboutUs">
+                        <button class="hero-btn hero-abt-us">About Us</button>
+                    </a>
+                    <a href="/allProducts">
+                        <button class="hero-btn hero-products">Products</button>
+                    </a>
                 </div>
             </div>
 
@@ -41,32 +45,36 @@ class HomePageView {
                 <div class="right-content">
                     <h3 class="right-content-header">Who are we</h3>
                     <h6 class="right-content-descript"><?= $homepagecontents[2]['content']; ?></h6>
-                    <button class=" hero-btn hero-products">Our history</button>
+                    <a href="/aboutUs">
+                        <button class=" hero-btn hero-products">Our history</button>
+                    </a>
                 </div>
             </div>
 
             <div class="featured-products">
                 <div class="featured-text">
                     <h2 class="featured-heading">Featured Products</h2>
-                    <button class="featured-btn hero-btn">See More &#8594</button>
+                    <a href="/allProducts">
+                        <button class="featured-btn hero-btn">See More &#8594</button>
+                    </a>
                 </div>
                 <div class="featured-products-list">               
                     <div class="featured-product-container">
                         <img class="product-img" src="/image/Tools Market_Vidues gipsi me bateri.jpg" alt="Tool">
-                        <a href="#">Tool Tool Tool</a>
-                        <p>$14.99</p>
+                        <a href="#">Drywall Drill</a>
+                        <p>$128.99</p>
                     </div>
 
                     <div class="featured-product-container">
                         <img class="product-img" src="/image/KEAD_Sharre bango me disk 240V 2000W Worcraft MST20-255.jpg" alt="Tool">
-                        <a href="#">Tool Tool Tool</a>
-                        <p>$14.99</p>
+                        <a href="#">Disc Saw 240V 2000W</a>
+                        <p>$174.99</p>
                     </div>
 
                     <div class="featured-product-container">
                         <img class="product-img" src="/image/Albaelettrica_Sharre me disk Milwaukee.jpg" alt="Tool">
-                        <a href="#">Tool Tool Tool</a>
-                        <p>$14.99</p>
+                        <a href="#">Milwaukee Disc Saw</a>
+                        <p>$145.99</p>
                     </div>
                 </div>
             </div>

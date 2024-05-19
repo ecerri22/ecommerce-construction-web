@@ -25,7 +25,6 @@ $router->get('/login', $uc, 'renderLogin');
 $router->post('/login', $uc, 'logIn');
 $router->delete('/login', $uc, 'logOut');
 
-
 // HELP-ADVICE PAGE //
 $router->get('/helpAdvice', $uc, 'renderHelpAdvice');
 
