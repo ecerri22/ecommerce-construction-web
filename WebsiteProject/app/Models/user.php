@@ -161,30 +161,34 @@ class User
             $productsandqueantities = array();
 
             foreach($products as $product){
-                $productsandqueantities[$product['product_id']] = $product['stock'];
+                $productsandqueantities[$product['product_id']] = $product['stock'] - $productIds[$product['product_id']];
             }
+
+            $query = "INSERT INTO orderinfo (order_id, product_id, quantity) VALUES";
 
             foreach($productIds as $k=>$v){
                 try {
-                    $productsandqueantities[$k] -= $v;
-                    $query = "INSERT INTO orderinfo (order_id, product_id, quantity) VALUES (?, ?, ?)";
-                    $params = [$orderid, $k, $v];
-                    App::container()->resolve('Core\Database')->query($query, $params); 
-                    
+                    $query .= " (".$orderid.",".$k.",".$v."),";
                 } catch (PDOException $e) {
                     echo "Error: " . $e->getMessage();
                 }
             }
 
+            $query = substr($query,0,-1);
+            App::container()->resolve('Core\Database')->query($query);
+
+            $query = "UPDATE products SET stock = CASE";
+
             foreach($productsandqueantities as $k=>$v){
-                $query = "UPDATE products SET stock = ? WHERE product_id = ?";
-                $params = [$v, $k];
-                App::container()->resolve('Core\Database')->query($query, $params); 
-                $query = "DELETE FROM carts WHERE product_id = ? AND user_id = ?";
-                $params = [$k, $user_id];
-                App::container()->resolve('Core\Database')->query($query, $params);
+                $query .= " WHEN product_id = ".$k." THEN ".$v;
             }
+
+            $query .= " END WHERE product_id IN (".implode(",",array_keys($productsandqueantities)).")";
+            App::container()->resolve('Core\Database')->query($query);
             
+            $query = "DELETE FROM carts WHERE user_id = ?";
+            $params = [$user_id];
+            App::container()->resolve('Core\Database')->query($query, $params);
         }
         else
         {
@@ -327,7 +331,7 @@ class User
 
     public static function getOrders($user_id){
         
-        return App::container()->resolve('Core\Database')->query('SELECT * from orders where user_id = :userid', ['userid' => $user_id])->get();
+        return App::container()->resolve('Core\Database')->query('SELECT * from orders where user_id = :userid ORDER BY created_at DESC', ['userid' => $user_id])->get();
 
     }
     
