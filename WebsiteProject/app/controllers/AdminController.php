@@ -35,7 +35,14 @@ class AdminController extends Controller
 
     public function renderEditProductPage()
     {
-        view('admin/enia_editProduct.view.php');
+        $product_id = $_GET['product_id'] ?? null;
+        // dd($_GET);
+        if ($product_id) {
+            $productData = $this->user->getProductData($product_id);
+            view('admin/enia_editProduct.view.php', [
+                'productData' => $productData
+            ]);
+        } 
     }
 
     public function renderOrdersAdminController()
@@ -44,7 +51,6 @@ class AdminController extends Controller
             'orders' => $this->order->getAllOrders()
         ]);
     }
-    
 
     public function renderUsersAdminController()
     {
@@ -56,12 +62,11 @@ class AdminController extends Controller
     public function renderProductsAdminController()
     {
         $search = $_GET['search'] ?? '';
-        $products = $this->user->getFilteredProducts($search); // This will be a new method
+        $products = $this->user->getFilteredProducts($search); 
         view('admin/atea_allProducts.view.php', [
             'data' => $products
         ]);
     }
-
 
     public function insertProduct()
     {
@@ -77,8 +82,6 @@ class AdminController extends Controller
             $stock = $_POST['prod-stock'];
             $buy_price = $_POST['prod-buy-price'];
 
-            // dd($_FILES);
-
             $this->user->createProduct($name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
 
             redirect('/allProductsAdmin');
@@ -93,23 +96,46 @@ class AdminController extends Controller
             $email = $_POST['email'];
             $password = $_POST['pass'];
 
-            // dd($_FILES);
-
             $this->guest->register($name, $lastName, $email, $password);
 
             redirect('/allProductsAdmin');
-        } else {
-            header("Location: /error");
-        }
+        } 
     }
-
 
     public function editOrderStatus()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // dd($_POST);
             $this->order->updateOrderStatus($_POST['newStatus'], $_POST['id']);
             redirect("/allOrdersAdmin");
         }
     }
+
+    
+    public function editProduct()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $product_id = $_POST['product_id'];
+            $name = $_POST['prod-name'];
+            $description = $_POST['prod-description'];
+            $price = $_POST['prod-price'];
+            $category = $_POST['prod-category'];
+            $image = $_FILES['prod-img']['name'];
+            $material = $_POST['prod-material'];
+            $unit_of_measure = $_POST['prod-unit-of-measure'];
+            $brand = $_POST['prod-brand'];
+            $stock = $_POST['prod-stock'];
+            $buy_price = $_POST['prod-buy-price'];
+            // dd($_FILES);
+
+            $result = $this->user->updateProduct($product_id, $name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
+
+            if ($result) {
+                redirect('/allProductsAdmin');
+            } else {
+                echo "Failed to update product";
+            }
+        }
+    }
+
+
 }

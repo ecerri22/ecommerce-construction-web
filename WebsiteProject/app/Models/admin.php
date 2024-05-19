@@ -124,19 +124,16 @@ class Admin
 
     public function getallusers() 
     {
-        return App::container()->resolve('Core\Database')->query('SELECT * FROM
+        return $this->db->query('SELECT * FROM
         users')->get();
     }
 
     public function getallproducts() 
     {
-        return App::container()->resolve('Core\Database')->query('SELECT * FROM products Join categories ON products.category_id = categories.category_id')->get();
+        return $this->db->query('SELECT * FROM products Join categories ON products.category_id = categories.category_id')->get();
     }
 
     public function createProduct($name, $description, $image, $category_id, $material, $unit_of_measure, $brand, $price, $stock, $buy_price) {
-        $errors = [];
-        $message = [];
-
         $this->setName($name);
         $this->setDescription($description);
         $this->setPrice($price);
@@ -174,6 +171,7 @@ class Admin
             }
           }
     }
+
     public function getFilteredProducts($search)
     {
         if (!empty($search)) {
@@ -184,4 +182,79 @@ class Admin
             return $this->getallproducts(); // This calls the existing method to fetch all products
         }
     }
+
+    public function getProductData($product_id){
+        $query = "SELECT * FROM products WHERE product_id = :product_id";
+        return $this->db->query($query, [':product_id' => $product_id])->find();
+    }
+
+   
+    public function updateProduct($product_id, $name, $description, $image, $category_id, $material, $unit_of_measure, $brand, $price, $stock, $buy_price)
+    {
+        $this->setName($name);
+        $this->setDescription($description);
+        $this->setPrice($price);
+        $this->setCategoryId($category_id);
+        $this->setProductImage($image);
+        $this->setMaterial($material);
+        $this->setUnitOfMeasure($unit_of_measure);
+        $this->setBrand($brand);
+        $this->setStock($stock);
+        $this->setBuyPrice($buy_price);
+
+        $updated_at = date('Y-m-d H:i:s');
+
+        if (!empty($_FILES["prod-img"]["name"])) {
+            $fileName = basename($_FILES["prod-img"]["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            $allowedTypes = array('jpg', 'png', 'jpeg', 'gif');
+
+            if (in_array($fileType, $allowedTypes)) {
+                $image = $_FILES["prod-img"]['tmp_name'];
+                $destination = "image/" . $fileName;
+
+                move_uploaded_file($image, $destination);
+
+                $sql = "UPDATE products SET 
+                    name = '{$this->getName()}', 
+                    description = '{$this->getDescription()}', 
+                    product_image = '{$destination}', 
+                    category_id = '{$this->getCategoryId()}', 
+                    material = '{$this->getMaterial()}', 
+                    unit_of_measure = '{$this->getUnitOfMeasure()}', 
+                    brand = '{$this->getBrand()}', 
+                    price = '{$this->getPrice()}', 
+                    stock = '{$this->getStock()}', 
+                    buy_price = '{$this->getBuyPrice()}', 
+                    updated_at = '{$updated_at}' 
+                WHERE product_id = '{$product_id}'";
+
+                $updatedProd = $this->db->query($sql);
+            }
+        } else {
+            $sql = "UPDATE products SET 
+                        name = '{$this->getName()}', 
+                        description = '{$this->getDescription()}', 
+                        category_id = '{$this->getCategoryId()}', 
+                        material = '{$this->getMaterial()}', 
+                        unit_of_measure = '{$this->getUnitOfMeasure()}', 
+                        brand = '{$this->getBrand()}', 
+                        price = '{$this->getPrice()}', 
+                        stock = '{$this->getStock()}', 
+                        buy_price = '{$this->getBuyPrice()}', 
+                        updated_at = '{$updated_at}' 
+                    WHERE product_id = '{$product_id}'";
+
+            $updatedProd = $this->db->query($sql);
+        }
+
+        if ($updatedProd) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

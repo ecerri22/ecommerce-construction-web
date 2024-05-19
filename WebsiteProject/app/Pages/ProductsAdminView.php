@@ -212,7 +212,7 @@ class ProductsAdminView{
                                 <td><?php echo $row['stock']; ?></td>
                                 <td><?php echo '$' . $row['buy_price']; ?></td>
                                 <td>
-                                    <a href="/editProduct">
+                                    <a href="/editProduct?product_id=<?= $row['product_id']; ?>">
                                         <button class="icon-button edit"><i class="fas fa-edit"></i></button>
                                     </a>
                                     <form method="POST" action="/allProductsAdmin">

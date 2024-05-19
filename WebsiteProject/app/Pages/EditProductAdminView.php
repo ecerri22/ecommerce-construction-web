@@ -9,14 +9,14 @@ class EditProductAdminView {
         $this->title = $title;
     }
 
-    public function render() {
+    public function render($productData = []) {
         ?>
         <!DOCTYPE html>
         <html lang="en">
         <?php $this->renderHead(); ?>
         <body>
             <?php $this->renderHeader(); ?>
-            <?php $this->renderContent(); ?>
+            <?php $this->renderContent($productData); ?>
         </body>
         </html>
         <?php
@@ -87,78 +87,79 @@ class EditProductAdminView {
         <?php
     }
 
-    private function renderContent() {
+    private function renderContent($productData = []) {
         ?>
         <div class="content">
             <?php $this->renderNavbar() ?>
 
             <div class="admin-dashboard">
                 <h1 class="page-title">Edit Product</h1>
-                <form action="/editProduct" class="create-prod-form">
+                <form action="/editProduct" method="POST" class="create-prod-form" enctype="multipart/form-data">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="hidden" name="product_id" value="<?= $productData['product_id'] ?>"/>    
+
                     <label for="prod-name" class="label-name">Product Name:</label>
-                    <input type="text" class="prod prod-name" name="prod-name">
+                    <input type="text" class="prod prod-name" name="prod-name" value="<?= $productData['name'] ?? ''; ?>">
 
                     <label for="prod-description" class="label-description">Description:</label>
-                    <textarea class="prod prod-description" name="prod-description"></textarea>
-
+                    <textarea class="prod prod-description" name="prod-description"><?= $productData['description'] ?? ''; ?></textarea>
 
                     <div class="div-prod-img">
                         <label for="prod-img" class="label-other">
                             <span>+ Add Product Image</span>
                             <input type="file" id="prod-img" class="prod-img" name="prod-img" accept="image/*">
+                            <?php if (!empty($product['product_image'])): ?>
+                                <img src="<?= $product['product_image']; ?>" alt="<?= $productData['name']?>" style="height: 100px;">
+                            <?php endif; ?>
                         </label>
                     </div>
 
                     <div class="div-prod-price">
                         <label for="prod-price" class="label-other">Price:</label>
-                        <input type="text" class="prod prod-price" name="prod-price">
+                        <input type="text" class="prod prod-price" name="prod-price" value="<?= $productData['price'] ?? ''; ?>">
                     </div>
 
                     <div class="div-prod-material">
                         <label for="prod-material" class="label-other">Material:</label>
-                        <input type="text" class="prod prod-material" name="prod-material">
+                        <input type="text" class="prod prod-price" name="prod-material" value="<?= $productData['material'] ?? ''; ?>">
                     </div>
 
                     <div class="div-prod-measure">
                         <label for="prod-unit-of-measure" class="label-other">Unit of measure:</label>
-                        <input type="text" class="prod prod-unit-of-measure" name="prod-unit-of-measure">
+                        <input type="text" class="prod prod-price" name="prod-unit-of-measure" value="<?= $productData['unit_of_measure'] ?? ''; ?>">
                     </div>
 
                     <div class="div-prod-brand">
                         <label for="prod-brand" class="label-other">Brand:</label>
-                        <input type="text" class="prod prod-brand" name="prod-brand">
+                        <input type="text" class="prod prod-price" name="prod-brand" value="<?= $productData['brand'] ?? ''; ?>">
                     </div>
                     
                     <!-- dropdown -->
                     <div class="div-prod-category">
-                        <label for="prod-category" class="label-other">Category:</label>
-                        <select id="prod-category" class="prod prod-category" name="prod-category">
-                            <option value="category1">Electrical</option>
-                            <option value="category2">Windows</option>
-                            <option value="category3">Steel Profiles</option>
-                            <option value="category4">Wood Materials</option>
-                            <option value="category5">Hydraulics</option>
-                            <option value="category6">Professional Work Tools</option>
-                            <option value="category7">Building Materials</option>
-                            <option value="category8">Roof Covers</option>
-                            <option value="category9">Isolation</option>
-                            <option value="category10">Packaging Materials</option>
-                        </select>
-                    </div>
+                    <label for="prod-category" class="label-other">Category:</label>
+                    <select class="prod prod-price" name="prod-category">
+                        <option value="1" <?= ($productData['category_id'] ?? '') == 1 ? 'selected' : ''; ?>>Electrical</option>
+                        <option value="2" <?= ($productData['category_id'] ?? '') == 2 ? 'selected' : ''; ?>>Windows</option>
+                        <option value="3" <?= ($productData['category_id'] ?? '') == 3 ? 'selected' : ''; ?>>Steel Profiles</option>
+                        <option value="4" <?= ($productData['category_id'] ?? '') == 4 ? 'selected' : ''; ?>>Wood Materials</option>
+                        <option value="5" <?= ($productData['category_id'] ?? '') == 5 ? 'selected' : ''; ?>>Hydraulics</option>
+                        <option value="6" <?= ($productData['category_id'] ?? '') == 6 ? 'selected' : ''; ?>>Professional Work Tools</option>
+                        <option value="7" <?= ($productData['category_id'] ?? '') == 7 ? 'selected' : ''; ?>>Building Materials</option>
+                        <option value="8" <?= ($productData['category_id'] ?? '') == 8 ? 'selected' : ''; ?>>Roof Covers</option>
+                        <option value="9" <?= ($productData['category_id'] ?? '') == 9 ? 'selected' : ''; ?>>Isolation</option>
+                        <option value="10" <?= ($productData['category_id'] ?? '') == 10 ? 'selected' : ''; ?>>Packaging Materials</option>
+                    </select>
+                </div>
+
 
                     <div class="div-prod-stock">
                         <label for="prod-stock" class="label-other">Stock: </label>
-                        <input type="text" class="prod prod-stock" name="prod-stock">
+                        <input type="text" class="prod prod-price" name="prod-stock" value="<?= $productData['stock'] ?? ''; ?>">
                     </div>
 
                     <div class="div-prod-buy-price">
                         <label for="prod-buy-price" class="label-other">Buy price:</label>
-                        <input type="text" class="prod prod-buy-price" name="prod-price">
-                    </div>
-
-                    <div class="div-prod-bought-at">
-                        <label for="prod-bought-at" class="label-other">Bought at:</label>
-                        <input type="text" class="prod prod-bought-at" name="prod-bought-at">
+                        <input type="text" class="prod prod-price" name="prod-buy-price" value="<?= $productData['buy_price'] ?? ''; ?>">
                     </div>
 
                     <input type="submit" value="Save changes" class="prod-submit"> 

@@ -31,7 +31,7 @@ $router->get('/helpAdvice', $uc, 'renderHelpAdvice');
 
 // MY ACCOUNT PAGE //
 $router->get('/myAccount',$uc,'renderMyAccount')->only('auth');
-$router->post('/myAccount',$uc,'renderMyAccount');
+$router->post('/myAccount',$uc,'renderMyAccount')->only('auth');
 // ORDER HISTORY PAGE //
 $router->get('/myOrders', $uc, 'renderMyOrders')->only('auth');
 $router->post('/myOrders', $uc, 'renderMyOrders')->only('auth');
@@ -70,6 +70,7 @@ $router->post('/createProduct', $ac, 'insertProduct')->only('role');
 
 // ADMIN - EDIT PRODUCT //
 $router->get('/editProduct', $ac, 'renderEditProductPage')->only('role');
+$router->patch('/editProduct', $ac, 'editProduct')->only('role');
 
 // ADMIN - DELETE PRODUCT //
 $router->delete('/allProductsAdmin', $pc, 'deleteProduct')->only('role');

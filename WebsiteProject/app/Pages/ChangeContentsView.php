@@ -97,7 +97,7 @@ class ChangeContentsView {
                 <h1 class="page-title">Change Contents</h1>
                 <form action="/changeContents" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
-                    <input type="hidden" name="id" ?>
+                    <input type="hidden" name="id" />
                     <div class="section-form-container">
                         <?php $this->renderHomePageSection($homepagecontents) ?>
                         <?php $this->renderAboutUsSection($aboutUsContents) ?>
