@@ -69,6 +69,12 @@ class ProductsAdminView{
                                 <p class="tab-txt-sidebar">Users</p>
                             </a>
                         </li>
+                        <li class="tab-sidebar">
+                            <a href="/changeContents" class="tab-link-sidebar">
+                                <i class="fas fa-save"></i>
+                                <p class="tab-txt-sidebar">Change Contents</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="logout-container">
@@ -126,34 +132,38 @@ class ProductsAdminView{
             <div class="admin-dashboard">
                 <h1 class="page-title">Products</h1>
                 <div class="search-container">
-            <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
-            <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
-                <i class="fas fa-search searchlogo"></i>
-            </button>
-            <select class="dropdown" id="category">
-                <option value="">Select category</option>
-                <?php
-                    $this->displaydropdown($data,'category_name');
-                ?>
-                <!-- Add more category options as needed -->
-            </select>
-            <select class="dropdown" id="Material">
-                <option value="">Select Material</option>
-                <?php
-                    $this->displaydropdown($data,'material')
-                ?>
-                <!-- Add more price range options as needed -->
-            </select>
-            <select class="dropdown" id="measurement">
-                <option value="">Select Unit of Measurement</option>
-                <?php
-                    $this->displaydropdown($data,'unit_of_measure');
-                ?>
-                <!-- Add more buy price range options as needed -->
-            </select>
+                    <input class="product-searcher" id="search" style="text-align: center;" type="text" name="search" placeholder="Search for product" value="<?php echo $_GET['search'] ?? ''; ?>">
+                    <button class='atea-searcher' type='submit' onclick='atea_search(<?php echo json_encode($data); ?>);'>
+                        <i class="fas fa-search searchlogo"></i>
+                    </button>
+                    <select class="dropdown" id="category">
+                        <option value="">Select category</option>
+                        <?php
+                            $this->displaydropdown($data,'category_name');
+                        ?>
+                        <!-- Add more category options as needed -->
+                    </select>
+                    <select class="dropdown" id="Material">
+                        <option value="">Select Material</option>
+                        <?php
+                            $this->displaydropdown($data,'material')
+                        ?>
+                        <!-- Add more price range options as needed -->
+                    </select>
+                    <select class="dropdown" id="measurement">
+                        <option value="">Select Unit of Measurement</option>
+                        <?php
+                            $this->displaydropdown($data,'unit_of_measure');
+                        ?>
+                        <!-- Add more buy price range options as needed -->
+                    </select>
 
-</div>
-
+                    <a href="/createProduct" class="green-button-link">
+                        <button class="green-button">
+                            <i class="fas fa-plus" style="color: white;"></i>
+                        </button>
+                    </a>
+                </div>
                 <?php self::showtable($data); ?>
             </div>
             </div>

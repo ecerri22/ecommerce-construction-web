@@ -15,7 +15,7 @@ class AddProductAdminView {
         <html lang="en">
         <?php $this->renderHead(); ?>
         <body>
-            <?php $this->renderHeader(); ?>
+            <?php $this->renderSidebar(); ?>
             <?php $this->renderContent(); ?>
         </body>
         </html>
@@ -37,7 +37,7 @@ class AddProductAdminView {
         <?php
     }
 
-    private function renderHeader() {
+    private function renderSidebar() {
         ?>
             <div class="sidebar">
                 <div class="sidebar-content">
@@ -67,6 +67,12 @@ class AddProductAdminView {
                             <a href="/allUsersAdmin" class="tab-link-sidebar">
                                 <i class="fas fa-user"></i>
                                 <p class="tab-txt-sidebar">Users</p>
+                            </a>
+                        </li>
+                        <li class="tab-sidebar">
+                            <a href="/changeContents" class="tab-link-sidebar">
+                                <i class="fas fa-save"></i>
+                                <p class="tab-txt-sidebar">Change Contents</p>
                             </a>
                         </li>
                     </ul>

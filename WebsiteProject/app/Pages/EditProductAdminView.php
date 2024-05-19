@@ -68,6 +68,12 @@ class EditProductAdminView {
                                 <p class="tab-txt-sidebar">Users</p>
                             </a>
                         </li>
+                        <li class="tab-sidebar">
+                            <a href="/changeContents" class="tab-link-sidebar">
+                                <i class="fas fa-save"></i>
+                                <p class="tab-txt-sidebar">Change Contents</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="logout-container">

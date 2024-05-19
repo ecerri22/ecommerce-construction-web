@@ -9,22 +9,22 @@ class HomePageView {
         $this->partials = new Header($title, $cssFile);
     }
 
-    public function render() {
+    public function render($homepagecontents = []) {
         ?>
             <?php $this->partials->render() ?>
-            <?php $this->renderContent(); ?>
+            <?php $this->renderContent($homepagecontents); ?>
             <?php $this->renderFooter(); ?>
         </body>
         </html>
         <?php
     }
 
-    private function renderContent() {
+    private function renderContent($homepagecontents = []) {
         ?>
         <div class="content">
             <div class="hero-section">
-                <h2 class="hero-head">Lorem ipsum dolor sit amet</h2>
-                <p class="hero-descript">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, praesentium.</p>
+                <h2 class="hero-head"><?= $homepagecontents[0]['content']; ?></h2>
+                <p class="hero-descript"><?= $homepagecontents[1]['content']; ?></p>
                 <div class="hero-btns">
                     <button class="hero-btn hero-abt-us">About Us</button>
                     <button class="hero-btn hero-products">Products</button>
@@ -40,7 +40,7 @@ class HomePageView {
                 </div>
                 <div class="right-content">
                     <h3 class="right-content-header">Who are we</h3>
-                    <h6 class="right-content-descript">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum doloribus numquam dolor vel architecto dolore quae qui pariatur. A veritatis dolorum accusantium laborum rerum molestias commodi itaque sapiente iusto dolorem unde pariatur doloribus, quisquam cupiditate alias deleniti, vel tempore asperiores nostrum quaerat? Similique soluta iure earum facilis doloremque obcaecati.</h6>
+                    <h6 class="right-content-descript"><?= $homepagecontents[2]['content']; ?></h6>
                     <button class=" hero-btn hero-products">Our history</button>
                 </div>
             </div>
@@ -82,7 +82,7 @@ class HomePageView {
                             </div>
                         </div>
                         <div class="card__side card__side--back ">
-                            <p class="project-card-descript">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora beatae perspiciatis vel sunt eius laborum obcaecati aliquid. Facilis voluptas porro reiciendis amet nihil nesciunt quas impedit unde cumque quisquam? Ratione.</p>
+                            <p class="project-card-descript"><?= $homepagecontents[3]['content']; ?></p>
                         </div> 
                     </div>
             
@@ -93,7 +93,7 @@ class HomePageView {
                             </div>
                         </div>
                         <div class="card__side card__side--back ">
-                            <p class="project-card-descript">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora beatae perspiciatis vel sunt eius laborum obcaecati aliquid. Facilis voluptas porro reiciendis amet nihil nesciunt quas impedit unde cumque quisquam? Ratione.</p>
+                            <p class="project-card-descript"><?= $homepagecontents[4]['content']; ?></p>
                         </div> 
                     </div>
         
@@ -104,7 +104,7 @@ class HomePageView {
                             </div>
                         </div>
                         <div class="card__side card__side--back ">
-                            <p class="project-card-descript">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora beatae perspiciatis vel sunt eius laborum obcaecati aliquid. Facilis voluptas porro reiciendis amet nihil nesciunt quas impedit unde cumque quisquam? Ratione.</p>
+                            <p class="project-card-descript"><?= $homepagecontents[5]['content']; ?></p>
                         </div> 
                     </div>
                 </div>

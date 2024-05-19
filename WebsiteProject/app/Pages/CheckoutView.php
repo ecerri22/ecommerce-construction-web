@@ -67,7 +67,7 @@ class CheckoutView{
                         <div class="checkout-products">
                             <?php foreach ($allCheckoutProducts as $checkoutProduct) : ?>
                                 <div class="checkout-one-product" data-product-id="<?=$checkoutProduct['product_id']?>">
-                                    <img class="product-checkout-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" />
+                                    <img class="product-checkout-img" src="<?= $checkoutProduct['product_image'] ?>" />
                                     <div class="checkout-products-details" >
                                         <p class="product-checkout-name"><?= $checkoutProduct['name'] ?> </p>
                                         <div style="display: flex; flex-direction:column; gap:.5rem;">

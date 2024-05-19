@@ -88,3 +88,6 @@ $router->patch('/allOrdersAdmin', $ac, 'editOrderStatus')->only('role');
 // ADMIN - ALL USERS //
 $router->get('/allUsersAdmin', $ac, 'renderUsersAdminController')->only('role');
 
+// ADMIN-CHANGE CONTENTS //
+$router->get('/changeContents', $mc, 'renderChangeContents')->only('role');
+$router->patch('/changeContents', $mc, 'updateContents')->only('role');

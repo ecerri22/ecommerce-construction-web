@@ -20,8 +20,6 @@ class Order {
         $this->db = App::container()->resolve('Core\Database');
     }
 
-
-
     public function getOrderId() {
         return $this->orderId;
     }

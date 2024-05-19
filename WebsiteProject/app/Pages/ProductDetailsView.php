@@ -144,30 +144,30 @@ class ProductDetailsView
                         </form>
 
                         <!-- right side -->
-                        <div class="header-user-btns">
+                        <div class="header-user-btns" id="header-user-btns">
                             <?php if ($_SESSION['user'] ?? false) : ?>
                             <!-- User is logged in -->
                             <a href="/myAccount">
-                                <button class="user-profile-btn header-btn">
-                                    <i class="fas fa-user"></i>
+                                <button class="user-profile-btn header-btn" id="header-btn">
+                                    <i class="fas fa-user" id="fas"></i>
                                 </button>
                             </a>
 
                             <a href="/wishlist">
-                                <button class="user-wishlist-btn header-btn">
-                                    <i class="fas fa-heart"></i> 
+                                <button class="user-wishlist-btn header-btn" id="header-btn">
+                                    <i class="fas fa-heart" id="fas"></i> 
                                 </button>
                             </a>
 
                             <a href="/shoppingCart">
-                                <button class="user-shopping-bag-btn header-btn">
-                                    <i class="fas fa-shopping-cart"></i> 
+                                <button class="user-shopping-bag-btn header-btn" id="header-btn">
+                                    <i class="fas fa-shopping-cart" id="fas"></i> 
                                 </button>
                             </a>
 
                             <form action="/login" method="POST">
                                 <input type="hidden" name="_method" value="DELETE" />
-                                <button class="logout-btn hero-btn">
+                                <button class="logout-btn hero-btn" id="hero-btn">
                                     Log out
                                 </button>
                             </form>
@@ -207,9 +207,6 @@ class ProductDetailsView
                             </li>
                         </ul>
                     </div>
-
-                    
-
                 </div>
             </header>
         <?php
@@ -227,7 +224,7 @@ class ProductDetailsView
         $averageRating = $nrOfReviews > 0 ? $sumOfRatings / $nrOfReviews : 0;
 
         ?>
-        <div class="container">
+        <div class="container" id="container">
             <div class="row">
                 <div class="col-xl-6 ml-5 mb-2">
                     <div class="product-photo">
