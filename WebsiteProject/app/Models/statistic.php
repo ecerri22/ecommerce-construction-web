@@ -47,7 +47,7 @@ class Statistic {
             echo '<script> addClickEventToDiv("'.$this->statistic_destination.'","statistic_'. $this->statistic_id.'");</script>';
         }
         else if($this->statistic_type == 2){
-            echo '<a id="statistic_'. $this->statistic_id . '" class = "statistic-2">';
+            echo '<a href="'.$this->statistic_destination.'" id="statistic_'. $this->statistic_id . '" class = "statistic-2">';
                 echo '<img class="statistic-icon-2" src="Thanas/'.$this->statistic_icon.'">';
             echo '<div class = "statistic-2-info">';
                     echo "<div style='color:gray; font-size:1.1rem; font-weight:500;'>".$this->statistic_name ."</div>";

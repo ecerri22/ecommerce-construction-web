@@ -91,12 +91,6 @@ class UserController extends Controller
             }
 
             if (isset($_POST['product_ids'])) {
-                $products = json_decode($_POST['product_ids'], true);
-
-                foreach ($products as $productId => $quantity) {
-                    $this->user->updateShoppingCartQuantity($productId, $quantity);
-                }
-
                 $this->user->createOrder();
             }
 

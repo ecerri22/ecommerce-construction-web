@@ -147,16 +147,44 @@ class User
                 echo "Error: Duplicate entry";
                 return;
             }
+
+            $where ="";
+
+            foreach($productIds as $k=>$v){
+                $where .= "product_id = ".$k." OR ";
+            }
+
+            $query = "SELECT product_id,stock FROM products WHERE ".substr($where,0,-3);
             
+            $products = App::container()->resolve('Core\Database')->query($query)->get();
+
+            $productsandqueantities = array();
+
+            foreach($products as $product){
+                $productsandqueantities[$product['product_id']] = $product['stock'];
+            }
+
             foreach($productIds as $k=>$v){
                 try {
+                    $productsandqueantities[$k] -= $v;
                     $query = "INSERT INTO orderinfo (order_id, product_id, quantity) VALUES (?, ?, ?)";
                     $params = [$orderid, $k, $v];
                     App::container()->resolve('Core\Database')->query($query, $params); 
+                    
                 } catch (PDOException $e) {
                     echo "Error: " . $e->getMessage();
                 }
             }
+
+            foreach($productsandqueantities as $k=>$v){
+                $query = "UPDATE products SET stock = ? WHERE product_id = ?";
+                $params = [$v, $k];
+                App::container()->resolve('Core\Database')->query($query, $params); 
+                $query = "DELETE FROM carts WHERE product_id = ? AND user_id = ?";
+                $params = [$k, $user_id];
+                App::container()->resolve('Core\Database')->query($query, $params);
+            }
+            
         }
         else
         {
