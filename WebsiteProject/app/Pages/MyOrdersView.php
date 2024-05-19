@@ -202,7 +202,7 @@ class MyOrdersView
           <div class="card mb-4">
             <div class="card-header bg-light d-flex justify-content-between align-items-center">
               <div>
-                <h2 class="h5 m-0"><?= $order['order_id'] ?></h2>
+                <h2 class="h5 m-0">Order id : <?= $order['order_id'] ?></h2>
                 <p class="text-muted m-0"><?= $order['created_at'] ?></p>
               </div>
               <div>
@@ -232,7 +232,7 @@ class MyOrdersView
                       <p class="m-0" > Price: <?= $product['price'] ?>$</p>
 
                     </div>
-                    <?php if ($order['status'] != "DELIVERED"): ?>
+                    <?php if ($order['status'] == "DELIVERED"): ?>
                       <div>
                         <button class="btn btn-primary review-button" data-bs-toggle="modal"
                           data-bs-target="#<?= $modalId ?>">
