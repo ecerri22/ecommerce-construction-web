@@ -28,6 +28,7 @@ class DashboardAdminView {
                 <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
                 <!-- <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"> -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+                <link rel="stylesheet" href="Enia/eniaAdminStyles.css" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                 <script src="Thanas\javascript\functions.js"></script>
             </head>
@@ -117,14 +118,8 @@ class DashboardAdminView {
                         ?>
                         <?php
                             Statistic::get_statistics(2);
-                            //this is a good way to dynamically generate the statistics, we can easily add more statistics to the page.
-                            //for example , try to see the difference after the commented line below is uncommented
-                            //and when its commented.
-                            Statistic::$statistic_array2[count(Statistic::$statistic_array2)] = new Statistic(8,"Statistic Name",1000,-1,"icons/bar-chart.png","https://www.google.com",2);
-                            //the "https://www.google.com" is just a placeholder, if we are going to make it so when the statistic is clicked 
-                            //it sends you to another file instead of just modfying the current file we can change this to the file path.
                             if(isset(Statistic::$statistic_array2))
-                                echo '<div class = "statistics-content-2">';
+                                echo '<div class = "statistics-content-2" id ="second-zone">';
                             foreach(Statistic::$statistic_array2 as $statistic)
                             {
                                 $statistic->display_statistic();

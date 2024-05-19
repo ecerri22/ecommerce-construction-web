@@ -532,14 +532,69 @@ a {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
   background-color: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 1);
   animation: fadeInAnimationformrow 0.6s ease forwards;
 }
 
+.form2-contents{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+
+}
+
+.words {
+  font-size: 1.2rem;
+  color: #333;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+.form2-input{
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #f9fafc;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.dropdown:hover {
+  background-color: #f2f2f2;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem;
+  color: #061538;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #081f54;
+  color: #fff;
+}
 .form-delete-btn
 {
   position: absolute;
@@ -563,6 +618,24 @@ a {
   outline: none;
 }
 
+.form2-confirm-btn{
+  background-color: #081f54;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.4rem;
+  /* border-radius: 4px; */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 30px 10px 2rem 10px;
+  margin-bottom: 2rem;
+
+}
 
 
 @keyframes fadeInAnimationform {
@@ -583,8 +656,8 @@ a {
     opacity: 0;
   }
   to {
-    width: 200px;
-    height: auto;
+    width: 30rem;
+    height: 35rem;
     opacity: 1;
   }
 }

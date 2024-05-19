@@ -28,28 +28,36 @@ class Statistic {
     }
 
     public function display_statistic(){ // displays the statistic, icon, name and value
+        
+        $val = $this->statistic_value;
+        if(!ctype_digit($this->statistic_value))
+        {
+            $val = App::container()->resolve('Core\Database')->query($this->statistic_value,[])->get();
+            $this->statistic_value = str_replace("'","\\'",$this->statistic_value);
+        }
         if($this->statistic_type == 1){
-            echo '<a href="'. $this->statistic_destination .'" id="statistic_'. self::$cnt . '" class="statistic">';
+            echo '<a href="'. $this->statistic_destination .'" id="statistic_'. $this->statistic_id. '" class="statistic">';
             echo '<img class="statistic-icon" src ="Thanas/'. $this->statistic_icon . '">';
-            echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>'; // Add delete button
+            //echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button>'; // Add delete button
             echo '<h3 style="color:gray; font-size:1.4rem; font-weight:500;">' . $this->statistic_name .'</h3>';
-            echo "<p style = 'font-weight:900; font-size:3rem; color: #061538;'>".$this->statistic_value ."</p>";
+            echo "<p style = 'font-weight:900; font-size:3rem; color: #061538;'>".$val ."</p>";
             $this->display_diff();
             echo '<h4 style="color:gray; font-weight:500; font-size:1rem; ">From Last Month</h4>';
             echo '</a>';
-            echo '<script> addClickEventToDiv("'.$this->statistic_destination.'","statistic_'. self::$cnt.'");</script>';
+            echo '<script> addClickEventToDiv("'.$this->statistic_destination.'","statistic_'. $this->statistic_id.'");</script>';
         }
         else if($this->statistic_type == 2){
-            echo '<a href="'. $this->statistic_destination .'" id="statistic_'. self::$cnt . '" class = "statistic-2">';
+            echo '<a id="statistic_'. $this->statistic_id . '" class = "statistic-2">';
                 echo '<img class="statistic-icon-2" src="Thanas/'.$this->statistic_icon.'">';
             echo '<div class = "statistic-2-info">';
                     echo "<div style='color:gray; font-size:1.1rem; font-weight:500;'>".$this->statistic_name ."</div>";
                         echo '<div>';
-                            echo "<p style = 'font-weight:900; font-size:30px; color: #061538;'>".$this->statistic_value."</p>";
+                            echo "<p style = 'font-weight:900; font-size:30px; color: #061538;'>".$val[0]['COUNT(*)']."</p>";
                         echo '</div>';
                 echo '</div>';
-            echo '<button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'.$this->statistic_id.');">X</button></a>';
-                echo '<script> addClickEventToDiv("'.$this->statistic_destination.'","statistic_'. self::$cnt.'");</script>';
+                ?>
+            <button class="delete-btn" onclick ="removeStatisticAndAnimate(event,this,'<?php echo $this->statistic_name?>','<?php echo $this->statistic_value?>','<?php echo $this->statistic_prev_value?>','<?php echo $this->statistic_icon?>','<?php echo $this->statistic_type?>','<?php echo $this->statistic_destination?>','<?php echo $this->statistic_id?>');">X</button></a><?php
+                //echo '<script> addClickEventToDiv("'.$this->statistic_destination.'","statistic_'. $this->statistic_id.'");</script>';
         }
         self::$cnt+=1;     
     }
@@ -82,7 +90,7 @@ class Statistic {
     }
 
     public function to_db_format(){
-        return array($this->statistic_name, $this->statistic_value, $this->statistic_prev_value, $this->statistic_icon, $this->statistic_type, $this->statistic_destination);
+        return array($this->statistic_name, $this->statistic_value, $this->statistic_prev_value, $this->statistic_icon, $this->statistic_type, $this->statistic_destination,$this->statistic_id);
     }
 
     public static function db_to_statistic($row){
