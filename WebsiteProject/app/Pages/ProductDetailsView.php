@@ -231,6 +231,7 @@ class ProductDetailsView
 
         ?>
         <div class="container" id="container">
+            <div class="col">
             <div class="row">
                 <div class="col-xl-6 ml-5 mb-2">
                     <div class="product-photo">
@@ -314,7 +315,9 @@ class ProductDetailsView
                     </div>
                 </div>
             </div>
+            <div class="row">
             <?php
+            
             if ($nrOfReviews != 0) {
                 foreach ($reviews as $review) {
 
@@ -341,6 +344,9 @@ class ProductDetailsView
                     <?php } ?>
                 </div>
             <?php } ?>
+            <div>
+                <div>
+                    <div>
         </div>
         <?php
     }

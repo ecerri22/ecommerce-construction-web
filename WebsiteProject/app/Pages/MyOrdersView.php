@@ -17,7 +17,12 @@ if (isset($_POST["Submit"])) {
       </script>
     ';
   } else {
-    Product::addReview(date('Y-m-d H:i:s'), $description, $stars, $userId, $productId, $userId);
+    Product::addReview(date('Y-m-d H:i:s'), $description, $stars, $userId, $productId);
+    echo ' 
+      <script>
+        alert("Review added succesfully")
+      </script>
+    ';
   }
   unset($_POST["saveChangesButton"]);
   unset($_POST["rating"]);
@@ -232,7 +237,7 @@ class MyOrdersView
                       <p class="m-0" > Price: <?= $product['price'] ?>$</p>
 
                     </div>
-                    <?php if ($order['status'] == "DELIVERED"): ?>
+                    <?php if ($order['status'] == "Delivered"): ?>
                       <div>
                         <button class="btn btn-primary review-button" data-bs-toggle="modal"
                           data-bs-target="#<?= $modalId ?>">
@@ -243,12 +248,7 @@ class MyOrdersView
 
                   </div>
                 </div>
-
-              <?php } ?>
-            </div>
-          </div>
-
-          <!-- Review modal -->
+                <!-- Review modal -->
           <div class="modal fade" id="<?= $modalId ?>" tabindex="-1" aria-labelledby="reviewModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -283,7 +283,11 @@ class MyOrdersView
               </div>
             </div>
           </div>
-          <!-- End of Review modal -->
+              <?php } ?>
+            </div>
+          </div>
+
+          
         <?php } ?>
       </div>
     </div>
