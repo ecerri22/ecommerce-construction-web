@@ -236,6 +236,7 @@ header {
     align-items: center;
     justify-content: center;
     background-color: white;
+    margin-bottom: 50px;
 }
 
 .product-name {
