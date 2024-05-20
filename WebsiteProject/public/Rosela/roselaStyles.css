@@ -300,7 +300,7 @@ input[type="number"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  column-gap: 50px;
+  column-gap: 120px;
   width: 100%;
   padding: 20px;
 
