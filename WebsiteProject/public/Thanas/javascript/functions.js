@@ -142,6 +142,7 @@ function addstatistic(form)
     var fileInput = document.getElementById('prod-img');
     var selectedFile = fileInput.files[0]; // Get the first selected file (if any)
 
+    var plus = document.getElementById('statistic_2_maker');
     if(!name || !category || !type || !selectedFile) {
         alert('Please fill in all fields.');
         return;
@@ -162,7 +163,9 @@ function addstatistic(form)
         processData: false, // Prevent jQuery from processing the data
         contentType: false, // Let the browser set the content type
         success: function(response) {
+            plus.remove();
             $('#second-zone').append(response);
+            $('#second-zone').append(plus);
         },
         error: function() {
             alert('Error uploading file.');
