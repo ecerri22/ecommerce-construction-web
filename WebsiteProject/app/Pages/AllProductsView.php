@@ -53,7 +53,15 @@ class AllProductsView {
                         <!-- center search bar-->
                         <div class="search-bar">
                             <input type="text" class="input-search" placeholder="Search..." id = "searcher">
-                            <button onclick='Search(<?php echo json_encode($this->arr) ?>,<?php echo isset($_SESSION["user"]["user_id"]) ?>,<?php echo @$_SESSION["user"]["user_id"] ?>)' class='btn-search header-btn'>
+                            <?php
+                            $istrue = 'false';
+                            $id = "null";
+                            if (isset($_SESSION["user"])) {
+                                $istrue = true;
+                                $id = $_SESSION["user"]["user_id"];
+                            }
+                            ?>
+                            <button onclick='Search(<?php echo json_encode($this->arr) ?>,<?php echo $istrue ?>,<?php echo $id ?>)' class='btn-search header-btn'>
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -139,11 +147,13 @@ class AllProductsView {
                 <div class="sidebar-header">
                     <p class="filter-section-title">Filter by</p>
                     <?php
-                    $istrue = false;
+                    $istrue = 'false';
+                    $id = "null";
                     if (isset($_SESSION["user"])) {
                         $istrue = true;
+                        $id = $_SESSION["user"]["user_id"];
                     }
-                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Clear</button>";
+                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).", ".$istrue.", ".$id.");'>Clear</button>";
                     ?>
                 </div>
                 <div class="sidebar-content">
@@ -154,16 +164,16 @@ class AllProductsView {
                         </button>
                         <div class="dropdown-content">
                             <?php
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Windows</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Electrical</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Wood Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Hydraulics</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Building Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Roof Covers</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Isolation</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Windows</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Electrical</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Steel Profiles</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Wood Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Hydraulics</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Professional Work Tools</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Building Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Roof Covers</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Isolation</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".$id.");'>Packaging Materials</a>";
                             ?>
                         </div>
                     </div>
