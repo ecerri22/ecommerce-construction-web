@@ -87,7 +87,7 @@ class Order {
     }
 
     public function getAllOrders(){
-        $result = 'SELECT orders.*, orderinfo.* FROM `orders` JOIN `orderinfo` ON orders.order_id = orderinfo.order_id GROUP BY orders.order_id;';
+        $result = 'SELECT orders.* , orderinfo.* FROM orders JOIN orderinfo ON orders.order_id = orderinfo.order_id'  ;
         return $this->db->query($result)->get();
     }   
 }

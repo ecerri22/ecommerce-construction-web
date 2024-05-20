@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 01:15 AM
+-- Generation Time: May 20, 2024 at 12:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -610,9 +610,6 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `password`, `email`, 
 --
 
 CREATE TABLE `wishlists` (
-  `item_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -621,8 +618,8 @@ CREATE TABLE `wishlists` (
 -- Dumping data for table `wishlists`
 --
 
-INSERT INTO `wishlists` (`item_id`, `created_at`, `updated_at`, `product_id`, `user_id`) VALUES
-(0, '2024-05-18 15:22:11', '2024-05-18 15:22:11', 1, 72);
+INSERT INTO `wishlists` (`product_id`, `user_id`) VALUES
+(1, 72);
 
 --
 -- Indexes for dumped tables
@@ -705,9 +702,9 @@ ALTER TABLE `users`
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  ADD PRIMARY KEY (`item_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `product_id_2` (`product_id`,`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables

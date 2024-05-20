@@ -146,7 +146,7 @@ class Product{
     }
 
     public static function addProductToShoppingCart($userId,$productId,$quantity){
-        $sql = "INSERT INTO carts(`user_id`,`product_id','quantity') 
+        $sql = "INSERT INTO carts(`user_id`,`product_id','quantity`) 
         VALUES($userId,$productId,$quantity)";
         $addedProd = App::container()->resolve('Core\Database')->query($sql);
     
@@ -158,7 +158,7 @@ class Product{
     }
 }
     public static function addProductToWishlist($productId,$userId){
-        $sql = "INSERT INTO wishlists(`product_id`,`user_id') 
+        $sql = "INSERT INTO wishlists(`product_id`,`user_id`) 
         VALUES($productId,$userId)";
         $addedProd = App::container()->resolve('Core\Database')->query($sql);
     
@@ -170,9 +170,9 @@ class Product{
     }
     }
     public static function deleteProductFromWishlist($productId,$userId){
-        $sql = 'DELETE FROM wishlist WHERE user_id = ? AND product_id=?';
+        $sql = 'DELETE FROM wishlists WHERE user_id = ? AND product_id=?';
         $params =[$userId,$productId];
-        $removedProd = App::container()->resolve('Core\Database')->query($sql);
+        $removedProd = App::container()->resolve('Core\Database')->query($sql,$params);
         if ($removedProd) { 
             return true;
         } else {
