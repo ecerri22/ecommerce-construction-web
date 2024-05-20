@@ -3,15 +3,18 @@
 namespace Controllers;
 use Core\Controller;
 use Models\Product;
+use Models\User;
 
 class ProductController extends Controller
 {
     public $product;
+    public $user;
 
     public function __construct()
     {
         parent::__construct();
         $this->product = new Product();
+        $this->user = new User();
     }
 
     public function renderAllProductsPage()
@@ -25,15 +28,5 @@ class ProductController extends Controller
     {
         view('user/irvi_productDetails.view.php');
     }
-
-    
-    public function deleteProduct()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->product->deleteProduct();
-            redirect('/allProductsAdmin');
-        } 
-    }
-
 
 }

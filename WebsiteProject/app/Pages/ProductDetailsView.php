@@ -231,55 +231,51 @@ class ProductDetailsView
 
         ?>
         <div class="container" id="container">
-            <div class="col">
             <div class="row">
                 <div class="col-xl-6 ml-5 mb-2">
                     <div class="product-photo">
-                        <img src="/<?= $product['product_image'] ?>" class="prod" alt="..." style="max-height: 400px;">
+                        <img src="/<?= $product['product_image'] ?>" class="prod" alt="Product image" style="max-height: 400px;">
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="product-description">
                         <h1><?= $product['name'] ?></h1>
-                        <p><?php
-                        if ($nrOfReviews != 0)
-                            echo $averageRating;
+                        <p>
+                            <?php
+                            if ($nrOfReviews != 0)
+                                echo $averageRating;
 
-                        #generate stars
-                        if ($nrOfReviews != 0) {
-                            $fullStars = floor($averageRating);
-                            for ($i = 0; $i < $fullStars; $i++) {
-                                echo '<i class="fas fa-star text-warning"></i>';
-                            }
+                            # Generate stars
+                            if ($nrOfReviews != 0) {
+                                $fullStars = floor($averageRating);
+                                for ($i = 0; $i < $fullStars; $i++) {
+                                    echo '<i class="fas fa-star text-warning"></i>';
+                                }
 
-                            if ($averageRating - $fullStars >= 0.5) {
-                                echo '<i class="fas fa-star-half-alt text-warning"></i>';
-                                $fullStars++;
-                            }
+                                if ($averageRating - $fullStars >= 0.5) {
+                                    echo '<i class="fas fa-star-half-alt text-warning"></i>';
+                                    $fullStars++;
+                                }
 
-                            for ($i = $fullStars; $i < 5; $i++) {
-                                echo '<i class="far fa-star text-warning"></i>';
+                                for ($i = $fullStars; $i < 5; $i++) {
+                                    echo '<i class="far fa-star text-warning"></i>';
+                                }
+                            } else {
+                                // Print all empty stars if there are no reviews
+                                for ($i = 0; $i < 5; $i++) {
+                                    echo '<i class="far fa-star text-warning"></i>';
+                                }
                             }
-                        } else {
-                            // Print all empty stars if there are no reviews
-                            for ($i = 0; $i < 5; $i++) {
-                                echo '<i class="far fa-star text-warning"></i>';
-                            }
-                        }
-                        ?>
-                            <a href="#reviews" class="link-product" id="reviewLink">(<?php echo $nrOfReviews ?> customer
-                                reviews)</a>
+                            ?>
+                            <a href="#reviews" class="link-product" id="reviewLink">(<?php echo $nrOfReviews ?> customer reviews)</a>
                         </p>
                         <p><?php echo $product['description']; ?></p>
-
                         <p>Price: <span style="font-weight: bold; color: #333;"><?= $product['price'] ?>$</span></p>
-
 
                         <form method="post" action="">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input class="form-control" id="quantityTf" name="quantityTf" type="number"
-                                        placeholder="Quantity" min="1" required>
+                                    <input class="form-control" id="quantityTf" name="quantityTf" type="number" placeholder="Quantity" min="1" required>
                                     <input type="hidden" name="userID" value="<?php echo $userId ?>">
                                 </div>
                                 <div class="col-md-6">
@@ -316,38 +312,39 @@ class ProductDetailsView
                 </div>
             </div>
             <div class="row">
-            <?php
-            
-            if ($nrOfReviews != 0) {
-                foreach ($reviews as $review) {
+                <div id="reviews" class="mt-5">
+                    <h2>Customer Reviews</h2>
+                    <?php
+                    if ($nrOfReviews != 0) {
+                        foreach ($reviews as $review) {
+                            $user = User::getUser($review['user_id']);
+                            ?>
+                            <div class="review">
+                                <div class="rating">
+                                    <?php
+                                    for ($i = 0; $i < $review['stars']; $i++) {
+                                        echo '<i class="fas fa-star text-warning"></i>';
+                                    }
 
-                    $user = User::getUser($review['user_id']);
-                    ?>
-                    <div id="reviews" class="mt-5">
-                        <h2>Customer Reviews</h2>
-                        <div class="review">
-                            <div class="rating">
-                                <?php
-                                for ($i = 0; $i < $review['stars']; $i++) {
-                                    echo '<i class="fas fa-star text-warning"></i>';
-                                }
-
-                                for ($i = $review['stars']; $i < 5; $i++) {
-                                    echo '<i class="far fa-star text-warning"></i>';
-                                }
-                                ?>
+                                    for ($i = $review['stars']; $i < 5; $i++) {
+                                        echo '<i class="far fa-star text-warning"></i>';
+                                    }
+                                    ?>
+                                </div>
+                                <p class="review-content"><?php echo $review['review_text'] ?></p>
+                                <p class="reviewer"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?>
+                                    <span class="date">(<?= $review['review_date'] ?>)</span></p>
                             </div>
-                            <p class="review-content"> <?php echo $review['review_text'] ?> </p>
-                            <p class="reviewer"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?><span
-                                    class="date">(<?= $review['review_date'] ?>)</span></p>
-                        </div>
-                    <?php } ?>
+                            <?php
+                        }
+                    } else {
+                        echo '<p>No reviews yet.</p>';
+                    }
+                    ?>
                 </div>
-            <?php } ?>
-            <div>
-                <div>
-                    <div>
+            </div>
         </div>
+
         <?php
     }
 

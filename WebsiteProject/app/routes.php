@@ -72,7 +72,7 @@ $router->get('/editProduct', $ac, 'renderEditProductPage')->only('role');
 $router->patch('/editProduct', $ac, 'editProduct')->only('role');
 
 // ADMIN - DELETE PRODUCT //
-$router->delete('/allProductsAdmin', $pc, 'deleteProduct')->only('role');
+$router->delete('/allProductsAdmin', $ac, 'deleteProduct')->only('role');
 
 // ADMIN - DASHBOARD //
 $router->get('/dashboard', $ac, 'renderDashboardAdminPage')->only('role');

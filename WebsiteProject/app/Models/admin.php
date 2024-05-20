@@ -172,6 +172,16 @@ class Admin
           }
     }
 
+    public function deleteProduct()
+    {
+        $product = App::container()->resolve('Core\Database')->query('SELECT * from products where product_id = :product_id', ['product_id' => $_POST['product_id']])->findOrFail();
+
+        $sql = "DELETE FROM products WHERE product_id = :product_id";
+        return App::container()->resolve('Core\Database')->query($sql, ['product_id' => $_POST['product_id']]);
+
+        unlink("image/" . $product['image_name']);
+    }
+
     public function getFilteredProducts($search)
     {
         if (!empty($search)) {

@@ -12,14 +12,14 @@ class Footer {
                     <h3>LOGO</h3>
                 </a>
                 <ul class="footer-links ftlink-main">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/allProducts">Products</a></li>
+                    <li><a href="/aboutUs">Contact Us</a></li>
                 </ul>
                 <ul class="footer-links ftlink-account">
-                    <li><a href="#">Create Account</a></li>
-                    <li><a href="#">My account</a></li>
-                    <li><a href="#">Shopping Cart</a></li>
+                    <li><a href="/signUp">Create Account</a></li>
+                    <li><a href="/myAccount">My account</a></li>
+                    <li><a href="/shoppingCart">Shopping Cart</a></li>
                 </ul>
                 <div class="footer-social">
                     <ul>

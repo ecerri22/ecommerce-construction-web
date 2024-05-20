@@ -9,16 +9,16 @@ use Models\User;
 
 class AdminController extends Controller
 {
-    private $user;
+    private $admin;
     private $order;
-    private $guest;
+    private $user;
 
     public function __construct()
     {
         parent::__construct();
-        $this->user = new Admin();
+        $this->admin = new Admin();
         $this->order = new Order();
-        $this->guest = new User();
+        $this->user = new User();
     }
 
     public function renderDashboardAdminPage()
@@ -35,9 +35,8 @@ class AdminController extends Controller
     public function renderEditProductPage()
     {
         $product_id = $_GET['product_id'] ?? null;
-        // dd($_GET);
         if ($product_id) {
-            $productData = $this->user->getProductData($product_id);
+            $productData = $this->admin->getProductData($product_id);
             view('admin/enia_editProduct.view.php', [
                 'productData' => $productData
             ]);
@@ -54,14 +53,14 @@ class AdminController extends Controller
     public function renderUsersAdminController()
     {
         view('admin/atea_allUsers.view.php', [
-            'data' => $this->user->getallusers()
+            'data' => $this->admin->getallusers()
         ]);
     }
 
     public function renderProductsAdminController()
     {
         $search = $_GET['search'] ?? '';
-        $products = $this->user->getFilteredProducts($search); 
+        $products = $this->admin->getFilteredProducts($search); 
         view('admin/atea_allProducts.view.php', [
             'data' => $products
         ]);
@@ -81,10 +80,18 @@ class AdminController extends Controller
             $stock = $_POST['prod-stock'];
             $buy_price = $_POST['prod-buy-price'];
 
-            $this->user->createProduct($name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
+            $this->admin->createProduct($name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
 
             redirect('/allProductsAdmin');
         }
+    }
+
+    public function deleteProduct()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->admin->deleteProduct();
+            redirect('/allProductsAdmin');
+        } 
     }
 
     public function createAdminDashboard()
@@ -95,7 +102,7 @@ class AdminController extends Controller
             $email = $_POST['email'];
             $password = $_POST['pass'];
 
-            $this->guest->register($name, $lastName, $email, $password);
+            $this->user->register($name, $lastName, $email, $password);
 
             redirect('/allProductsAdmin');
         } 
@@ -126,7 +133,7 @@ class AdminController extends Controller
             $buy_price = $_POST['prod-buy-price'];
             // dd($_FILES);
 
-            $result = $this->user->updateProduct($product_id, $name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
+            $result = $this->admin->updateProduct($product_id, $name, $description, $image, $category, $material, $unit_of_measure, $brand, $price, $stock, $buy_price);
 
             if ($result) {
                 redirect('/allProductsAdmin');

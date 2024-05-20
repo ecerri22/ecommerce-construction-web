@@ -44,7 +44,7 @@ function Search(page,user,userid) {
 
 function toggleButtonColorOnPress(button, page,user,userid){
     if (button.style.backgroundColor == "green"){
-        button.style.backgroundColor = "#0615388c";
+        button.style.backgroundColor = "#061538db";
     } else {
         button.style.backgroundColor = "green";   
     }
@@ -54,7 +54,7 @@ function toggleButtonColorOnPress(button, page,user,userid){
 
 function clearSearch(page,user,userid){
     for (var i = 0; i < document.getElementsByClassName("sidebar-link").length; i++){
-        document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#0615388c";
+        document.getElementsByClassName("sidebar-link")[i].style.backgroundColor = "#061538db";
     }
     $('#searcher').val("");
     document.getElementById("mySlider").value = 50;

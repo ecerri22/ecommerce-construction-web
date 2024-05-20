@@ -139,62 +139,62 @@ class AllProductsView {
                 <div class="sidebar-header">
                     <p class="filter-section-title">Filter by</p>
                     <?php
-                    $istrue=false;
-                    if(isset($_SESSION["user"]))
-                    $istrue=true;
-                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Clear</button>";
+                    $istrue = false;
+                    if (isset($_SESSION["user"])) {
+                        $istrue = true;
+                    }
+                    echo "<button class='clear-btn' onclick='clearSearch(".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Clear</button>";
                     ?>
                 </div>
                 <div class="sidebar-content">
-                    <p class="filter-type-title">Categories</p>
-                    <div class="sidebar-list">
-                        <?php
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Windows</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Electrical</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Wood Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Hydraulics</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Building Materials</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Roof Covers</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Isolation</a>";
-                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).",".$istrue.",".@$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
+                    <div class="dropdown">
+                        <button class="dropdown-btn">
+                            <p class="filter-type-title" style="margin:0rem;">Categories</p>
+                            <i class="fas fa-chevron-down" style="color: #061538; font-size:1rem;"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <?php
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Windows</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Electrical</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Steel Profiles</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Wood Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Hydraulics</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Professional Work Tools</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Building Materials</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Roof Covers</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Isolation</a>";
+                            echo "<a href='#' class='sidebar-link' onclick='toggleButtonColorOnPress(this,".json_encode($this->arr).", ".$istrue.", ".@$_SESSION['user']['user_id'].");'>Packaging Materials</a>";
                             ?>
+                        </div>
                     </div>
-                    <div class="price-fliter">
+                    <div class="price-filter">
                         <p class="filter-type-title">Filter By Price</p>
                         <div class="slider-container">
-                        <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
-                        <p>Price: <span id="sliderValue">500 $</span></p>
-                        <script>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
+                            <p>Price: <span id="sliderValue">500 $</span></p>
+                            <script>
                                 var slider = document.getElementById("mySlider");
                                 var sliderValue = document.getElementById("sliderValue");
-
+    
                                 timeout = null; // Initialize timeout variable
                                 slider.oninput = function() {
-                                sliderValue.innerHTML = this.value * 10 + " $";
-                                clearTimeout(timeout); // Clear any existing timeout
-                                timeout = setTimeout(function() {
-                                    // Call the search function after a delay of 500 milliseconds
-                                    Search(<?php echo json_encode($this->arr); ?>, <?php if(isset($_SESSION['user']))
-                                    echo true;
-                                else
-                                echo false; ?>,<?php echo @$_SESSION['user']['user_id']; ?>);
-                                }, 500); // Adjust the delay time as needed
-                            };
+                                    sliderValue.innerHTML = this.value * 10 + " $";
+                                    clearTimeout(timeout); // Clear any existing timeout
+                                    timeout = setTimeout(function() {
+                                        // Call the search function after a delay of 500 milliseconds
+                                        Search(<?php echo json_encode($this->arr); ?>, <?php echo isset($_SESSION['user']) ? 'true' : 'false'; ?>, <?php echo @$_SESSION['user']['user_id']; ?>);
+                                    }, 500); // Adjust the delay time as needed
+                                };
                             </script>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <script>
             var changed = [];
-            function addtocart(userid,productid,button,isincart)
-            {
-                if(isincart)
-                {
+            function addtocart(userid, productid, button, isincart) {
+                if (isincart) {
                     return;
                 }
                 $.ajax({
@@ -211,9 +211,19 @@ class AllProductsView {
                     }
                 });
             }
-</script>
+    
+            document.addEventListener("DOMContentLoaded", function() {
+                var dropdownBtn = document.querySelector(".dropdown-btn");
+                var dropdownContent = document.querySelector(".dropdown-content");
+    
+                dropdownBtn.addEventListener("click", function() {
+                    dropdownContent.classList.toggle("show");
+                });
+            });
+        </script>
         <?php
     }
+    
         
     public function display_products($products) {
         echo '<div id="products" class="products-container">';
