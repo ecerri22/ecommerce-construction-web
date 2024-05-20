@@ -48,19 +48,21 @@ class ProductDetailsView
             }
             $productId = $_GET['productID'];
             if (count(Product::getProductFromWishList($productId, $userId)) == 0) {
-                Product::addProductToWishlist($userId, $productId);
+                Product::addProductToWishlist($productId,$userId);
+                $wishlistButtonValue = 'Remove from wishlist';
                 echo ' 
                     <script>
                         alert("Product added in the wishlist");
-                        $(`#cartButton`).Value=`Remove from wishlist`;
+                        $(`#wishlistButton`).value=`Remove from wishlist`;
                     </script>
                     ';
             } else {
-                Product::deleteProductFromWishlist($userId, $productId);
+                Product::deleteProductFromWishlist($productId,$userId);
+                $wishlistButtonValue = 'Add to wishlist';
+
                 echo ' 
                     <script>
                         alert("Product removed from the wishlist");
-                        $(`#cartButton`).Value=`Add to wishlist`;
                     </script>
                     ';
             }
@@ -223,6 +225,10 @@ class ProductDetailsView
 
         $averageRating = $nrOfReviews > 0 ? $sumOfRatings / $nrOfReviews : 0;
 
+        $isInWishlist = count(Product::getProductFromWishList($product['product_id'], $userId)) > 0;
+        $wishlistButtonValue = $isInWishlist ? 'Remove from wishlist' : 'Add to wishlist';
+
+
         ?>
         <div class="container" id="container">
             <div class="row">
@@ -284,7 +290,7 @@ class ProductDetailsView
                         <form method="post" action="">
                             <div class="row mt-3">
                                 <div class="col-md-8">
-                                    <input type="submit" name="wishlistButton" class="btn btn-success" value="Add to wishlist">
+                                    <input type="submit" name="wishlistButton" class="btn btn-success" value="<?= $wishlistButtonValue ?>">
                                 </div>
                             </div>
                         </form>
