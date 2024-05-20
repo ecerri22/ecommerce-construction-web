@@ -20,6 +20,7 @@ class WishlistView{
 
     public function renderContent($allWishlistProducts){
         ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <div class="content">
             <div class="wishlist-products-container">
                 <h2 class="wishlist-title">Wishlist products</h2>
@@ -28,13 +29,26 @@ class WishlistView{
                 if (count($allWishlistProducts) != 0) {
                         ?>
                             <div class="wishlist-products">
+                                <script>
+                                    function removeproduct(product_id){
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "Rosela/removeproductfromwishlist.php",
+                                            data: {product_id: product_id,user_id: <?php echo $_SESSION['user']['user_id']; ?>},
+                                            success: function(data){
+                                                location.reload();
+                                            }
+                                        });
+                                        
+                                    }
+                                </script>
                         <?php
                         foreach ($allWishlistProducts as $wishlistProduct) {
                             ?>
                             <form action="/wishlist" method="post">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($wishlistProduct['product_id']); ?>">
                                 <div class="product-card">
-                                    <button type="submit" class="remove-from-cart">
+                                    <button onclick = 'removeproduct(<?php echo htmlspecialchars($wishlistProduct["product_id"]) ?>)' type="button" class="remove-from-cart">
                                         <i class="fas fa-trash"></i> 
                                     </button>
                                     <img class="product-img" src="<?php echo htmlspecialchars($wishlistProduct['product_image']); ?>" alt="Product image">    
