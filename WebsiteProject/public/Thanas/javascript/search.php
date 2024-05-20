@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach(array_map(function($match) {
         return $match['product'];
     }, $matches) as $product) {
-        $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"#", $product['minidescription'], $product['category'],$user, $product['isincart'], $userid);
+        $products[] = new Product($product['id'],$product['name'], $product['price'], $product['image'],"/productDetails?productID=".$product["id"], $product['minidescription'], $product['category'],$user, $product['isincart'], $userid);
         if(in_array($product['id'], $changedids))
         {
             $products[count($products)-1]->isincart = true;
