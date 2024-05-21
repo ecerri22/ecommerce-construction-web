@@ -101,9 +101,7 @@ class ChangeContentsView {
                     <div class="section-form-container">
                         <?php $this->renderHomePageSection($homepagecontents) ?>
                         <?php $this->renderAboutUsSection($aboutUsContents) ?>
-                        <?php
-                        //  $this->renderFooterSection($footercontents) 
-                         ?>
+                        <?php $this->renderFooterSection($footercontents) ?>
                         <button type="submit" class="submit-btn">Save All Changes</button>
                     </div>
                 </form>
@@ -154,28 +152,28 @@ class ChangeContentsView {
         <?php
     }
 
-    // private function renderFooterSection($footercontents =[]) {
-    //     $footerContents = $footercontents[0]; // Assuming there's only one set of footer contents
-        /*
+    private function renderFooterSection($footercontents =[]) {
+    
         ?>
         <div class="section-form">
             <h2>Footer Content</h2>
             <div class="form-group">
                 <label for="footer-facebook">Facebook:</label>
-                <input type="text" id="footer-facebook" name="footer-facebook" value="<?= $footerContents['facebook'] ?>">
+                <input type="text" id="footer-facebook" name="footer-facebook" value="<?= $footercontents['link'] ?>">
             </div>
             <div class="form-group">
                 <label for="footer-twitter">Twitter:</label>
-                <input type="text" id="footer-twitter" name="footer-twitter" value="<?= $footerContents['twitter'] ?>">
+                <input type="text" id="footer-twitter" name="footer-twitter" value="<?= $footercontents['link'] ?>">
             </div>
             <div class="form-group">
                 <label for="footer-instagram">Instagram:</label>
-                <input type="text" id="footer-instagram" name="footer-instagram" value="<?= $footerContents['instagram'] ?>">
+                <input type="text" id="footer-instagram" name="footer-instagram" value="<?= $footercontents['link'] ?>">
             </div>
         </div>
-        */
-        // <?php
-    // }
+        
+        <?php
+    }
+    
 }
 
 echo '<style>

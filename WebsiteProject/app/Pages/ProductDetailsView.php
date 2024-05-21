@@ -231,21 +231,21 @@ class ProductDetailsView
 
         ?>
         <div class="container" id="container">
-            <div class="row">
-                <div class="col-xl-6 ml-5 mb-2">
-                    <div class="product-photo">
-                        <img src="/<?= $product['product_image'] ?>" class="prod" alt="Product image" style="max-height: 400px;">
+            <div class="col">
+                <div class="row">
+                    <div class="col-xl-6 ml-5 mb-2">
+                        <div class="product-photo">
+                            <img src="/<?= $product['product_image'] ?>" class="prod" alt="..." style="max-height: 400px;">
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="product-description">
-                        <h1><?= $product['name'] ?></h1>
-                        <p>
-                            <?php
+                    <div class="col-xl-6">
+                        <div class="product-description">
+                            <h1><?= $product['name'] ?></h1>
+                            <p><?php
                             if ($nrOfReviews != 0)
                                 echo $averageRating;
 
-                            # Generate stars
+                            #generate stars
                             if ($nrOfReviews != 0) {
                                 $fullStars = floor($averageRating);
                                 for ($i = 0; $i < $fullStars; $i++) {
@@ -267,79 +267,83 @@ class ProductDetailsView
                                 }
                             }
                             ?>
-                            <a href="#reviews" class="link-product" id="reviewLink">(<?php echo $nrOfReviews ?> customer reviews)</a>
-                        </p>
-                        <p><?php echo $product['description']; ?></p>
-                        <p>Price: <span style="font-weight: bold; color: #333;"><?= $product['price'] ?>$</span></p>
+                                <a href="#reviews" class="link-product" id="reviewLink">(<?php echo $nrOfReviews ?> customer
+                                    reviews)</a>
+                            </p>
+                            <p><?php echo $product['description']; ?></p>
 
-                        <form method="post" action="">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input class="form-control" id="quantityTf" name="quantityTf" type="number" placeholder="Quantity" min="1" required>
-                                    <input type="hidden" name="userID" value="<?php echo $userId ?>">
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="submit" name="cartButton" class="btn btn-primary">Add to Cart</button>
-                                </div>
-                            </div>
-                        </form>
+                            <p>Price: <span style="font-weight: bold; color: #333;"><?= $product['price'] ?>$</span></p>
 
-                        <form method="post" action="">
-                            <div class="row mt-3">
-                                <div class="col-md-8">
-                                    <input type="submit" name="wishlistButton" class="btn btn-success" value="<?= $wishlistButtonValue ?>">
+
+                            <form method="post" action="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="form-control" id="quantityTf" name="quantityTf" type="number"
+                                            placeholder="Quantity" min="1" required>
+                                        <input type="hidden" name="userID" value="<?php echo $userId ?>">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" name="cartButton" class="btn btn-primary">Add to Cart</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <div class="details">
-                            <div class="row mt-1">
-                                <p>Brand:
-                                    <a href="/allProducts" class="link-product"><?php echo $product['brand'] ?></a>
-                                </p>
-                            </div>
-                            <div class="row mt-0">
-                                <p>Category:
-                                    <a href="/allProducts" class="link-product"><?php echo $category['category_name'] ?></a>
-                                </p>
-                            </div>
-                            <div class="row mt-0">
-                                <p>Material:
-                                    <a href="/allProducts" class="link-product"><?php echo $product['material'] ?></a>
-                                </p>
+                            </form>
+
+                            <form method="post" action="">
+                                <div class="row mt-3">
+                                    <div class="col-md-8">
+                                        <input type="submit" name="wishlistButton" class="btn btn-success" value="<?= $wishlistButtonValue ?>">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="details">
+                                <div class="row mt-1">
+                                    <p>Brand:
+                                        <a href="/allProducts" class="link-product"><?php echo $product['brand'] ?></a>
+                                    </p>
+                                </div>
+                                <div class="row mt-0">
+                                    <p>Category:
+                                        <a href="/allProducts" class="link-product"><?php echo $category['category_name'] ?></a>
+                                    </p>
+                                </div>
+                                <div class="row mt-0">
+                                    <p>Material:
+                                        <a href="/allProducts" class="link-product"><?php echo $product['material'] ?></a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div id="reviews" class="mt-5">
-                    <h2>Customer Reviews</h2>
+                <div class="row">
                     <?php
-                    if ($nrOfReviews != 0) {
-                        foreach ($reviews as $review) {
-                            $user = User::getUser($review['user_id']);
-                            ?>
-                            <div class="review">
-                                <div class="rating">
-                                    <?php
-                                    for ($i = 0; $i < $review['stars']; $i++) {
-                                        echo '<i class="fas fa-star text-warning"></i>';
-                                    }
+                        if ($nrOfReviews != 0) {
+                            foreach ($reviews as $review) {
 
-                                    for ($i = $review['stars']; $i < 5; $i++) {
-                                        echo '<i class="far fa-star text-warning"></i>';
-                                    }
-                                    ?>
-                                </div>
-                                <p class="review-content"><?php echo $review['review_text'] ?></p>
-                                <p class="reviewer"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?>
-                                    <span class="date">(<?= $review['review_date'] ?>)</span></p>
-                            </div>
-                            <?php
-                        }
-                    } else {
-                        echo '<p>No reviews yet.</p>';
-                    }
+                                $user = User::getUser($review['user_id']);
+                                ?>
+                                    <div id="reviews" class="mt-5">
+                                        <h2>Customer Reviews</h2>
+                                        <div class="review">
+                                            <div class="rating">
+                                                <?php
+                                                    for ($i = 0; $i < $review['stars']; $i++) {
+                                                        echo '<i class="fas fa-star text-warning"></i>';
+                                                    }
+
+                                                    for ($i = $review['stars']; $i < 5; $i++) {
+                                                        echo '<i class="far fa-star text-warning"></i>';
+                                                    }
+                                                ?>
+                                            </div>
+                                            <p class="review-content"> <?php echo $review['review_text'] ?> </p>
+                                            <p class="reviewer"><?php echo $user['first_name'] . ' ' . $user['last_name'] ?>
+                                            <span class="date">(<?= $review['review_date'] ?>)</span></p>
+                                        </div>
+                                    </div>
+                                <?php 
+                            } 
+                        } 
                     ?>
                 </div>
             </div>
@@ -350,36 +354,8 @@ class ProductDetailsView
 
     private function renderFooter()
     {
-        ?>
-        <footer class="footer">
-            <div class="footer-content">
-                <a href="#" class="logo logo-footer">
-                    <h3>LOGO</h3>
-                </a>
-                <ul class="footer-links ftlink-main">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-                <ul class="footer-links ftlink-account">
-                    <li><a href="#">Create Account</a></li>
-                    <li><a href="#">My account</a></li>
-                    <li><a href="#">Shopping Cart</a></li>
-                </ul>
-                <div class="footer-social">
-                    <ul>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Company. All rights reserved.</p>
-            </div>
-        </footer>
-        <?php
-
+        $footer = new Footer();
+        $footer->render();
     }
 
 }

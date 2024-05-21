@@ -11,7 +11,14 @@ class Pages {
     {
         $this->db = App::container()->resolve('Core\Database');
     }
+
+    ////////////////////////////////////////HOMEPAGE/////////////////////////////////////
     
+    public function getContentsHomePage(){
+        $result = 'SELECT * FROM home_page_content';
+        return $this->db->query($result)->get();
+    }  
+
     public function updateContentsHomePage($contents) {
         foreach ($contents as $id => $content) {
             $query = "UPDATE home_page_content SET content = ? WHERE id = ?";
@@ -20,10 +27,12 @@ class Pages {
         }
     }
 
-    public function getContentsHomePage(){
-        $result = 'SELECT * FROM home_page_content';
-        return $this->db->query($result)->get();
-    }   
+    /////////////////////////////////ABOUT US///////////////////////////////////////////////
+
+    public function getContentsAboutUsPage() 
+    {
+        return $this->db->query('SELECT * FROM about_us_content')->get();
+    }
 
     public function updateContentsAboutUsPage($contents) {
         foreach ($contents as $id => $content) {
@@ -33,9 +42,11 @@ class Pages {
         }
     }
 
-    public function getContentsAboutUsPage(){
-        $result = 'SELECT * FROM about_us_content';
-        return $this->db->query($result)->get();
+    ////////////////////////////////FOOTER//////////////////////////////////////////////////
+
+    public function getContentsFooter(){
+        $query = 'SELECT * FROM footer_content';
+        return $this->db->query($query)->get();
     }   
 
     public function updateContentsFooter($contents) {
@@ -44,9 +55,5 @@ class Pages {
         $this->db->query($query, $params);
     }
 
-    public function getContentsFooter(){
-        $result = 'SELECT * FROM home_page_content';
-        return $this->db->query($result)->get();
-    }   
 }
 

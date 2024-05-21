@@ -45,7 +45,7 @@ class WishlistView{
                         <?php
                         foreach ($allWishlistProducts as $wishlistProduct) {
                             ?>
-                            <form action="/wishlist" method="post">
+                            <form action="/wishlist" method="post" class="prod-card-form">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($wishlistProduct['product_id']); ?>">
                                 <div class="product-card">
                                     <button onclick = 'removeproduct(<?php echo htmlspecialchars($wishlistProduct["product_id"]) ?>)' type="button" class="remove-from-cart">
@@ -119,7 +119,6 @@ class WishlistView{
                                     font-size: 1rem;
                                     color: #888;
                                 }
-
                             </style>
                         <?php
                     }

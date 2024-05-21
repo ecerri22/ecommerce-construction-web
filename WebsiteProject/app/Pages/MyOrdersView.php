@@ -90,6 +90,7 @@ class MyOrdersView
     <?php
   }
 
+
   private function renderHeader()
   {
     ?>

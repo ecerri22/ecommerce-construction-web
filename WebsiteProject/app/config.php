@@ -2,7 +2,7 @@
 return [
     'host' => 'localhost',
     'port' => '3306',
-    'dbname' => 'constructionweb',
+    'dbname' => 'constructionweb2',
     'user' => 'root',
     'charset' => 'utf8mb4'
 ];

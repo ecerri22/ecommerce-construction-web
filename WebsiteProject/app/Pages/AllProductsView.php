@@ -180,8 +180,12 @@ class AllProductsView {
                     <div class="price-filter">
                         <p class="filter-type-title">Filter By Price</p>
                         <div class="slider-container">
-                            <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
-                            <p>Price: <span id="sliderValue">500 $</span></p>
+                            <div style="display: flex; flex-direction:row; gap:1rem;">
+                                <p>$0</p>
+                                <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
+                                <p>+</p>
+                            </div>
+                            <p>Price: <span id="sliderValue">$500</span></p>
                             <script>
                                 var slider = document.getElementById("mySlider");
                                 var sliderValue = document.getElementById("sliderValue");
@@ -247,35 +251,8 @@ class AllProductsView {
     }
 
     public function display_footer(){
-        ?>
-            <footer class="footer">
-                <div class="footer-content">
-                    <a href="#" class="logo logo-footer">
-                        <h3>LOGO</h3>
-                    </a>
-                    <ul class="footer-links ftlink-main">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                    <ul class="footer-links ftlink-account">
-                        <li><a href="#">Create Account</a></li>
-                        <li><a href="#">My account</a></li>
-                        <li><a href="#">Shopping Cart</a></li>
-                    </ul>
-                    <div class="footer-social">
-                        <ul>
-                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 Company. All rights reserved.</p>
-                </div>
-            </footer> 
-        <?php
+        $footer = new Footer();
+        $footer->render();
     }
 
 

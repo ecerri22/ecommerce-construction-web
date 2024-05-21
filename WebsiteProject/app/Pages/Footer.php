@@ -1,10 +1,29 @@
 <?php
+
 namespace Pages;
 
+use Models\Pages;
+
 class Footer {
-    public function __construct(){}
+    private $pages;
+
+    public function __construct() {
+        $this->pages = new Pages();
+    }
 
     public function render() {
+        $footerContents = $this->pages->getContentsFooter();
+
+        $socialLinks = [
+            'facebook' => '#',
+            'twitter' => '#',
+            'instagram' => '#'
+        ];
+
+        foreach ($footerContents as $content) {
+            $socialLinks[$content['socialMedia']] = $content['link'];
+        }
+
         ?>
         <footer class="footer">
             <div class="footer-content">
@@ -23,9 +42,9 @@ class Footer {
                 </ul>
                 <div class="footer-social">
                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="<?= $socialLinks['facebook'] ?>"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="<?= $socialLinks['twitter'] ?>"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="<?= $socialLinks['instagram'] ?>"><i class="fab fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>

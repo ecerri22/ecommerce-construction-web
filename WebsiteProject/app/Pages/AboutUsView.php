@@ -8,28 +8,28 @@ class AboutUsView {
         $this->partials = new Header($title, $cssFile);
     }
 
-    public function render() {
+    public function render($data = []) {
         ?>
             <?php $this->partials->render() ?>
-            <?php $this->renderContent(); ?>
+            <?php $this->renderContent($data); ?>
             <?php $this->renderFooter(); ?>
         </body>
         </html>
         <?php
     }
 
-    private function renderContent() {
+    private function renderContent($data = []) {
         ?>
             <div class="content">
                 <section class="about-us">
                     <div class="about-container">
                     
                         <h2 class="header">About Our Company</h2>
-                        <p>Construction Web has been a pioneer in the construction industry since 1998, specializing in both residential and commercial projects. Our commitment to innovation and excellence has established us as a leader in the field, delivering projects that not only meet but exceed our clients' expectations.</p>
+                        <p><?= $data[0]['content']; ?></p>
                         
                         <div class="history">
                             <h3>Our History </h3>
-                            <p>Founded by a group of ambitious engineers, Construction Web started as a small firm focused on small to medium-sized construction projects. Over the years, we have expanded our expertise to include large-scale commercial developments, gaining recognition for our sustainable practices and cutting-edge architectural designs.</p>
+                            <p><?= $data[1]['content']; ?></p>
                         </div>
 
                         <div class="team">
@@ -61,17 +61,17 @@ class AboutUsView {
 
                         <div class="mission">
                             <h3>Our Mission</h3>
-                            <p>To lead the construction industry by creating unparalleled value for our clients through innovation, foresight, and reliability, ensuring that our projects are completed on time, on budget, and to the highest standards of quality.</p>
+                            <p><?= $data[2]['content']; ?>.</p>
                         </div>
 
                         <div class="value">
                             <h3>Our Valued Clients</h3>
-                            <p>Our team has always embraced our clients and partners as part of Our Team. Every project is performed with open communication. The Partnering methodology is implemented and a mutual respect with our clients provides the groundwork for our success</p>
+                            <p><?= $data[3]['content']; ?></p>
                         </div>
 
                         <div class="why-us">
                             <h3>Why us?</h3>
-                            <p>Choose our construction company for unparalleled expertise, meticulous attention to detail, and a commitment to exceeding expectations. With a proven track record of delivering exceptional results, we ensure your project is completed on time, within budget, and to the highest standards.</p>
+                            <p><?= $data[4]['content']; ?></p>
                         </div> 
                     </div>
                 </section>

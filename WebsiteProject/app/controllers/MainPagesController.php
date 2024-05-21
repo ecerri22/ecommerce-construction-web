@@ -14,6 +14,8 @@ class MainPagesController extends Controller
         $this->pages = new Pages();
     }
 
+    ////////////////////////////////////////HOMEPAGE/////////////////////////////////////
+
     public function renderHomePage()
     {
         view('user/enia_home.view.php', [
@@ -21,10 +23,17 @@ class MainPagesController extends Controller
         ]);
     }
 
+    /////////////////////////////////ABOUT US///////////////////////////////////////////////
+
     public function renderAboutUsPage()
     {
-        view('user/denis_aboutus.view.php');
+        view('user/denis_aboutus.view.php',[
+            'data' => $this->pages->getContentsAboutUsPage()
+        ]);
+
     }
+
+    ////////////////////////////////ERROR//////////////////////////////////////////////////
 
     public function renderErrorPage()
     {
